@@ -78,58 +78,46 @@ function loadTileset(){
 	    throw(error);
 	});
 	
-	var position = Cesium.Cartesian3.fromDegrees(milkTruckEnLong,milkTruckEnLat, 20);
-	   var heading = Cesium.Math.toRadians(135);
-	   var pitch = 0;
-	   var roll = 0;
-	   var hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
-	   var orientation = Cesium.Transforms.headingPitchRollQuaternion(position, hpr);
-       console.log(position);
-       
-       //https://blog.csdn.net/caozl1132/article/details/86220824
-       var ellipsoid = viewer.scene.globe.ellipsoid;
-       var cartesian3 = new Cesium.Cartesian3(position.x, position.y, position.z);
-       var cartographic = ellipsoid.cartesianToCartographic(cartesian3); 
-       console.log(cartographic);
-       console.log(Cesium.Math.toDegrees(cartographic.longitude)+","+Cesium.Math.toDegrees(cartographic.latitude));
-	 
-	   var entity = viewer.entities.add({
-		   id:"milkTruck",
-	       position : position,
-	       orientation : orientation,
-	       model : {
-	    	   //uri: "http://localhost:8080/PositionPhZY/upload/CesiumMilkTruck.gltf",
-	           uri: "http://localhost:8080/PositionPhZY/upload/Cesium_Air.glb",
-	           minimumPixelSize : 128,
-	           maximumScale : 20000
-	       }
-	   });
-	   viewer.trackedEntity = entity;
+	var truckList=[];
+	var longitude=119.55190190955776;
+	var latitude=37.041269952281;
+	for(var i=0;i<10;i++){
+		longitude+=0.001;
+		latitude+=0.001;
+		truckList[i]={"longitude":longitude,"latitude":latitude};
+	}
+	
+	var removeTruckEntity;
+	for(var i=0;i<truckList.length;i++){
+		var truck=truckList[i];
+		console.log(truck.longitude+","+truck.latitude);
+		var truckEntity=addMilkTruck(i,truck.longitude,truck.latitude);
+		if(i==5){
+			removeTruckEntity=truckEntity;
+		}
+	}
 	   
-	   //https://zhuanlan.zhihu.com/p/642695336
-	   setTimeout(function(){
-		   //viewer.entities.remove(entity);
-	   },"5000");
-	   /*
-	   */
+    //https://zhuanlan.zhihu.com/p/642695336
+    setTimeout(function(){
+	    viewer.entities.remove(removeTruckEntity);
+    },"5000");
 	   
-	   //https://wenku.baidu.com/view/4cdb49d5fa0f76c66137ee06eff9aef8941e4864.html?_wkts_=1691826732887&bdQuery=cesium%E6%B7%BB%E5%8A%A0%E5%9B%BE%E7%89%87
+	//https://wenku.baidu.com/view/4cdb49d5fa0f76c66137ee06eff9aef8941e4864.html?_wkts_=1691826732887&bdQuery=cesium%E6%B7%BB%E5%8A%A0%E5%9B%BE%E7%89%87
 	   
-	   viewer.entities.add({
-		   id:"boy",
-	       position : position,
-	       billboard:{
-	    	   image:'http://localhost:8080/PositionPhZY/upload/staff.jpg',
-	    	   color:Cesium.Color.WHITE.withAlpha(0.8),
-	    	   width:40,
-	    	   height:40,
-	    	   verticalOrigin:Cesium.VerticalOrigin.CENTER,
-	    	   horizontalOrigin:Cesium.HorizontalOrigin.CENTER
-	       }
-	   });
-	   /*
-	   */
-	   
+	/*
+    viewer.entities.add({
+	   id:"boy",
+       position : position,
+       billboard:{
+    	   image:'http://localhost:8080/PositionPhZY/upload/staff.jpg',
+    	   color:Cesium.Color.WHITE.withAlpha(0.8),
+    	   width:40,
+    	   height:40,
+    	   verticalOrigin:Cesium.VerticalOrigin.CENTER,
+    	   horizontalOrigin:Cesium.HorizontalOrigin.CENTER
+       }
+    });
+	*/
 	
 	/*
 	tileset = new Cesium.Cesium3DTileset({
@@ -149,6 +137,43 @@ function loadTileset(){
 	    throw(error);
 	});
 	*/
+}
+
+function convertCartesian3ToCartographic(position){
+	//https://blog.csdn.net/caozl1132/article/details/86220824
+    var ellipsoid = viewer.scene.globe.ellipsoid;
+    var cartesian3 = new Cesium.Cartesian3(position.x, position.y, position.z);
+    var cartographic = ellipsoid.cartesianToCartographic(cartesian3); 
+    console.log(cartographic);
+    return JSON.parse("{\"longitude\":"+Cesium.Math.toDegrees(cartographic.longitude)+",\"latitude\":"+Cesium.Math.toDegrees(cartographic.latitude)+"}");
+}
+
+function addMilkTruck(index,longitude,latitude){
+	var position = Cesium.Cartesian3.fromDegrees(longitude,latitude, 20);
+	var heading = Cesium.Math.toRadians(135);
+	var pitch = 0;
+	var roll = 0;
+	var hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
+	var orientation = Cesium.Transforms.headingPitchRollQuaternion(position, hpr);
+    console.log(position);
+    
+    var positionCartographic=convertCartesian3ToCartographic(position);
+    console.log(positionCartographic.longitude+","+positionCartographic.latitude);
+	 
+    var entity = viewer.entities.add({
+	    id:"milkTruck"+index,
+        position : position,
+        orientation : orientation,
+        model : {
+    	   //uri: "http://localhost:8080/PositionPhZY/upload/CesiumMilkTruck.gltf",
+           uri: "http://localhost:8080/PositionPhZY/upload/Cesium_Air.glb",
+           minimumPixelSize : 128,
+           maximumScale : 20000
+        }
+    });
+    //viewer.trackedEntity = entity;//放大当前物体到眼前
+    
+    return entity;
 }
 </script>
 </head>
