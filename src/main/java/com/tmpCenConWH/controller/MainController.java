@@ -1,13 +1,24 @@
 package com.tmpCenConWH.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.tmpCenConWH.entity.*;
+import com.tmpCenConWH.service.*;
 
 //eclipse搭建maven项目:https://blog.csdn.net/weixin_62332711/article/details/125630418
 @Controller
 @RequestMapping(MainController.MODULE_NAME)
 public class MainController {
 
+	@Autowired
+	private BoxService boxService;
 	public static final String MODULE_NAME="/main";
 
 	/**
@@ -20,5 +31,25 @@ public class MainController {
 		//http://localhost:8080/TmpCenConWH/main/goTestMap
 		
 		return "testMap";
+	}
+	
+	@RequestMapping(value="/getBoxList")
+	@ResponseBody
+	public Map<String, Object> getBoxList() {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<Box> boxList=boxService.getList();
+
+		if(boxList.size()==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("info", "暂无信息");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("boxList", boxList);
+		}
+		
+		return jsonMap;
 	}
 }

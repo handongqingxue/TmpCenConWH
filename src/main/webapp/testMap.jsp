@@ -26,7 +26,16 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 $(function(){
 	initViewer();
 	loadTileset();
+	getBoxList();
 });
+
+function getBoxList(){
+	$.post(path+"main/getBoxList",
+		function(result){
+			alert(result.status);
+		}
+	,"json");
+}
 
 function initViewer(){
 	viewer = new Cesium.Viewer('cesiumContainer');
@@ -78,6 +87,7 @@ function loadTileset(){
 	    throw(error);
 	});
 	
+	/*
 	var truckList=[];
 	var longitude=119.55190190955776;
 	var latitude=37.041269952281;
@@ -101,7 +111,7 @@ function loadTileset(){
     setTimeout(function(){
 	    viewer.entities.remove(removeTruckEntity);
     },"5000");
-	   
+	*/
 	//https://wenku.baidu.com/view/4cdb49d5fa0f76c66137ee06eff9aef8941e4864.html?_wkts_=1691826732887&bdQuery=cesium%E6%B7%BB%E5%8A%A0%E5%9B%BE%E7%89%87
 	   
 	/*
