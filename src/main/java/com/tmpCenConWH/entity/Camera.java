@@ -1,6 +1,6 @@
 package com.tmpCenConWH.entity;
 
-public class Box {
+public class Camera {
 
 	private Integer id;
 	public Integer getId() {
@@ -9,11 +9,11 @@ public class Box {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getTagId() {
+		return tagId;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setTagId(String tagId) {
+		this.tagId = tagId;
 	}
 	public Double getLongitude() {
 		return longitude;
@@ -33,7 +33,7 @@ public class Box {
 	public void setZ(Float z) {
 		this.z = z;
 	}
-	private String name;
+	private String tagId;
 	private Double longitude;
 	private Double latitude;
 	private Float z;

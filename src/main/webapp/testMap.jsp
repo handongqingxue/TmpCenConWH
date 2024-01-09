@@ -27,12 +27,52 @@ $(function(){
 	initViewer();
 	loadTileset();
 	getBoxList();
+	getCameraList();
+	setInterval(() => {
+		updateBoxList();
+	}, 5000);
 });
 
 function getBoxList(){
 	$.post(path+"main/getBoxList",
 		function(result){
-			alert(result.status);
+			if(result.status=="ok"){
+				var boxList=result.boxList;
+				for(var i=0;i<boxList.length;i++){
+					var box=boxList[i];
+					//alert(box.id+","+box.longitude+","+box.latitude+","+box.z)
+					addBox(box.id,box.longitude,box.latitude,box.z);
+				}
+			}
+		}
+	,"json");
+}
+
+function updateBoxList(){
+	$.post(path+"main/getBoxList",
+		function(result){
+			if(result.status=="ok"){
+				var boxList=result.boxList;
+				for(var i=0;i<boxList.length;i++){
+					var box=boxList[i];
+					//alert(box.id+","+box.longitude+","+box.latitude+","+box.z)
+					refreshBox(box.id,box.longitude,box.latitude,box.z);
+				}
+			}
+		}
+	,"json");
+}
+
+function getCameraList(){
+	$.post(path+"main/getCameraList",
+		function(result){
+			if(result.status=="ok"){
+				var cameraList=result.cameraList;
+				for(var i=0;i<cameraList.length;i++){
+					var camera=cameraList[i];
+					addCamera(camera.id,camera.longitude,camera.latitude,camera.z);
+				}
+			}
 		}
 	,"json");
 }
@@ -184,6 +224,49 @@ function addMilkTruck(index,longitude,latitude){
     //viewer.trackedEntity = entity;//放大当前物体到眼前
     
     return entity;
+}
+
+function addBox(id,longitude,latitude,z){
+	var position = Cesium.Cartesian3.fromDegrees(longitude,latitude,z);
+	viewer.entities.add({
+	   id:"box"+id,
+       position : position,
+       billboard:{
+    	   image:'http://localhost:8080/TmpCenConWH/upload/box.jpg',
+    	   color:Cesium.Color.WHITE.withAlpha(0.8),
+    	   width:40,
+    	   height:40,
+    	   verticalOrigin:Cesium.VerticalOrigin.CENTER,
+    	   horizontalOrigin:Cesium.HorizontalOrigin.CENTER
+       }
+    });
+}
+
+function refreshBox(id,longitude,latitude,z){
+	var boxEn=viewer.entities.getById("box"+id);
+	if(boxEn==undefined){
+		addBox(id,longitude,latitude,z);
+	}
+	else{
+		var position = Cesium.Cartesian3.fromDegrees(longitude,latitude,z);
+		boxEn.position=position;
+	}
+}
+
+function addCamera(id,longitude,latitude,z){
+	var position = Cesium.Cartesian3.fromDegrees(longitude,latitude,z);
+	viewer.entities.add({
+	   id:"camera"+id,
+       position : position,
+       billboard:{
+    	   image:'http://localhost:8080/TmpCenConWH/upload/camera.jpg',
+    	   color:Cesium.Color.WHITE.withAlpha(0.8),
+    	   width:40,
+    	   height:40,
+    	   verticalOrigin:Cesium.VerticalOrigin.CENTER,
+    	   horizontalOrigin:Cesium.HorizontalOrigin.CENTER
+       }
+    });
 }
 </script>
 </head>

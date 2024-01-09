@@ -19,6 +19,8 @@ public class MainController {
 
 	@Autowired
 	private BoxService boxService;
+	@Autowired
+	private CameraService cameraService;
 	public static final String MODULE_NAME="/main";
 
 	/**
@@ -48,6 +50,26 @@ public class MainController {
 		else {
 			jsonMap.put("status", "ok");
 			jsonMap.put("boxList", boxList);
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/getCameraList")
+	@ResponseBody
+	public Map<String, Object> getCameraList() {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<Camera> cameraList=cameraService.getList();
+
+		if(cameraList.size()==0) {
+			jsonMap.put("status", "no");
+			jsonMap.put("info", "暂无信息");
+		}
+		else {
+			jsonMap.put("status", "ok");
+			jsonMap.put("cameraList", cameraList);
 		}
 		
 		return jsonMap;
