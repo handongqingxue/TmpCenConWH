@@ -24,6 +24,7 @@ var milkTruckEnLat=37.041269952281006;
 var viewer;
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZWIzYTUxYy0xMmRkLTRiYTEtODE1My1kMjE1NzAyZDQwMmIiLCJpZCI6NzMyNDUsImlhdCI6MTYzNjY5NTEzOX0.rgwvu7AcuwqpYTO3kTKuZ7Pzebn1WNu2x8bKiqgbTcM';
 $(function(){
+	alert(getValueByAngle("tan",45))
 	initViewer();
 	loadTileset();
 	getBoxList();
@@ -32,6 +33,39 @@ $(function(){
 		updateBoxList();
 	}, 5000);
 });
+
+//角度转比值
+function getValueByAngle(flag,angle){
+	var radian = Math.PI*(angle/180);//将角度转换成弧度
+	var value;
+	if(flag=="sin"){
+		value = Math.sin(radian);//计算正弦值
+		console.log("正弦值：" + value);
+	}
+	else if(flag=="cos"){
+		value = Math.cos(radian);//计算余弦值
+		console.log("余弦值：" + value);
+	}
+	else if(flag=="tan"){
+		value = Math.tan(radian);//计算正切值
+		console.log("正切值：" + value);
+	}
+	return value.toFixed(2);
+}
+
+//https://zhuanlan.zhihu.com/p/617677886?utm_id=0
+//比值转角度
+function getAngleByValue(flag,value){
+	var aValue;
+	if(flag=="sin")
+		aValue=Math.asin(value);
+	else if(flag=="cos")
+		aValue=Math.acos(value);
+	else if(flag=="tan")
+		aValue=Math.atan(value);
+	var angle=aValue/Math.PI*180;
+	return angle.toFixed(2);
+}
 
 function getBoxList(){
 	$.post(path+"main/getBoxList",
