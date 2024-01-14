@@ -18,13 +18,26 @@
 <title>Insert title here</title>
 <script>  
 var path='<%=basePath%>';
+var areaWidth=1000;
+var areaHeight=1000;
+var areaX1Long=119.55051952014225;
+var areaY1Lat=37.039877776142845;
+
+var areaX2Long=119.55517546999079;
+var areaY2Lat=37.04368329953588;
+
 var milkTruckEnLong=119.55190190955776;
 var milkTruckEnLat=37.041269952281006;
+
+var cameraList;
+var openCameraList=[];
 
 var viewer;
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZWIzYTUxYy0xMmRkLTRiYTEtODE1My1kMjE1NzAyZDQwMmIiLCJpZCI6NzMyNDUsImlhdCI6MTYzNjY5NTEzOX0.rgwvu7AcuwqpYTO3kTKuZ7Pzebn1WNu2x8bKiqgbTcM';
 $(function(){
-	alert(getValueByAngle("tan",45))
+	alert(checkInScope())
+	//alert(convertLongLatToXY(milkTruckEnLong,milkTruckEnLat))
+	//alert(getValueByAngle("tan",30))
 	initViewer();
 	loadTileset();
 	getBoxList();
@@ -32,7 +45,50 @@ $(function(){
 	setInterval(() => {
 		updateBoxList();
 	}, 5000);
+	setTimeout(function(){
+		for(var i=0;i<cameraList.length;i++){
+			checkInScope();
+		}
+	},"3000");
 });
+
+function checkInScope(){
+	var inScope=false;
+	var x=376;
+	var y=800;
+	var distanceToCameraZ=getLineDistance(294.68,50,x,0);
+	if(distanceToCameraZ<=100){
+		var distanceToCameraY=getLineDistance(294.68,858.38,x,y);
+		if(distanceToCameraY<=100){
+			var yScope=1.72*x+351.53;
+			if(y<=yScope){
+				inScope=true;
+			}
+		}
+	}
+	return inScope;
+}
+
+function getLineDistance(x1,y1,x2,y2){
+	var a;
+	var b;
+	if(x1>x2)
+		a=x1-x2;
+	else
+		a=x2-x1;
+		
+	if(y1>y2)
+		b=y1-y2;
+	else
+		b=y2-y1;
+	return Math.sqrt(a*a+b*b);
+}
+
+function convertLongLatToXY(longitude,latitude){
+	var x=areaWidth/(areaX2Long-areaX1Long)*(longitude-areaX1Long);
+	var y=areaHeight/(areaY2Lat-areaY1Lat)*(latitude-areaY1Lat);
+	return JSON.parse("{\"x\":"+x.toFixed(2)+",\"y\":"+y.toFixed(2)+"}");
+}
 
 //角度转比值
 function getValueByAngle(flag,angle){
@@ -101,10 +157,10 @@ function getCameraList(){
 	$.post(path+"main/getCameraList",
 		function(result){
 			if(result.status=="ok"){
-				var cameraList=result.cameraList;
+				cameraList=result.cameraList;
 				for(var i=0;i<cameraList.length;i++){
 					var camera=cameraList[i];
-					addCamera(camera.id,camera.longitude,camera.latitude,camera.z);
+					addCamera(camera.id,camera.tagId,camera.longitude,camera.latitude,camera.z);
 				}
 			}
 		}
@@ -287,7 +343,7 @@ function refreshBox(id,longitude,latitude,z){
 	}
 }
 
-function addCamera(id,longitude,latitude,z){
+function addCamera(id,tagId,longitude,latitude,z){
 	var position = Cesium.Cartesian3.fromDegrees(longitude,latitude,z);
 	viewer.entities.add({
 	   id:"camera"+id,
@@ -300,6 +356,30 @@ function addCamera(id,longitude,latitude,z){
     	   verticalOrigin:Cesium.VerticalOrigin.CENTER,
     	   horizontalOrigin:Cesium.HorizontalOrigin.CENTER
        }
+    });
+	
+	var xyJS=convertLongLatToXY(longitude,latitude);
+	
+	var position2 = Cesium.Cartesian3.fromDegrees(longitude,latitude,z+20);
+	viewer.entities.add({
+	  id:"cameraTag"+id,
+      position: position2,
+      label: { //文字标签
+          text: tagId+"("+xyJS.x+","+xyJS.y+")",
+          font: '500 20px Helvetica',// 15pt monospace
+          scale: 1,
+          style: Cesium.LabelStyle.FILL,
+          fillColor: Cesium.Color.WHITE,
+          // pixelOffset: new Cesium.Cartesian2(0, 0),   //偏移量
+          eyeOffset: new Cesium.Cartesian3(0.0, 10.0, -15.0),
+          // horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
+          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+          showBackground: true,
+          disableDepthTestDistance:Number.POSITIVE_INFINITY,
+          // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+          // disableDepthTestDistance: Number.POSITIVE_INFINITY,
+          // backgroundColor: new Cesium.Color(26 / 255, 196 / 255, 228 / 255, 1.0)   //背景顔色
+      },
     });
 }
 </script>
