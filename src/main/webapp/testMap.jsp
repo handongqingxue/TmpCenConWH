@@ -30,12 +30,11 @@ var milkTruckEnLong=119.55190190955776;
 var milkTruckEnLat=37.041269952281006;
 
 var cameraList;
-var openCameraList=[];
+var openCameras="";
 
 var viewer;
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZWIzYTUxYy0xMmRkLTRiYTEtODE1My1kMjE1NzAyZDQwMmIiLCJpZCI6NzMyNDUsImlhdCI6MTYzNjY5NTEzOX0.rgwvu7AcuwqpYTO3kTKuZ7Pzebn1WNu2x8bKiqgbTcM';
 $(function(){
-	alert(checkInScope())
 	//alert(convertLongLatToXY(milkTruckEnLong,milkTruckEnLat))
 	//alert(getValueByAngle("tan",30))
 	initViewer();
@@ -45,22 +44,37 @@ $(function(){
 	setInterval(() => {
 		updateBoxList();
 	}, 5000);
-	setTimeout(function(){
-		for(var i=0;i<cameraList.length;i++){
-			checkInScope();
-		}
-	},"3000");
 });
 
-function checkInScope(){
+//遍历所有监控，验证是否在监控范围
+function checkInCameraScopeByList(x,y){
+	for(var i=0;i<cameraList.length;i++){
+		var camera=cameraList[i];
+		var cameraX=camera.x;
+		var cameraY=camera.y;
+		var cameraZ=camera.z;
+		var distIrr=camera.distIrr;
+		var k=camera.k;
+		var b=camera.b;
+		if(checkInCameraScope(x,y,cameraX,cameraY,cameraZ,distIrr,k,b)){
+			openCameras+=","+camera.tagId;
+		}
+	}
+	if(openCameras!=""){
+		openCameras=openCameras.substring(1);
+		alert(openCameras)
+		openCameras="";
+	}
+}
+
+//验证是否在监控范围
+function checkInCameraScope(x,y,cameraX,cameraY,cameraZ,distIrr,k,b){
 	var inScope=false;
-	var x=376;
-	var y=800;
-	var distanceToCameraZ=getLineDistance(294.68,50,x,0);
-	if(distanceToCameraZ<=100){
-		var distanceToCameraY=getLineDistance(294.68,858.38,x,y);
-		if(distanceToCameraY<=100){
-			var yScope=1.72*x+351.53;
+	var distanceToCameraZ=getLineDistance(cameraX,cameraZ,x,0);
+	if(distanceToCameraZ<=distIrr){
+		var distanceToCameraY=getLineDistance(cameraX,cameraY,x,y);
+		if(distanceToCameraY<=distIrr){
+			var yScope=k*x+b;
 			if(y<=yScope){
 				inScope=true;
 			}
@@ -69,6 +83,8 @@ function checkInScope(){
 	return inScope;
 }
 
+//https://www.qttc.net/171-javascript-get-two-points-distance.html
+//获取两个坐标之间的距离
 function getLineDistance(x1,y1,x2,y2){
 	var a;
 	var b;
@@ -84,6 +100,7 @@ function getLineDistance(x1,y1,x2,y2){
 	return Math.sqrt(a*a+b*b);
 }
 
+//将经纬度转换为坐标
 function convertLongLatToXY(longitude,latitude){
 	var x=areaWidth/(areaX2Long-areaX1Long)*(longitude-areaX1Long);
 	var y=areaHeight/(areaY2Lat-areaY1Lat)*(latitude-areaY1Lat);
@@ -193,10 +210,14 @@ function initViewer(){
         if(cartesian){
             var cartographic=ellipsoid.cartesianToCartographic(cartesian);//笛卡尔坐标转制图坐标
             //var coordinate="经度:"+Cesium.Math.toDegrees(cartographic.longitude).toFixed(2)+",纬度:"+Cesium.Math.toDegrees(cartographic.latitude).toFixed(2)+
-                    "相机高度:"+Math.ceil(viewer.camera.positionCartographic.height);
-            var coordinate="经度:"+Cesium.Math.toDegrees(cartographic.longitude)+",纬度:"+Cesium.Math.toDegrees(cartographic.latitude)+
+                    //"相机高度:"+Math.ceil(viewer.camera.positionCartographic.height);
+            var longitude=Cesium.Math.toDegrees(cartographic.longitude);
+            var latitude=Cesium.Math.toDegrees(cartographic.latitude);
+            var coordinate="经度:"+longitude+",纬度:"+latitude+
             "相机高度:"+Math.ceil(viewer.camera.positionCartographic.height);
 			console.log("coordinate==="+coordinate);
+			var xyJS=convertLongLatToXY(longitude,latitude);
+			checkInCameraScopeByList(xyJS.x,xyJS.y);
         }else{
         	
         }
