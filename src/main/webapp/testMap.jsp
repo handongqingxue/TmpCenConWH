@@ -10,11 +10,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript" src="<%=basePath %>resource/js/jquery-3.3.1.js"></script>
 <!-- 
-<script src="https://cesiumjs.org/releases/1.56.1/Build/Cesium/Cesium.js"></script>  
-<link href="https://cesiumjs.org/releases/1.56.1/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
- -->
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.56.1/Build/Cesium/Cesium.js"></script>  
+<link href="https://cesium.com/downloads/cesiumjs/releases/1.56.1/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 <script src="<%=basePath %>resource/cesiumjs/releases/1.56.1/Build/Cesium/Cesium.js"></script>
 <link href="<%=basePath %>resource/cesiumjs/releases/1.56.1/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.83/Build/Cesium/Cesium.js"></script>
+ -->
+<script src="<%=basePath %>resource/cesiumjs/releases/1.83/Build/Cesium/Cesium.js"></script>
+<link href="https://cesium.com/downloads/cesiumjs/releases/1.83/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 <title>Insert title here</title>
 <script>  
 var path='<%=basePath%>';
@@ -41,6 +44,7 @@ $(function(){
 	loadTileset();
 	getBoxList();
 	getCameraList();
+	addLine();
 	setInterval(() => {
 		updateBoxList();
 	}, 5000);
@@ -402,6 +406,23 @@ function addCamera(id,tagId,longitude,latitude,z){
           // backgroundColor: new Cesium.Color(26 / 255, 196 / 255, 228 / 255, 1.0)   //背景顔色
       },
     });
+}
+
+function addLine(){
+	var positions = [];
+	for (i = 0; i < 40; ++i) {
+	  positions.push(Cesium.Cartesian3.fromDegrees(119.54905375146231 + i, 37.0417260810917,130));
+	}
+	viewer.entities.add({
+	  polyline: {
+	    positions: positions,
+	    width: 10.0,
+	    material: new Cesium.PolylineGlowMaterialProperty({
+	      color: Cesium.Color.DEEPSKYBLUE,
+	      glowPower: 0.25,
+	    }),
+	  },
+	});
 }
 </script>
 </head>
