@@ -15,9 +15,10 @@
 <script src="<%=basePath %>resource/cesiumjs/releases/1.56.1/Build/Cesium/Cesium.js"></script>
 <link href="<%=basePath %>resource/cesiumjs/releases/1.56.1/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 <script src="https://cesium.com/downloads/cesiumjs/releases/1.83/Build/Cesium/Cesium.js"></script>
+<link href="https://cesium.com/downloads/cesiumjs/releases/1.83/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
  -->
 <script src="<%=basePath %>resource/cesiumjs/releases/1.83/Build/Cesium/Cesium.js"></script>
-<link href="https://cesium.com/downloads/cesiumjs/releases/1.83/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+<link href="<%=basePath %>resource/cesiumjs/releases/1.83/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 <title>Insert title here</title>
 <script>  
 var path='<%=basePath%>';
@@ -44,7 +45,7 @@ $(function(){
 	loadTileset();
 	getBoxList();
 	getCameraList();
-	addLine();
+	drawTrack();
 	setInterval(() => {
 		updateBoxList();
 	}, 5000);
@@ -408,21 +409,31 @@ function addCamera(id,tagId,longitude,latitude,z){
     });
 }
 
-function addLine(){
-	var positions = [];
-	for (i = 0; i < 40; ++i) {
-	  positions.push(Cesium.Cartesian3.fromDegrees(119.54905375146231 + i, 37.0417260810917,130));
-	}
-	viewer.entities.add({
-	  polyline: {
-	    positions: positions,
-	    width: 10.0,
-	    material: new Cesium.PolylineGlowMaterialProperty({
-	      color: Cesium.Color.DEEPSKYBLUE,
-	      glowPower: 0.25,
-	    }),
-	  },
-	});
+function drawTrack(){
+	$.post(path+"main/getPositionList",
+		function(result){
+			if(result.status=="ok"){
+				var positions = [];
+				var positionList=result.positionList;
+				for(var i=0;i<positionList.length;i++){
+					var position=positionList[i];
+					positions.push(Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude,position.z));
+				}
+				
+				viewer.entities.add({
+				  polyline: {
+				    positions: positions,
+				    width: 10.0,
+				    material: new Cesium.PolylineGlowMaterialProperty({
+				      color: Cesium.Color.DEEPSKYBLUE,
+				      glowPower: 0.25,
+				    }),
+				  },
+				});
+			}
+		}
+	,"json");
+	
 }
 </script>
 </head>
