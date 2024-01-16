@@ -409,6 +409,7 @@ function addCamera(id,tagId,longitude,latitude,z){
     });
 }
 
+//绘制轨迹
 function drawTrack(){
 	$.post(path+"main/getPositionList",
 		function(result){
