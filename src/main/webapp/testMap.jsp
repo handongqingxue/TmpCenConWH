@@ -227,6 +227,15 @@ function initViewer(){
         	
         }
     },Cesium.ScreenSpaceEventType.MOUSE_MOVE);//监听的是鼠标滑动事件
+    
+    //https://blog.csdn.net/wo_buzhidao/article/details/84141659
+    handler.setInputAction(function(click){
+    	var pick = viewer.scene.pick(click.position);
+        //选中某模型   pick选中的对象
+        if(pick && pick.id){
+        	console.log(pick.id._id);
+        }
+    },Cesium.ScreenSpaceEventType.LEFT_CLICK);//监听的是鼠标左键点击事件
 }
 
 function loadTileset(){
@@ -243,21 +252,37 @@ function loadTileset(){
 	    throw(error);
 	});
 	
-	/*
 	var truckList=[];
 	var longitude=119.55190190955776;
 	var latitude=37.041269952281;
+	var z=20;
+	var radians;
 	for(var i=0;i<10;i++){
 		longitude+=0.001;
 		latitude+=0.001;
-		truckList[i]={"longitude":longitude,"latitude":latitude};
+		z+=15;
+		switch (i) {
+		case 0:
+			radians=70;
+			break;
+		case 1:
+			radians=90;
+			break;
+		case 2:
+			radians=110;
+			break;
+		default:
+			radians=170;
+			break;
+		}
+		truckList[i]={"longitude":longitude,"latitude":latitude,"z":z,"radians":radians};
 	}
 	
 	var removeTruckEntity;
 	for(var i=0;i<truckList.length;i++){
 		var truck=truckList[i];
 		console.log(truck.longitude+","+truck.latitude);
-		var truckEntity=addMilkTruck(i,truck.longitude,truck.latitude);
+		var truckEntity=addMilkTruck(i,truck.longitude,truck.latitude,truck.z,truck.radians);
 		if(i==5){
 			removeTruckEntity=truckEntity;
 		}
@@ -267,7 +292,6 @@ function loadTileset(){
     setTimeout(function(){
 	    viewer.entities.remove(removeTruckEntity);
     },"5000");
-	*/
 	//https://wenku.baidu.com/view/4cdb49d5fa0f76c66137ee06eff9aef8941e4864.html?_wkts_=1691826732887&bdQuery=cesium%E6%B7%BB%E5%8A%A0%E5%9B%BE%E7%89%87
 	   
 	/*
@@ -314,9 +338,9 @@ function convertCartesian3ToCartographic(position){
     return JSON.parse("{\"longitude\":"+Cesium.Math.toDegrees(cartographic.longitude)+",\"latitude\":"+Cesium.Math.toDegrees(cartographic.latitude)+"}");
 }
 
-function addMilkTruck(index,longitude,latitude){
-	var position = Cesium.Cartesian3.fromDegrees(longitude,latitude, 20);
-	var heading = Cesium.Math.toRadians(135);
+function addMilkTruck(index,longitude,latitude,z,radians){
+	var position = Cesium.Cartesian3.fromDegrees(longitude,latitude, z);
+	var heading = Cesium.Math.toRadians(radians);
 	var pitch = 0;
 	var roll = 0;
 	var hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
@@ -335,7 +359,16 @@ function addMilkTruck(index,longitude,latitude){
            uri: "http://localhost:8080/PositionPhZY/upload/Cesium_Air.glb",
            minimumPixelSize : 128,
            maximumScale : 20000
-        }
+        },
+	    label : { //文字标签
+	       text : '客机',
+	       font : '18px monospace',
+	       style : Cesium.LabelStyle.FILL,
+	       outlineWidth : 2,
+	       verticalOrigin : Cesium.VerticalOrigin.BOTTOM,//垂直方向以底部来计算标签的位置
+	       pixelOffset : new Cesium.Cartesian2( 0, -20 ),//偏移量
+    	   showBackground: true
+	    }
     });
     //viewer.trackedEntity = entity;//放大当前物体到眼前
     
@@ -354,7 +387,17 @@ function addBox(id,longitude,latitude,z){
     	   height:40,
     	   verticalOrigin:Cesium.VerticalOrigin.CENTER,
     	   horizontalOrigin:Cesium.HorizontalOrigin.CENTER
-       }
+       },
+	   label : { //文字标签
+	       text : '吨袋',
+	       font : '18px monospace',
+	       style : Cesium.LabelStyle.FILL,
+	       fillColor: Cesium.Color.WHITE,
+	       outlineWidth : 2,
+	       verticalOrigin : Cesium.VerticalOrigin.BOTTOM, //垂直方向以底部来计算标签的位置
+	       pixelOffset : new Cesium.Cartesian2( 0, -30 ),//偏移量
+       	   showBackground: true
+	   }
     });
 }
 
@@ -371,6 +414,8 @@ function refreshBox(id,longitude,latitude,z){
 
 function addCamera(id,tagId,longitude,latitude,z){
 	var position = Cesium.Cartesian3.fromDegrees(longitude,latitude,z);
+	var xyJS=convertLongLatToXY(longitude,latitude);
+	
 	viewer.entities.add({
 	   id:"camera"+id,
        position : position,
@@ -381,31 +426,23 @@ function addCamera(id,tagId,longitude,latitude,z){
     	   height:40,
     	   verticalOrigin:Cesium.VerticalOrigin.CENTER,
     	   horizontalOrigin:Cesium.HorizontalOrigin.CENTER
-       }
-    });
-	
-	var xyJS=convertLongLatToXY(longitude,latitude);
-	
-	var position2 = Cesium.Cartesian3.fromDegrees(longitude,latitude,z+20);
-	viewer.entities.add({
-	  id:"cameraTag"+id,
-      position: position2,
-      label: { //文字标签
-          text: tagId+"("+xyJS.x+","+xyJS.y+")",
-          font: '500 20px Helvetica',// 15pt monospace
-          scale: 1,
-          style: Cesium.LabelStyle.FILL,
-          fillColor: Cesium.Color.WHITE,
-          // pixelOffset: new Cesium.Cartesian2(0, 0),   //偏移量
-          eyeOffset: new Cesium.Cartesian3(0.0, 10.0, -15.0),
-          // horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
-          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-          showBackground: true,
-          disableDepthTestDistance:Number.POSITIVE_INFINITY,
-          // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-          // disableDepthTestDistance: Number.POSITIVE_INFINITY,
-          // backgroundColor: new Cesium.Color(26 / 255, 196 / 255, 228 / 255, 1.0)   //背景顔色
-      },
+       },
+	   label: { //文字标签
+	       text: tagId+"("+xyJS.x+","+xyJS.y+")",
+	       font: '500 20px Helvetica',// 15pt monospace
+	       scale: 1,
+	       style: Cesium.LabelStyle.FILL,
+	       fillColor: Cesium.Color.WHITE,
+	       // pixelOffset: new Cesium.Cartesian2(0, 0),//偏移量
+	       eyeOffset: new Cesium.Cartesian3(0.0, 10.0, -20.0),
+	       // horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
+	       verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+	       showBackground: true,
+	       disableDepthTestDistance:Number.POSITIVE_INFINITY,
+	       // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+	       // disableDepthTestDistance: Number.POSITIVE_INFINITY,
+	       // backgroundColor: new Cesium.Color(26 / 255, 196 / 255, 228 / 255, 1.0)//背景顔色
+	   }
     });
 }
 
