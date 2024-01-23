@@ -190,18 +190,20 @@ function getCameraList(){
 }
 
 //https://blog.csdn.net/wo_buzhidao/article/details/84141659
+//https://codeleading.com/article/8088883300/
 function initViewer(){
 	viewer = new Cesium.Viewer('cesiumContainer',{
 		//需要进行可视化的数据源的集合
-		animation: false,//是否显示动画控件
-		homeButton: false,//是否显示Home按钮
-		fullscreenButton: false,//是否显示全屏按钮
+		animation: false,//是否显示动画控件(左下角仪表)
 		baseLayerPicker: false ,//是否显示图层选择控件
+		fullscreenButton: false,//是否显示全屏按钮
 		geocoder: false,//是否显示地名查找控件
-		timeline: false,//是否显示时间线控件
-		sceneModePicker: false,//是否显示投影方式控件
-		navigationHelpButton: false,//是否显示帮助信息控件
+		homeButton: false,//是否显示Home按钮
 		infoBox: false,//是否显示点击要素之后显示的信息
+		sceneModePicker: false,//是否显示投影方式控件
+		selectionIndicator: false,//是否显示选取指示器组件
+		timeline: false,//是否显示时间线控件
+		navigationHelpButton: false,//是否显示帮助信息控件
 		requestRenderMode: true,//启用请求渲染模式
 		scene3DOnly: false,//每个几何实例将只能以3D渲染以节省GPU内存
 		sceneMode: 3, //初始场景模式 1 2D模式 2 2D循环模式 3 3D模式  Cesium.SceneMode
@@ -251,6 +253,11 @@ function initViewer(){
         	console.log(pick.id._id);
         }
     },Cesium.ScreenSpaceEventType.LEFT_CLICK);//监听的是鼠标左键点击事件
+    
+    /* 三维球转动添加监听事件 */
+    viewer.camera.changed.addEventListener(function (percentage) {
+        console.log("11111111111");
+    });
 }
 
 function loadTileset(){
