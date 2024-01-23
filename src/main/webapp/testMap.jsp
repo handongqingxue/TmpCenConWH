@@ -37,6 +37,7 @@ var cameraList;
 var openCameras="";
 
 var viewer;
+var camera;
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZWIzYTUxYy0xMmRkLTRiYTEtODE1My1kMjE1NzAyZDQwMmIiLCJpZCI6NzMyNDUsImlhdCI6MTYzNjY5NTEzOX0.rgwvu7AcuwqpYTO3kTKuZ7Pzebn1WNu2x8bKiqgbTcM';
 $(function(){
 	//alert(convertLongLatToXY(milkTruckEnLong,milkTruckEnLat))
@@ -46,6 +47,9 @@ $(function(){
 	getBoxList();
 	getCameraList();
 	drawTrack();
+	setTimeout(function(){
+		initCameraView();
+	},1000);
 	setInterval(() => {
 		updateBoxList();
 	}, 5000);
@@ -237,7 +241,15 @@ function initViewer(){
             var latitude=Cesium.Math.toDegrees(cartographic.latitude);
             var coordinate="经度:"+longitude+",纬度:"+latitude+
             "相机高度:"+Math.ceil(viewer.camera.positionCartographic.height);
-			console.log("coordinate==="+coordinate);
+            
+            var camera=viewer.scene.camera;
+            var heading=camera.heading;
+            var pitch=camera.pitch;
+            var roll=camera.roll;
+            var position=camera.position;
+            
+			console.log("coordinate==="+coordinate+",heading="+heading+",pitch="+pitch+",roll="+roll+",position="+position);
+			
 			var xyJS=convertLongLatToXY(longitude,latitude);
 			checkInCameraScopeByList(xyJS.x,xyJS.y);
         }else{
@@ -254,10 +266,26 @@ function initViewer(){
         }
     },Cesium.ScreenSpaceEventType.LEFT_CLICK);//监听的是鼠标左键点击事件
     
+    camera=viewer.scene.camera;
     /* 三维球转动添加监听事件 */
-    viewer.camera.changed.addEventListener(function (percentage) {
+    camera.changed.addEventListener(function (percentage) {
         console.log("11111111111");
     });
+}
+
+function initCameraView(){
+	var initialPosition = Cesium.Cartesian3.fromDegrees(119.55050375982641, 37.03781578528313, 150.0); // 相机的位置
+    var orientation = {
+   	    heading: 0.587042045037391,
+   	    // 视角
+   	    pitch: -0.2857299629475152,
+   	    roll: 6.279336782701472,
+   	};
+    var homeCameraView = {
+   		destination: initialPosition, // 相机的位置
+   	    orientation: orientation,
+   	};
+    camera.setView(homeCameraView);
 }
 
 function loadTileset(){
