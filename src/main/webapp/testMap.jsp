@@ -407,6 +407,7 @@ function addMilkTruck(index,longitude,latitude,z,radians){
         model : {
     	   //uri: "http://localhost:8080/PositionPhZY/upload/CesiumMilkTruck.gltf",
            uri: "http://localhost:8080/PositionPhZY/upload/Cesium_Air.glb",
+           //uri: "http://localhost:8080/PositionPhZY/upload/111.glb",
            minimumPixelSize : 128,
            maximumScale : 20000
         },

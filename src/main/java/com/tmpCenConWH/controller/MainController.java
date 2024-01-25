@@ -36,6 +36,18 @@ public class MainController {
 		
 		return "testMap";
 	}
+
+	/**
+	 * 跳转到首页
+	 * @return
+	 */
+	@RequestMapping(value="/goHome")
+	public String goHome() {
+		
+		//http://localhost:8080/TmpCenConWH/main/goHome
+		
+		return "home";
+	}
 	
 	@RequestMapping(value="/getBoxList")
 	@ResponseBody
