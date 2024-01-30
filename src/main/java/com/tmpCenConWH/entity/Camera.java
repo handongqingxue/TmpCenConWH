@@ -81,6 +81,12 @@ public class Camera {
 	public void setB(Float b) {
 		this.b = b;
 	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	private String tagId;
 	private Double longitude;
 	private Double latitude;
@@ -93,4 +99,5 @@ public class Camera {
 	private Float distGroundPro;//地面投影距离
 	private Float k;
 	private Float b;
+	private String url;
 }
