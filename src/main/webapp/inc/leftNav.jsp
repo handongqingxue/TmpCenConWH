@@ -38,7 +38,7 @@
 			<div class="item_div">库存预警</div>
 		</c:when>
 		<c:when test="${uri.contains('/vedio/')}">
-			<div class="item_div">视频追踪</div>
+			<div class="item_div" onclick="showVedioDiv(true);">视频追踪</div>
 			<div class="item_div">智能分析</div>
 			<div class="item_div">区域画面</div>
 			<div class="item_div">视频设置</div>

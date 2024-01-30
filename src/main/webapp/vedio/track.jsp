@@ -38,9 +38,8 @@ body{
 .real_frame_div{
 	width: 1600px;
 	height: 1400px;
-	margin-top:-2160px;
 	background-color:#fff;
-	position: absolute;
+	position: fixed;
 	z-index: 1;
 	display: none;
 }
@@ -53,7 +52,7 @@ body{
 .real_frame_div .tit_div .text_span{
 	margin-left: 15px;
 }
-.close_span{
+.real_frame_div .tit_div .close_span{
 	color:#999;
 	margin-right: 20px;
 	float: right;
@@ -62,6 +61,30 @@ body{
 .real_frame_div iframe{
 	width: 100%;
 	height: 1360px;
+}
+
+.vedio_div{
+	width: 1600px;
+	height: 1400px;
+	background-color:#fff;
+	position:fixed;
+	z-index: 1;
+	display: none;
+}
+.vedio_div .tit_div{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	border-bottom: #666 solid 1px;
+}
+.vedio_div .tit_div .text_span{
+	margin-left: 15px;
+}
+.vedio_div .tit_div .close_span{
+	color:#999;
+	margin-right: 20px;
+	float: right;
+	cursor: pointer;
 }
 </style>
 <title>Insert title here</title>
@@ -75,13 +98,31 @@ var areaY1Lat=37.039877776142845;
 var areaX2Long=119.55517546999079;
 var areaY2Lat=37.04368329953588;
 
+var agvPositionList=[];
+
 var viewer;
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkZWIzYTUxYy0xMmRkLTRiYTEtODE1My1kMjE1NzAyZDQwMmIiLCJpZCI6NzMyNDUsImlhdCI6MTYzNjY5NTEzOX0.rgwvu7AcuwqpYTO3kTKuZ7Pzebn1WNu2x8bKiqgbTcM';
 $(function(){
 	initViewer();
+	initIframe();
 	loadTileset();
 	getCameraList();
+	initAgvPositionList();
 });
+
+function initAgvPositionList(){
+	var agv1Position={"tagId":"001","longitude":119.55475873865358,"latitude":37.041692536161385};
+	var agv2Position={"tagId":"002","longitude":119.55393797552341,"latitude":37.042449888214016};
+	var agv3Position={"tagId":"003","longitude":119.55172649976066,"latitude":37.04286573848189};
+	
+	agvPositionList.push(agv1Position);
+	agvPositionList.push(agv2Position);
+	agvPositionList.push(agv3Position);
+}
+
+function initIframe(){
+	$("#real_frame_div").append("<iframe src=\"\" />");
+}
 
 function initViewer(){
 	viewer = new Cesium.Viewer('cesuim_div',{
@@ -209,22 +250,126 @@ function showRealFrameDiv(flag){
 		realFrameDiv.css("display","none");
 	}
 }
+
+function showVedioDiv(flag){
+	var vedioDiv=$("#vedio_div");
+	if(flag){
+		vedioDiv.css("display","block");
+	}
+	else{
+		vedioDiv.css("display","none");
+	}
+}
+
+function showVedioInDiv(){
+	var tagId=$("#agv_sel").val();
+	if(tagId==""||tagId==null){
+		alert("请选择叉车");
+		return false;
+	}
+	var agvPosition=getAGVPositionFromListByTagId(tagId);
+	console.log(agvPosition)
+	var xyJS=convertLongLatToXY(agvPosition.longitude,agvPosition.latitude);
+	checkInCameraScopeByList(xyJS.x,xyJS.y);
+}
+
+function getAGVPositionFromListByTagId(tagId){
+	var agvPos;
+	for (var i = 0; i < agvPositionList.length; i++) {
+		var agvPosition=agvPositionList[i];
+		if(tagId==agvPosition.tagId){
+			agvPos=agvPosition;
+			break;
+		}
+	}
+	return agvPos;
+}
+
+//遍历所有监控，验证是否在监控范围
+function checkInCameraScopeByList(x,y){
+	var openCameras="";
+	for(var i=0;i<cameraList.length;i++){
+		var camera=cameraList[i];
+		var cameraX=camera.x;
+		var cameraY=camera.y;
+		var cameraZ=camera.z;
+		var distIrr=camera.distIrr;
+		var k=camera.k;
+		var b=camera.b;
+		if(checkInCameraScope(x,y,cameraX,cameraY,cameraZ,distIrr,k,b)){
+			openCameras+=","+camera.tagId;
+		}
+	}
+	if(openCameras!=""){
+		openCameras=openCameras.substring(1);
+		alert(openCameras)
+		openCameras="";
+	}
+}
+
+//验证是否在监控范围
+function checkInCameraScope(x,y,cameraX,cameraY,cameraZ,distIrr,k,b){
+	var inScope=false;
+	var distanceToCameraZ=getLineDistance(cameraX,cameraZ,x,0);
+	if(distanceToCameraZ<=distIrr){
+		var distanceToCameraY=getLineDistance(cameraX,cameraY,x,y);
+		if(distanceToCameraY<=distIrr){
+			var yScope=k*x+b;
+			if(y<=yScope){
+				inScope=true;
+			}
+		}
+	}
+	return inScope;
+}
+
+//https://www.qttc.net/171-javascript-get-two-points-distance.html
+//获取两个坐标之间的距离
+function getLineDistance(x1,y1,x2,y2){
+	var a;
+	var b;
+	if(x1>x2)
+		a=x1-x2;
+	else
+		a=x2-x1;
+		
+	if(y1>y2)
+		b=y1-y2;
+	else
+		b=y2-y1;
+	return Math.sqrt(a*a+b*b);
+}
 </script>
 </head>
 <body>
-<div class="main_div">
-	<%@include file="../inc/top.jsp"%>
-	<%@include file="../inc/leftNav.jsp"%>
-	<div class="cesuim_div" id="cesuim_div">
-	</div>
-</div>
 
 <div class="real_frame_div" id="real_frame_div">
 	<div class="tit_div">
 		<span class="text_span">实时画面</span>
 		<span class="close_span" onclick="showRealFrameDiv(false)">X</span>
 	</div>
-	<iframe src="" />
+</div>
+
+<div class="vedio_div" id="vedio_div">
+	<div class="tit_div">
+		<span class="text_span">视频追踪</span>
+		<span class="close_span" onclick="showVedioDiv(false)">X</span>
+	</div>
+	叉车列表
+	<select id="agv_sel">
+		<option value="">请选择</option>
+		<option value="001">叉车001</option>
+		<option value="002">叉车002</option>
+		<option value="003">叉车003</option>
+	</select>
+	<input type="button" value="搜索" onclick="showVedioInDiv()"/>
+</div>
+ 
+<div class="main_div">
+	<%@include file="../inc/top.jsp"%>
+	<%@include file="../inc/leftNav.jsp"%>
+	<div class="cesuim_div" id="cesuim_div">
+	</div>
 </div>
 </body>
 </html>
