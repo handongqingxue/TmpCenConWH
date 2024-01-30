@@ -6,6 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <style type="text/css">
+a{
+	text-decoration: none;
+}
 .top_div{
 	width:100%;
 	height:120px;
@@ -41,7 +44,7 @@
 	margin-left:50px;
 }
 .top_div .nav_div .agv_nav_div{
-	width: 350px;
+	width: 320px;
 	height: 120px;
 	line-height: 120px;
 	margin-top:-120px;
@@ -108,18 +111,24 @@
 	<img class="system_name_img" alt="" src="<%=basePath %>resource/image/001.png">
 	<span class="system_name_span">远程集中监控系统</span>
 	<div class="nav_div">
+		<a href="<%=basePath %>main/goHome">
 		<div class="home_nav_div${uri.contains('home.jsp')?' selected':'' }">
 			<img class="nav_img" alt="" src="<%=basePath %>resource/image/002.png">
 			<span class="text_span">首页</span>
 		</div>
-		<div class="agv_nav_div">
+		</a>
+		<a href="<%=basePath %>agv/goInfo">
+		<div class="agv_nav_div${uri.contains('info.jsp')?' selected':'' }">
 			<img class="nav_img" alt="" src="<%=basePath %>resource/image/003.png">
 			<span class="text_span">AGV车辆定位</span>
 		</div>
-		<div class="video_nav_div">
+		</a>
+		<a href="<%=basePath %>vedio/goTrack">
+		<div class="video_nav_div${uri.contains('track.jsp')?' selected':'' }">
 			<img class="nav_img" alt="" src="<%=basePath %>resource/image/004.png">
 			<span class="text_span">视频监控</span>
 		</div>
+		</a>
 		<div class="rep_sys_nav_div">
 			<img class="nav_img" alt="" src="<%=basePath %>resource/image/005.png">
 			<span class="text_span">报表系统</span>
