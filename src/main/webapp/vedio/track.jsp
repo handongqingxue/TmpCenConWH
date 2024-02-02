@@ -64,27 +64,83 @@ body{
 }
 
 .vedio_div{
-	width: 1600px;
+	width: 800px;
 	height: 1400px;
+	margin:auto;
+	top:150px;
+	left:0;
+	right:0;
 	background-color:#fff;
-	position:fixed;
+	border:#347CAF solid 1px;
+	position:absolute;
 	z-index: 1;
 	display: none;
 }
 .vedio_div .tit_div{
 	width: 100%;
-	height: 40px;
-	line-height: 40px;
-	border-bottom: #666 solid 1px;
+	height: 100px;
+	line-height: 100px;
+	font-weight:bold;
+	text-align:center;
+	border-bottom: #F3F3F3 solid 1px;
 }
 .vedio_div .tit_div .text_span{
-	margin-left: 15px;
+	font-size:30px;
 }
 .vedio_div .tit_div .close_span{
 	color:#999;
+	font-size:25px;
 	margin-right: 20px;
 	float: right;
 	cursor: pointer;
+}
+.vedio_div .inp_div{
+	width: 90%;
+	height: 100px;
+	line-height: 100px;
+	margin:auto;
+}
+.vedio_div .inp_div .key_span{
+	font-size:25px;
+}
+.vedio_div .inp_div .val_inp{
+	width: 400px;
+	height: 50px;
+	margin-top:20px;
+	margin-right:20px;
+	color:#347CAF;
+	font-size:25px;
+	border-top:0px;
+	border-right:0px;
+	border-left:0px;
+	float: right;
+}
+.vedio_div .sea_but_div{
+	width: 90%;
+	height: 80px;
+	line-height: 80px;
+	margin:auto;
+	color:#fff;
+	font-size:25px;
+	text-align:center;
+	background-color:#34F043;
+	border-radius:10px;
+	cursor: pointer;
+}
+.vedio_div .real_vedio_div{
+	width: 93%;
+	height: 900px;
+	margin:80px auto 0;
+}
+.vedio_div .real_vedio_div .tit_div{
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	margin:auto;
+	color:#1F1A57;
+	font-size:25px;
+	letter-spacing:5px;
+	border: #CBCBCB solid 1px;
 }
 </style>
 <title>Insert title here</title>
@@ -262,7 +318,7 @@ function showVedioDiv(flag){
 }
 
 function showVedioInDiv(){
-	var tagId=$("#agv_sel").val();
+	var tagId=$("#agv_inp").val();
 	if(tagId==""||tagId==null){
 		alert("请选择叉车");
 		return false;
@@ -352,17 +408,17 @@ function getLineDistance(x1,y1,x2,y2){
 
 <div class="vedio_div" id="vedio_div">
 	<div class="tit_div">
-		<span class="text_span">视频追踪</span>
+		<span class="text_span">无人叉车视频追踪</span>
 		<span class="close_span" onclick="showVedioDiv(false)">X</span>
 	</div>
-	叉车列表
-	<select id="agv_sel">
-		<option value="">请选择</option>
-		<option value="001">叉车001</option>
-		<option value="002">叉车002</option>
-		<option value="003">叉车003</option>
-	</select>
-	<input type="button" value="搜索" onclick="showVedioInDiv()"/>
+	<div class="inp_div">
+		<span class="key_span">请输入叉车编号：</span>
+		<input class="val_inp" id="agv_inp" type="text"/>
+	</div>
+	<div class="sea_but_div" onclick="showVedioInDiv()">点击搜索</div>
+	<div class="real_vedio_div">
+		<div class="tit_div">实时视频画面</div>
+	</div>
 </div>
  
 <div class="main_div">
