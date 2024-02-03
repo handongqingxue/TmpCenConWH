@@ -27,6 +27,7 @@
 				/main/**=anon
 				/agv/**=anon
 				/vedio/**=anon
+				/repSys/**=anon
 				/resource/**=anon
 				/**=authc
 			</value>

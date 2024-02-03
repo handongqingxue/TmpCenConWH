@@ -142,6 +142,11 @@ body{
 	letter-spacing:5px;
 	border: #CBCBCB solid 1px;
 }
+.vedio_div .real_vedio_div iframe{
+	width: 100%;
+	height: 750px;
+	margin-top: 10px;
+}
 </style>
 <title>Insert title here</title>
 <script>  
@@ -344,6 +349,7 @@ function getAGVPositionFromListByTagId(tagId){
 //遍历所有监控，验证是否在监控范围
 function checkInCameraScopeByList(x,y){
 	var openCameras="";
+	var openCameraUrls="";
 	for(var i=0;i<cameraList.length;i++){
 		var camera=cameraList[i];
 		var cameraX=camera.x;
@@ -354,12 +360,18 @@ function checkInCameraScopeByList(x,y){
 		var b=camera.b;
 		if(checkInCameraScope(x,y,cameraX,cameraY,cameraZ,distIrr,k,b)){
 			openCameras+=","+camera.tagId;
+			openCameraUrls+=","+camera.url;
 		}
 	}
 	if(openCameras!=""){
 		openCameras=openCameras.substring(1);
-		alert(openCameras)
+		openCameraUrls=openCameraUrls.substring(1);
+		
+		alert(openCameraUrls.split(",")[0])
+		$("#vedio_div iframe").attr("src",openCameraUrls.split(",")[0]);
+		
 		openCameras="";
+		openCameraUrls="";
 	}
 }
 
@@ -418,6 +430,7 @@ function getLineDistance(x1,y1,x2,y2){
 	<div class="sea_but_div" onclick="showVedioInDiv()">点击搜索</div>
 	<div class="real_vedio_div">
 		<div class="tit_div">实时视频画面</div>
+		<iframe></iframe>
 	</div>
 </div>
  

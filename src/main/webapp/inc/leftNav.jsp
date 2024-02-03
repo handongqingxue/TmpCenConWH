@@ -45,6 +45,14 @@
 			<div class="item_div">故障统计</div>
 			<div class="item_div">视频联动</div>
 		</c:when>
+		<c:when test="${uri.contains('/repSys/')}">
+			<div class="item_div">统计图表</div>
+			<div class="item_div">入库报表</div>
+			<div class="item_div">出库报表</div>
+			<div class="item_div">库存统计</div>
+			<div class="item_div">单据查询</div>
+			<div class="item_div">库存报警</div>
+		</c:when>
 	</c:choose>
 </div>
 </body>
