@@ -14,8 +14,99 @@
 <script type="text/javascript" src="<%=basePath %>resource/js/echarts.min.js"></script>
 <script type="text/javascript">
 $(function(){
+	initBarChartDiv();
+	initPieChartDiv();
 	initLineChartDiv();
 });
+
+function initBarChartDiv(){
+	var dom = document.getElementById('bar_chart_div');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    var option;
+    option = {
+	  xAxis: {
+	    type: 'category',
+	    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+	  },
+	  yAxis: {
+	    type: 'value'
+	  },
+	  series: [
+	    {
+	    	data: [120, 200, 150, 80, 70, 110, 130],
+	        type: 'bar',
+	        barGap: 0,
+	    },
+	    {
+	    	data: [120, 200, 150, 80, 70, 110, 130],
+	        type: 'bar'
+	    }
+	  ]
+	};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+}
+
+function initPieChartDiv(){
+	var dom = document.getElementById('pie_chart_div');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    var option;
+    option = {
+	  tooltip: {
+	    trigger: 'item'
+	  },
+	  legend: {
+	    top: '5%',
+	    left: 'center'
+	  },
+	  series: [
+	    {
+	      name: 'Access From',
+	      type: 'pie',
+	      radius: ['50%', '70%'],
+	      avoidLabelOverlap: false,
+	      itemStyle: {
+	        borderRadius: 0,
+	        borderColor: '#fff',
+	        borderWidth: 2
+	      },
+	      label: {
+	        show: false,
+	        position: 'center'
+	      },
+	      emphasis: {
+	        label: {
+	          show: true,
+	          fontSize: 40,
+	          fontWeight: 'bold'
+	        }
+	      },
+	      labelLine: {
+	        show: false
+	      },
+	      data: [
+	        { value: 580, name: '滞留' },
+	        { value: 484, name: '入库量' },
+	        { value: 300, name: '出库量' }
+	      ]
+	    }
+	  ]
+	};
+
+    if(option&&typeof option==='object') {
+      myChart.setOption(option);
+    }
+}
 
 function initLineChartDiv(){
 	var dom = document.getElementById('line_chart_div');
@@ -93,9 +184,21 @@ body{
 	margin-top:-550px;
 	margin-left:300px;
 }
+.center_div .bar_chart_div{
+	width: 600px;
+	height: 500px;
+}
+.center_div .pie_chart_div{
+	width: 600px;
+	height: 500px;
+	margin-top:-500px;
+	margin-left:650px;
+}
 .center_div .line_chart_div{
 	width: 600px;
 	height: 500px;
+	margin-top:-500px;
+	margin-left:1300px;
 }
 
 .right_div{
@@ -158,6 +261,10 @@ body{
 	<%@include file="../inc/top.jsp"%>
 	<%@include file="../inc/leftNav.jsp"%>
 	<div class="center_div">
+		<div class="bar_chart_div" id="bar_chart_div">
+		</div>
+		<div class="pie_chart_div" id="pie_chart_div">
+		</div>
 		<div class="line_chart_div" id="line_chart_div">
 		</div>
 	</div>
