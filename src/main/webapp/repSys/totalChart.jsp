@@ -253,6 +253,65 @@ body{
 	font-size: 30px;
 	border-bottom: #C8C8C8 solid 1px;
 }
+
+.tab1_div,
+.tab2_div{
+	width: 2000px;
+	display: none;
+}
+.tab1_div .name_div,
+.tab2_div .name_div{
+	font-size:35px;
+	text-align: center;
+}
+.tab1,
+.tab2{
+	width: 100%;
+	border: 1px;
+}
+.tab1 tr td,
+.tab2 tr td{
+	width: 16.6%;
+	text-align: center;
+}
+.tab1 .tr1,
+.tab2 .tr1{
+	height:70px;
+}
+.tab1 .tr2,
+.tab2 .tr2{
+	height:80px;
+}
+.tab1 .tr1 .td1,
+.tab1 .tr1 .td5,
+.tab2 .tr1 .td1,
+.tab2 .tr1 .td5{
+	font-size: 25px;
+}
+.tab1 .tr1 .td2,
+.tab1 .tr1 .td3,
+.tab1 .tr1 .td4,
+.tab1 .tr1 .td6,
+.tab1 .tr2 .td1,
+.tab1 .tr2 .td2,
+.tab1 .tr2 .td3,
+.tab2 .tr1 .td2,
+.tab2 .tr1 .td3,
+.tab2 .tr1 .td4,
+.tab2 .tr1 .td6,
+.tab2 .tr2 .td1,
+.tab2 .tr2 .td2,
+.tab2 .tr2 .td3{
+	font-size: 35px;
+}
+.tab1 .tr3,
+.tab2 .tr3{
+	height:60px;
+}
+.tab1 .tr3 td,
+.tab2 .tr3 td{
+	font-size: 28px;
+}
 </style>
 <title>Insert title here</title>
 </head>
@@ -267,6 +326,204 @@ body{
 		</div>
 		<div class="line_chart_div" id="line_chart_div">
 		</div>
+		
+		<div class="tab1_div" id="tab1_div">
+			<div class="name_div">1#硝酸铵库房多孔粒状硝酸铵出入库登记簿</div>
+			<table class="tab1" border="1" cellspacing="0">
+				<tr class="tr1">
+					<td class="td1" rowspan="2">时间</td>
+					<td class="td2">入库</td>
+					<td class="td3">出库</td>
+					<td class="td4">库存</td>
+					<td class="td5" rowspan="2">记录人签字</td>
+					<td class="td6" rowspan="2">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">数量(吨)</td>
+					<td class="td2">数量(吨)</td>
+					<td class="td3">数量(吨)</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月23日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月24日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月25日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月26日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月27日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月28日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月29日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月30日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月31日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="tab2_div" id="tab2_div">
+			<div class="name_div">2#硝酸铵库房多孔粒状硝酸铵出入库登记簿</div>
+			<table class="tab2" border="1" cellspacing="0">
+				<tr class="tr1">
+					<td class="td1" rowspan="2">时间</td>
+					<td class="td2">入库</td>
+					<td class="td3">出库</td>
+					<td class="td4">库存</td>
+					<td class="td5" rowspan="2">记录人签字</td>
+					<td class="td6" rowspan="2">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">数量(吨)</td>
+					<td class="td2">数量(吨)</td>
+					<td class="td3">数量(吨)</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月23日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月24日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月25日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月26日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月27日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月28日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月29日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月30日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">2024年1月31日</td>
+					<td class="td2">11</td>
+					<td class="td3">11</td>
+					<td class="td4">11</td>
+					<td class="td5">天赐</td>
+					<td class="td6">李天亯</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="tab3_div" id="tab3_div">
+			<div class="name_div">制药车间化工原料（醋 酸）出入库登记表</div>
+			<table class="tab3" border="1" cellspacing="0">
+				<tr class="tr1">
+					<td class="td1" rowspan="2">时间</td>
+					<td class="td2">入库</td>
+					<td class="td3">出库</td>
+					<td class="td4">库存</td>
+					<td class="td5" rowspan="2">记录人签字</td>
+					<td class="td6" rowspan="2">备注</td>
+				</tr>
+			</table>
+		</div>
+		
+		
 	</div>
 	<div class="right_div">
 		<div class="in_out_real_data_div">
