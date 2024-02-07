@@ -360,29 +360,195 @@ body{
 	font-size: 25px;
 }
 
-.tab4_div{
+.tab4_div,
+.tab5_div,
+.tab6_div,
+.tab7_div,
+.tab8_div,
+.tab9_div{
 	width: 2000px;
-	/* 
 	display: none;
-	*/
 }
-.tab4_div .name_div{
+.tab4_div .name_div,
+.tab5_div .name_div,
+.tab6_div .name_div,
+.tab7_div .name_div,
+.tab8_div .name_div,
+.tab9_div .name_div{
 	font-size:35px;
 	text-align: center;
 }
-.tab4_div .ylmc_div{
+.tab4_div .ylmc_div,
+.tab5_div .ylmc_div,
+.tab6_div .ylmc_div,
+.tab7_div .ylmc_div,
+.tab8_div .ylmc_div,
+.tab9_div .ylmc_div{
 	height: 70px;
 }
-.tab4_div .ylmc_div .ylmc_span{
+.tab4_div .ylmc_div .ylmc_span,
+.tab5_div .ylmc_div .ylmc_span,
+.tab6_div .ylmc_div .ylmc_span,
+.tab7_div .ylmc_div .ylmc_span,
+.tab8_div .ylmc_div .ylmc_span,
+.tab9_div .ylmc_div .ylmc_span{
 	font-size:35px;
 }
-.tab4_div .ylmc_div .nf_span{
+.tab4_div .ylmc_div .nf_span,
+.tab5_div .ylmc_div .nf_span,
+.tab6_div .ylmc_div .nf_span,
+.tab7_div .ylmc_div .nf_span,
+.tab8_div .ylmc_div .nf_span,
+.tab9_div .ylmc_div .nf_span{
 	font-size:35px;
 	float: right;
 }
-.tab4{
+.tab4,
+.tab5,
+.tab6,
+.tab7,
+.tab8,
+.tab9{
 	width: 100%;
 	border: 1px;
+}
+.tab4 tr td,
+.tab5 tr td,
+.tab6 tr td,
+.tab7 tr td,
+.tab8 tr td,
+.tab9 tr td{
+	text-align: center;
+}
+.tab4 .tr1,
+.tab5 .tr1,
+.tab6 .tr1,
+.tab7 .tr1,
+.tab8 .tr1,
+.tab9 .tr1{
+	height:120px;
+}
+.tab4 .tr1 .td1,
+.tab4 .tr2 .td1,
+.tab5 .tr1 .td1,
+.tab5 .tr2 .td1,
+.tab6 .tr1 .td1,
+.tab6 .tr2 .td1,
+.tab7 .tr1 .td1,
+.tab7 .tr2 .td1,
+.tab8 .tr1 .td1,
+.tab8 .tr2 .td1,
+.tab9 .tr1 .td1,
+.tab9 .tr2 .td1{
+	width: 5%;
+	font-size: 30px;
+}
+.tab4 .tr1 .td2,
+.tab4 .tr1 .td3,
+.tab4 .tr1 .td4,
+.tab4 .tr1 .td5,
+.tab4 .tr1 .td6,
+.tab4 .tr1 .td7,
+.tab4 .tr1 .td8,
+.tab4 .tr1 .td9,
+.tab4 .tr2 .td2,
+.tab4 .tr2 .td3,
+.tab4 .tr2 .td4,
+.tab4 .tr2 .td5,
+.tab4 .tr2 .td6,
+.tab4 .tr2 .td7,
+.tab4 .tr2 .td8,
+.tab4 .tr2 .td9,
+.tab5 .tr1 .td2,
+.tab5 .tr1 .td3,
+.tab5 .tr1 .td4,
+.tab5 .tr1 .td5,
+.tab5 .tr1 .td6,
+.tab5 .tr1 .td7,
+.tab5 .tr1 .td8,
+.tab5 .tr1 .td9,
+.tab5 .tr2 .td2,
+.tab5 .tr2 .td3,
+.tab5 .tr2 .td4,
+.tab5 .tr2 .td5,
+.tab5 .tr2 .td6,
+.tab5 .tr2 .td7,
+.tab5 .tr2 .td8,
+.tab5 .tr2 .td9,
+.tab6 .tr1 .td2,
+.tab6 .tr1 .td3,
+.tab6 .tr1 .td4,
+.tab6 .tr1 .td5,
+.tab6 .tr1 .td6,
+.tab6 .tr1 .td7,
+.tab6 .tr1 .td8,
+.tab6 .tr1 .td9,
+.tab6 .tr2 .td2,
+.tab6 .tr2 .td3,
+.tab6 .tr2 .td4,
+.tab6 .tr2 .td5,
+.tab6 .tr2 .td6,
+.tab6 .tr2 .td7,
+.tab6 .tr2 .td8,
+.tab6 .tr2 .td9,
+.tab7 .tr1 .td2,
+.tab7 .tr1 .td3,
+.tab7 .tr1 .td4,
+.tab7 .tr1 .td5,
+.tab7 .tr1 .td6,
+.tab7 .tr1 .td7,
+.tab7 .tr1 .td8,
+.tab7 .tr1 .td9,
+.tab7 .tr2 .td2,
+.tab7 .tr2 .td3,
+.tab7 .tr2 .td4,
+.tab7 .tr2 .td5,
+.tab7 .tr2 .td6,
+.tab7 .tr2 .td7,
+.tab7 .tr2 .td8,
+.tab7 .tr2 .td9,
+.tab8 .tr1 .td2,
+.tab8 .tr1 .td3,
+.tab8 .tr1 .td4,
+.tab8 .tr1 .td5,
+.tab8 .tr1 .td6,
+.tab8 .tr1 .td7,
+.tab8 .tr1 .td8,
+.tab8 .tr1 .td9,
+.tab8 .tr2 .td2,
+.tab8 .tr2 .td3,
+.tab8 .tr2 .td4,
+.tab8 .tr2 .td5,
+.tab8 .tr2 .td6,
+.tab8 .tr2 .td7,
+.tab8 .tr2 .td8,
+.tab8 .tr2 .td9,
+.tab9 .tr1 .td2,
+.tab9 .tr1 .td3,
+.tab9 .tr1 .td4,
+.tab9 .tr1 .td5,
+.tab9 .tr1 .td6,
+.tab9 .tr1 .td7,
+.tab9 .tr1 .td8,
+.tab9 .tr1 .td9,
+.tab9 .tr2 .td2,
+.tab9 .tr2 .td3,
+.tab9 .tr2 .td4,
+.tab9 .tr2 .td5,
+.tab9 .tr2 .td6,
+.tab9 .tr2 .td7,
+.tab9 .tr2 .td8,
+.tab9 .tr2 .td9{
+	width: 10%;
+	font-size: 30px;
+}
+.tab4 .tr2,
+.tab5 .tr2,
+.tab6 .tr2,
+.tab7 .tr2,
+.tab8 .tr2,
+.tab9 .tr2{
+	height:80px;
 }
 </style>
 <title>Insert title here</title>
@@ -671,12 +837,318 @@ body{
 			</div>
 			<table class="tab4" border="1" cellspacing="0">
 				<tr class="tr1">
-					<td class="td1" rowspan="2">序号</td>
-					<td class="td2" colspan="3">出库记录</td>
-					<td class="td3" colspan="3">入库记录</td>
-					<td class="td4" rowspan="2">总库存(kg)</td>
-					<td class="td5" rowspan="2">出料人</td>
-					<td class="td6" rowspan="2">备注</td>
+					<td class="td1">序号</td>
+					<td class="td2">出入库日期</td>
+					<td class="td3">出库量(kg)</td>
+					<td class="td4">入库量(kg)</td>
+					<td class="td5">总库存(kg)</td>
+					<td class="td6">库房责任人</td>
+					<td class="td7">班组长</td>
+					<td class="td8">领料人</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">1</td>
+					<td class="td2"></td>
+					<td class="td3">25</td>
+					<td class="td4">25</td>
+					<td class="td5">25</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">2</td>
+					<td class="td2"></td>
+					<td class="td3">25</td>
+					<td class="td4">25</td>
+					<td class="td5">25</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">3</td>
+					<td class="td2"></td>
+					<td class="td3">25</td>
+					<td class="td4">25</td>
+					<td class="td5">25</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="tab5_div" id="tab5_div">
+			<div class="name_div">制药车间化工原料出入库登记表</div>
+			<div class="ylmc_div">
+				<span class="ylmc_span">原料名称：国产油相</span>
+				<span class="nf_span">年份： 2024</span>
+			</div>
+			<table class="tab5" border="1" cellspacing="0">
+				<tr class="tr1">
+					<td class="td1">序号</td>
+					<td class="td2">出入库日期</td>
+					<td class="td3">出库量(kg)</td>
+					<td class="td4">入库量(kg)</td>
+					<td class="td5">总库存(kg)</td>
+					<td class="td6">库房责任人</td>
+					<td class="td7">领料人</td>
+					<td class="td8">班组长</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">1</td>
+					<td class="td2"></td>
+					<td class="td3">875</td>
+					<td class="td4">875</td>
+					<td class="td5">875</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">2</td>
+					<td class="td2"></td>
+					<td class="td3">875</td>
+					<td class="td4">875</td>
+					<td class="td5">875</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">3</td>
+					<td class="td2"></td>
+					<td class="td3">875</td>
+					<td class="td4">875</td>
+					<td class="td5">875</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="tab6_div" id="tab6_div">
+			<div class="name_div">制药车间化工原料出入库登记表</div>
+			<div class="ylmc_div">
+				<span class="ylmc_span">原料名称：硫脲</span>
+				<span class="nf_span">年份： 2024</span>
+			</div>
+			<table class="tab6" border="1" cellspacing="0">
+				<tr class="tr1">
+					<td class="td1">序号</td>
+					<td class="td2">出入库日期</td>
+					<td class="td3">出库量(kg)</td>
+					<td class="td4">入库量(kg)</td>
+					<td class="td5">总库存(kg)</td>
+					<td class="td6">库房责任人</td>
+					<td class="td7">班组长</td>
+					<td class="td8">领料人</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">1</td>
+					<td class="td2"></td>
+					<td class="td3">25</td>
+					<td class="td4">25</td>
+					<td class="td5">25</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">2</td>
+					<td class="td2"></td>
+					<td class="td3">25</td>
+					<td class="td4">25</td>
+					<td class="td5">25</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">3</td>
+					<td class="td2"></td>
+					<td class="td3">25</td>
+					<td class="td4">25</td>
+					<td class="td5">25</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="tab7_div" id="tab7_div">
+			<div class="name_div">制药车间化工原料出入库登记表</div>
+			<div class="ylmc_div">
+				<span class="ylmc_span">原料名称：碳酸钠</span>
+				<span class="nf_span">年份： 2024</span>
+			</div>
+			<table class="tab7" border="1" cellspacing="0">
+				<tr class="tr1">
+					<td class="td1">序号</td>
+					<td class="td2">出入库日期</td>
+					<td class="td3">出库量(kg)</td>
+					<td class="td4">入库量(kg)</td>
+					<td class="td5">总库存(kg)</td>
+					<td class="td6">库房责任人</td>
+					<td class="td7">领料人</td>
+					<td class="td8">班组长</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">1</td>
+					<td class="td2"></td>
+					<td class="td3">875</td>
+					<td class="td4">875</td>
+					<td class="td5">875</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">2</td>
+					<td class="td2"></td>
+					<td class="td3">875</td>
+					<td class="td4">875</td>
+					<td class="td5">875</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">3</td>
+					<td class="td2"></td>
+					<td class="td3">875</td>
+					<td class="td4">875</td>
+					<td class="td5">875</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="tab8_div" id="tab8_div">
+			<div class="name_div">制药车间化工原料出入库登记表</div>
+			<div class="ylmc_div">
+				<span class="ylmc_span">原料名称：乙二醇</span>
+				<span class="nf_span">年份： 2022</span>
+			</div>
+			<table class="tab8" border="1" cellspacing="0">
+				<tr class="tr1">
+					<td class="td1">序号</td>
+					<td class="td2">出入库日期</td>
+					<td class="td3">出库量(kg)</td>
+					<td class="td4">入库量(kg)</td>
+					<td class="td5">总库存(kg)</td>
+					<td class="td6">库房责任人</td>
+					<td class="td7">班组长</td>
+					<td class="td8">领料人</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">1</td>
+					<td class="td2"></td>
+					<td class="td3">25</td>
+					<td class="td4">25</td>
+					<td class="td5">25</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">2</td>
+					<td class="td2"></td>
+					<td class="td3">25</td>
+					<td class="td4">25</td>
+					<td class="td5">25</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">3</td>
+					<td class="td2"></td>
+					<td class="td3">25</td>
+					<td class="td4">25</td>
+					<td class="td5">25</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="tab9_div" id="tab9_div">
+			<div class="name_div">制药车间化工原料出入库登记表</div>
+			<div class="ylmc_div">
+				<span class="ylmc_span">原料名称：添加剂</span>
+				<span class="nf_span">年份： 2022</span>
+			</div>
+			<table class="tab9" border="1" cellspacing="0">
+				<tr class="tr1">
+					<td class="td1">序号</td>
+					<td class="td2">出入库日期</td>
+					<td class="td3">出库量(kg)</td>
+					<td class="td4">入库量(kg)</td>
+					<td class="td5">总库存(kg)</td>
+					<td class="td6">库房责任人</td>
+					<td class="td7">班组长</td>
+					<td class="td8">领料人</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">1</td>
+					<td class="td2"></td>
+					<td class="td3">25</td>
+					<td class="td4">25</td>
+					<td class="td5">25</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">2</td>
+					<td class="td2"></td>
+					<td class="td3">25</td>
+					<td class="td4">25</td>
+					<td class="td5">25</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">3</td>
+					<td class="td2"></td>
+					<td class="td3">25</td>
+					<td class="td4">25</td>
+					<td class="td5">25</td>
+					<td class="td6">天赐</td>
+					<td class="td7">天赐</td>
+					<td class="td8">天赐</td>
+					<td class="td9">备注</td>
 				</tr>
 			</table>
 		</div>
