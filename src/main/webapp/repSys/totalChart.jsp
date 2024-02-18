@@ -165,6 +165,189 @@ function initLineChartDiv(){
       myChart.setOption(option);
     }
 }
+
+function createDataTab(tabName){
+	if(tabName=="tab1"){
+		var dataTab1=$("#data_tab1");
+		dataTab1.empty();
+		
+		var timeCbChecked=$("#tool_bar1 #time_cb").prop("checked");
+		var inCountCbChecked=$("#tool_bar1 #in_count_cb").prop("checked");
+		var outCountCbChecked=$("#tool_bar1 #out_count_cb").prop("checked");
+		var saveCountCbChecked=$("#tool_bar1 #save_count_cb").prop("checked");
+		var recCbChecked=$("#tool_bar1 #rec_cb").prop("checked");
+		var memoCbChecked=$("#tool_bar1 #memo_cb").prop("checked");
+		
+		var appendStr="<tr class=\"tr1\">";
+				if(timeCbChecked)
+					appendStr+="<td>时间</td>";
+				if(inCountCbChecked)
+					appendStr+="<td>入库数量(吨)</td>";
+				if(outCountCbChecked)
+					appendStr+="<td>出库数量(吨)</td>";
+				if(saveCountCbChecked)
+					appendStr+="<td>库存数量(吨)</td>";
+				if(recCbChecked)
+					appendStr+="<td>记录人签字</td>";
+				if(memoCbChecked)
+					appendStr+="<td>备注</td>";
+			appendStr+="</tr>";
+		
+		var dataArr=[];
+		var data={time:"2024年1月23日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月24日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月25日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月26日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月27日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月28日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月29日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月30日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月31日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr>";
+				if(timeCbChecked)
+					appendStr+="<td>"+dataArr[i].time+"</td>";
+				if(inCountCbChecked)
+					appendStr+="<td>"+dataArr[i].inCount+"</td>";
+				if(outCountCbChecked)
+					appendStr+="<td>"+dataArr[i].outCount+"</td>";
+				if(saveCountCbChecked)
+					appendStr+="<td>"+dataArr[i].saveCount+"</td>";
+				if(recCbChecked)
+					appendStr+="<td>"+dataArr[i].rec+"</td>";
+				if(memoCbChecked)
+					appendStr+="<td>"+dataArr[i].memo+"</td>";
+			appendStr+="</tr>";
+		}
+		
+		dataTab1.append(appendStr);
+	}
+}
+
+function createReportTab(tabName){
+	if(tabName=="tab1"){
+		var tab1=$("#tab1");
+		tab1.empty();
+		
+		var timeCbChecked=$("#tool_bar1 #time_cb").prop("checked");
+		var inCountCbChecked=$("#tool_bar1 #in_count_cb").prop("checked");
+		var outCountCbChecked=$("#tool_bar1 #out_count_cb").prop("checked");
+		var saveCountCbChecked=$("#tool_bar1 #save_count_cb").prop("checked");
+		var recCbChecked=$("#tool_bar1 #rec_cb").prop("checked");
+		var memoCbChecked=$("#tool_bar1 #memo_cb").prop("checked");
+		
+		var appendStr="<tr style=\"height: 70px;\">";
+			if(timeCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 25px;text-align: center;\" rowspan=\"2\">时间</td>";
+			if(inCountCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 35px;text-align: center;\">入库</td>";
+			if(outCountCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 35px;text-align: center;\">出库</td>";
+			if(saveCountCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 35px;text-align: center;\">库存</td>";
+			if(recCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 25px;text-align: center;\" rowspan=\"2\">记录人签字</td>";
+			if(memoCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 35px;text-align: center;\" rowspan=\"2\">备注</td>";
+			appendStr+="</tr>";
+			
+			
+		appendStr+="<tr style=\"height: 80px;\">";
+		if(inCountCbChecked)
+			appendStr+="<td style=\"width: 16.6%;font-size: 35px;text-align: center;\">数量(吨)</td>";
+		if(outCountCbChecked)
+			appendStr+="<td style=\"width: 16.6%;font-size: 35px;text-align: center;\">数量(吨)</td>";
+		if(saveCountCbChecked)
+			appendStr+="<td style=\"width: 16.6%;font-size: 35px;text-align: center;\">数量(吨)</td>";
+		appendStr+="</tr>";
+		
+		var dataArr=[];
+		var data={time:"2024年1月23日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月24日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月25日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月26日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月27日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月28日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月29日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月30日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月31日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr style=\"height: 60px;\">";
+			if(timeCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 28px;text-align: center;\">"+dataArr[i].time+"</td>";
+			if(inCountCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 28px;text-align: center;\">"+dataArr[i].inCount+"</td>";
+			if(outCountCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 28px;text-align: center;\">"+dataArr[i].outCount+"</td>";
+			if(saveCountCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 28px;text-align: center;\">"+dataArr[i].saveCount+"</td>";
+			if(recCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 28px;text-align: center;\">"+dataArr[i].rec+"</td>";
+			if(memoCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 28px;text-align: center;\">"+dataArr[i].memo+"</td>";
+			appendStr+="</tr>";
+		}
+		
+		appendStr+="";
+		appendStr+="";
+		appendStr+="";
+		appendStr+="";
+		
+		tab1.append(appendStr);
+	
+	
+		
+		
+		
+	
+	}
+}
+
+function exportExcel(tabName){
+	alert(tabName)
+	var table = $("#"+tabName);
+    var excelContent = table[0].innerHTML;
+    var excelFile = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' xmlns='http://www.w3.org/TR/REC-html40'>";
+    excelFile += "<head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head>";
+    excelFile += "<body><table>";
+    excelFile += excelContent;
+    excelFile += "</table></body>";
+    excelFile += "</html>";
+    var link = "data:application/vnd.ms-excel;base64," + base64(excelFile);
+    
+    var fileName;
+    if(tabName=="tab1"){
+    	fileName="1#硝酸铵库房多孔粒状硝酸铵出入库登记簿";
+    }
+    var a = document.createElement("a");
+    a.download = fileName+".xlsx";
+    a.href = link;
+    a.click();
+}
+
+function base64 (content) {
+    return window.btoa(unescape(encodeURIComponent(content)));
+}
 </script>
 <style type="text/css">
 body{
@@ -257,6 +440,7 @@ body{
 .tab1_div,
 .tab2_div{
 	width: 2000px;
+	margin-top: 50px;
 	/* display: none; */
 }
 .tab1_div .name_div,
@@ -264,6 +448,7 @@ body{
 	font-size:35px;
 	text-align: center;
 }
+.data_tab1,
 .tab1,
 .tab2,
 .tab3,
@@ -278,11 +463,13 @@ body{
 	width: 100%;
 	border: 1px;
 }
+.data_tab1 tr td,
 .tab1 tr td,
 .tab2 tr td{
 	width: 16.6%;
 	text-align: center;
 }
+.data_tab1 .tr1,
 .tab1 .tr1,
 .tab2 .tr1{
 	height:70px;
@@ -291,6 +478,7 @@ body{
 .tab2 .tr2{
 	height:80px;
 }
+.data_tab1 tr td,
 .tab1 .tr1 .td1,
 .tab1 .tr1 .td5,
 .tab2 .tr1 .td1,
@@ -324,7 +512,8 @@ body{
 
 .tab3_div{
 	width: 2000px;
-	display: none;
+	margin-top: 100px;
+	/* display: none; */
 }
 .tab3_div .name_div{
 	font-size:35px;
@@ -383,6 +572,26 @@ body{
 	font-size:35px;
 	text-align: center;
 }
+
+.tab1_div .tool_bar{
+	font-size: 35px;
+}
+.tab1_div .tool_bar input{
+	width: 30px;
+	height: 30px;
+}
+.tab1_div .tool_bar .sear_but{
+	width: 100px;
+	height: 50px;
+	font-size: 35px;
+}
+.tab1_div .tool_bar .report_but,
+.tab1_div .output_exc_but{
+	width: 180px;
+	height: 50px;
+	font-size: 35px;
+}
+
 .tab4_div .ylmc_div,
 .tab5_div .ylmc_div,
 .tab6_div .ylmc_div,
@@ -664,7 +873,60 @@ body{
 		
 		<div class="tab1_div" id="tab1_div">
 			<div class="name_div">1#硝酸铵库房多孔粒状硝酸铵出入库登记簿</div>
-			<table class="tab1" border="1" cellspacing="0">
+			
+			<div class="tool_bar" id="tool_bar1">
+				显示列:
+				时间:<input type="checkbox" id="time_cb" checked="checked"/>
+				入库数量:<input type="checkbox" id="in_count_cb" checked="checked"/>
+				出库数量:<input type="checkbox" id="out_count_cb" checked="checked"/>
+				库存数量:<input type="checkbox" id="save_count_cb" checked="checked"/>
+				记录人:<input type="checkbox" id="rec_cb" checked="checked"/>
+				备注:<input type="checkbox" id="memo_cb" checked="checked"/>
+				<input class="sear_but" type="button" value="查询" onclick="createDataTab('tab1')"/>
+				<input class="report_but" type="button" value="生成报表" onclick="createReportTab('tab1')"/>
+			</div>
+			
+			<table class="data_tab1" id="data_tab1" border="1" cellspacing="0">
+				<!-- 
+				<tr class="tr1">
+					<td>时间</td>
+					<td>入库数量(吨)</td>
+					<td>出库数量(吨)</td>
+					<td>库存数量(吨)</td>
+					<td>记录人签字</td>
+					<td>备注</td>
+				</tr>
+				<tr>
+					<td>2024年1月23日</td>
+					<td>11</td>
+					<td>11</td>
+					<td>11</td>
+					<td>天赐</td>
+					<td>李天亯</td>
+				</tr>
+				<tr>
+					<td>2024年1月24日</td>
+					<td>11</td>
+					<td>11</td>
+					<td>11</td>
+					<td>天赐</td>
+					<td>李天亯</td>
+				</tr>
+				<tr>
+					<td>2024年1月25日</td>
+					<td>11</td>
+					<td>11</td>
+					<td>11</td>
+					<td>天赐</td>
+					<td>李天亯</td>
+				</tr>
+				 -->
+			</table>
+			
+			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab1')"/>
+			
+			<!-- 
+			<table class="tab1" id="tab1" border="1" cellspacing="0">
 				<tr class="tr1">
 					<td class="td1" rowspan="2">时间</td>
 					<td class="td2">入库</td>
@@ -750,6 +1012,57 @@ body{
 					<td class="td5">天赐</td>
 					<td class="td6">李天亯</td>
 				</tr>
+			</table>
+			 -->
+			
+			<table id="tab1" style="width: 100%;border: 1px;" border="1" cellspacing="0">
+				<!-- 
+				<tr style="height: 70px;">
+					<td style="width: 16.6%;font-size: 25px;text-align: center;" rowspan="2">时间</td>
+					<td style="width: 16.6%;font-size: 35px;text-align: center;">入库</td>
+					<td style="width: 16.6%;font-size: 35px;text-align: center;">出库</td>
+					<td style="width: 16.6%;font-size: 35px;text-align: center;">库存</td>
+					<td style="width: 16.6%;font-size: 25px;text-align: center;" rowspan="2">记录人签字</td>
+					<td style="width: 16.6%;font-size: 35px;text-align: center;" rowspan="2">备注</td>
+				</tr>
+				<tr style="height: 80px;">
+					<td style="width: 16.6%;font-size: 35px;text-align: center;">数量(吨)</td>
+					<td style="width: 16.6%;font-size: 35px;text-align: center;">数量(吨)</td>
+					<td style="width: 16.6%;font-size: 35px;text-align: center;">数量(吨)</td>
+				</tr>
+				<tr style="height: 60px;">
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">2024年1月23日</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">11</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">11</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">11</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">天赐</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">李天亯</td>
+				</tr>
+				<tr style="height: 60px;">
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">2024年1月24日</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">11</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">11</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">11</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">天赐</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">李天亯</td>
+				</tr>
+				<tr style="height: 60px;">
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">2024年1月25日</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">11</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">11</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">11</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">天赐</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">李天亯</td>
+				</tr>
+				<tr style="height: 60px;">
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">2024年1月26日</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">11</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">11</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">11</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">天赐</td>
+					<td style="width: 16.6%;font-size: 28px;text-align: center;">李天亯</td>
+				</tr>
+				 -->
 			</table>
 		</div>
 		
