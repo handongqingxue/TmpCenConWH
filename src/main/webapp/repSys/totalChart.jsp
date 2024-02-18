@@ -257,7 +257,7 @@ body{
 .tab1_div,
 .tab2_div{
 	width: 2000px;
-	display: none;
+	/* display: none; */
 }
 .tab1_div .name_div,
 .tab2_div .name_div{
@@ -265,7 +265,16 @@ body{
 	text-align: center;
 }
 .tab1,
-.tab2{
+.tab2,
+.tab3,
+.tab4,
+.tab5,
+.tab6,
+.tab7,
+.tab8,
+.tab9,
+.tab10,
+.tab11{
 	width: 100%;
 	border: 1px;
 }
@@ -320,10 +329,6 @@ body{
 .tab3_div .name_div{
 	font-size:35px;
 	text-align: center;
-}
-.tab3{
-	width: 100%;
-	border: 1px;
 }
 .tab3 tr td{
 	text-align: center;
@@ -402,15 +407,6 @@ body{
 .tab9_div .ylmc_div .nf_span{
 	font-size:35px;
 	float: right;
-}
-.tab4,
-.tab5,
-.tab6,
-.tab7,
-.tab8,
-.tab9{
-	width: 100%;
-	border: 1px;
 }
 .tab4 tr td,
 .tab5 tr td,
@@ -549,6 +545,107 @@ body{
 .tab8 .tr2,
 .tab9 .tr2{
 	height:80px;
+}
+
+.tab10_div{
+	width: 1000px;
+	display: none;
+}
+.tab10_div .name_div{
+	font-size:35px;
+	text-align: center;
+}
+.tab10_div .lotNo_div{
+	width: 200px;
+	font-size:25px;
+	float: right;
+}
+.tab10_div .date_div,
+.tab10_div .temp_div,
+.tab10_div .free_point_div,
+.tab10_div .oper_sign_div,
+.tab10_div .mon_sign_div{
+	width: 200px;
+	margin-top: 80px;
+	font-size:25px;
+}
+.tab10_div .operator_div{
+	width: 200px;
+	font-size:25px;
+	float: right;
+}
+.tab10 tr td{
+	width: 33%;
+	height:120px;
+	font-size:30px;
+	text-align: center;
+}
+
+.tab11_div{
+	width: 1500px;
+	display: none;
+}
+.tab11_div .name_div{
+	font-size:35px;
+	text-align: center;
+}
+.tab11 .tr1,
+.tab11 .tr2{
+	height:90px;
+}
+.tab11 .tr1 .td1,
+.tab11 .tr1 .td3,
+.tab11 .tr2 .td1,
+.tab11 .tr3 .td1,
+.tab11 .tr4 .td1,
+.tab11 .tr4 .td3,
+.tab11 .tr5 .td2,
+.tab11 .tr6 .td1,
+.tab11 .tr6 .td3,
+.tab11 .tr9 .td1,
+.tab11 .tr10 .td1,
+.tab11 .tr10 .td3,
+.tab11 .tr11 .td1{
+	width: 20%;
+	font-size: 30px;
+	text-align: center;
+}
+.tab11 .tr1 .td2,
+.tab11 .tr1 .td4,
+.tab11 .tr4 .td2,
+.tab11 .tr4 .td4,
+.tab11 .tr5 .td1,
+.tab11 .tr5 .td3{
+	width: 30%;
+	font-size: 30px;
+	text-align: center;
+}
+.tab11 .tr2 .td2,
+.tab11 .tr9 .td2,
+.tab11 .tr11 .td2{
+	width: 80%;
+	font-size: 30px;
+}
+.tab11 .tr3,
+.tab11 .tr11{
+	height:180px;
+}
+.tab11 .tr4,
+.tab11 .tr5,
+.tab11 .tr6,
+.tab11 .tr7,
+.tab11 .tr8{
+	height:70px;
+}
+.tab11 .tr6 .td2,
+.tab11 .tr7 .td1,
+.tab11 .tr8 .td1{
+	width: 60%;
+	font-size: 30px;
+}
+.tab11 .tr9,
+.tab11 .tr10{
+	height:140px;
 }
 </style>
 <title>Insert title here</title>
@@ -1149,6 +1246,102 @@ body{
 					<td class="td7">天赐</td>
 					<td class="td8">天赐</td>
 					<td class="td9">备注</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="tab10_div" id="tab10_div">
+			<div class="name_div">添加剂制备记录</div>
+			<div class="lotNo_div">批次序号:</div>
+			<div class="date_div">日期:</div>
+			<div class="operator_div">操作工:</div>
+			<table class="tab10" border="1" cellspacing="0">
+				<tr>
+					<td>成分</td>
+					<td>标准(kg)</td>
+					<td>加入量(kg)</td>
+				</tr>
+				<tr>
+					<td>添加剂</td>
+					<td>100-3000</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>水</td>
+					<td>300-9000</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>乙二醇</td>
+					<td>300-9000</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>总计</td>
+					<td>12000</td>
+					<td></td>
+				</tr>
+			</table>
+			<div class="temp_div">当天气温：</div>
+			<div class="free_point_div">冰点（℃）：</div>
+			<div class="oper_sign_div">操作工签字：</div>
+			<div class="mon_sign_div">班组长签字：</div>
+		</div>
+		
+		<div class="tab11_div" id="tab11_div">
+			<div class="name_div">制药车间废矿物油到货验收确认单</div>
+			<table class="tab11" border="1" cellspacing="0">
+				<tr class="tr1">
+					<td class="td1">接收日期</td>
+					<td class="td2"></td>
+					<td class="td3">运输车辆车牌号</td>
+					<td class="td4" colspan="2"></td>
+				</tr>
+				<tr class="tr2">
+					<td class="td1">产生单位</td>
+					<td class="td2" colspan="4"></td>
+				</tr>
+				<tr class="tr3">
+					<td class="td1">物资类别	</td>
+					<td class="td2" colspan="4"></td>
+				</tr>
+				<tr class="tr4">
+					<td class="td1" rowspan="2">到货重量(kg)</td>
+					<td class="td2">毛重</td>
+					<td class="td3">皮重</td>
+					<td class="td4" colspan="2">净重</td>
+				</tr>
+				<tr class="tr5">
+					<td class="td1">11kg</td>
+					<td class="td2">11kg</td>
+					<td class="td3" colspan="2">11kg</td>
+				</tr>
+				<tr class="tr6">
+					<td class="td1" rowspan="3">验收内容</td>
+					<td class="td2" colspan="3">1.包装无破损，无跑冒滴漏现象；</td>
+					<td class="td3"></td>
+				</tr>
+				<tr class="tr7">
+					<td class="td1" colspan="3">2.到货废物矿油是否为废机油、液压油、废柴油；</td>
+					<td></td>
+				</tr>
+				<tr class="tr8">
+					<td class="td1" colspan="3">3.废机油、液压油、废柴油无杂物；</td>
+					<td></td>
+				</tr>
+				<tr class="tr9">
+					<td class="td1">验收意见</td>
+					<td class="td2" colspan="4">同意接收口 拒绝接收口 拒收理由</td>
+				</tr>
+				<tr class="tr10">
+					<td class="td1">验收人签字</td>
+					<td class="td2"></td>
+					<td class="td3">送货人签字</td>
+					<td class="td4" colspan="2"></td>
+				</tr>
+				<tr class="tr11">
+					<td class="td1">接收单位负责人签字</td>
+					<td class="td2" colspan="4">年月日</td>
 				</tr>
 			</table>
 		</div>
