@@ -232,6 +232,71 @@ function createDataTab(tabName){
 		
 		dataTab1.append(appendStr);
 	}
+	else if(tabName=="tab2"){
+		var dataTab2=$("#data_tab2");
+		dataTab2.empty();
+		
+		var timeCbChecked=$("#tool_bar2 #time_cb").prop("checked");
+		var inCountCbChecked=$("#tool_bar2 #in_count_cb").prop("checked");
+		var outCountCbChecked=$("#tool_bar2 #out_count_cb").prop("checked");
+		var saveCountCbChecked=$("#tool_bar2 #save_count_cb").prop("checked");
+		var recCbChecked=$("#tool_bar2 #rec_cb").prop("checked");
+		var memoCbChecked=$("#tool_bar2 #memo_cb").prop("checked");
+		
+		var appendStr="<tr class=\"tr1\">";
+				if(timeCbChecked)
+					appendStr+="<td>时间</td>";
+				if(inCountCbChecked)
+					appendStr+="<td>入库数量(吨)</td>";
+				if(outCountCbChecked)
+					appendStr+="<td>出库数量(吨)</td>";
+				if(saveCountCbChecked)
+					appendStr+="<td>库存数量(吨)</td>";
+				if(recCbChecked)
+					appendStr+="<td>记录人签字</td>";
+				if(memoCbChecked)
+					appendStr+="<td>备注</td>";
+			appendStr+="</tr>";
+		
+		var dataArr=[];
+		var data={time:"2024年1月23日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月24日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月25日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月26日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月27日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月28日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月29日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月30日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月31日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr>";
+				if(timeCbChecked)
+					appendStr+="<td>"+dataArr[i].time+"</td>";
+				if(inCountCbChecked)
+					appendStr+="<td>"+dataArr[i].inCount+"</td>";
+				if(outCountCbChecked)
+					appendStr+="<td>"+dataArr[i].outCount+"</td>";
+				if(saveCountCbChecked)
+					appendStr+="<td>"+dataArr[i].saveCount+"</td>";
+				if(recCbChecked)
+					appendStr+="<td>"+dataArr[i].rec+"</td>";
+				if(memoCbChecked)
+					appendStr+="<td>"+dataArr[i].memo+"</td>";
+			appendStr+="</tr>";
+		}
+		
+		dataTab2.append(appendStr);
+	}
 }
 
 function createReportTab(tabName){
@@ -308,18 +373,82 @@ function createReportTab(tabName){
 			appendStr+="</tr>";
 		}
 		
-		appendStr+="";
-		appendStr+="";
-		appendStr+="";
-		appendStr+="";
-		
 		tab1.append(appendStr);
-	
-	
+	}
+	else if(tabName=="tab2"){
+		var tab2=$("#tab2");
+		tab2.empty();
 		
+		var timeCbChecked=$("#tool_bar2 #time_cb").prop("checked");
+		var inCountCbChecked=$("#tool_bar2 #in_count_cb").prop("checked");
+		var outCountCbChecked=$("#tool_bar2 #out_count_cb").prop("checked");
+		var saveCountCbChecked=$("#tool_bar2 #save_count_cb").prop("checked");
+		var recCbChecked=$("#tool_bar2 #rec_cb").prop("checked");
+		var memoCbChecked=$("#tool_bar2 #memo_cb").prop("checked");
 		
+		var appendStr="<tr style=\"height: 70px;\">";
+			if(timeCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 25px;text-align: center;\" rowspan=\"2\">时间</td>";
+			if(inCountCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 35px;text-align: center;\">入库</td>";
+			if(outCountCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 35px;text-align: center;\">出库</td>";
+			if(saveCountCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 35px;text-align: center;\">库存</td>";
+			if(recCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 25px;text-align: center;\" rowspan=\"2\">记录人签字</td>";
+			if(memoCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 35px;text-align: center;\" rowspan=\"2\">备注</td>";
+			appendStr+="</tr>";
+			
+			
+		appendStr+="<tr style=\"height: 80px;\">";
+		if(inCountCbChecked)
+			appendStr+="<td style=\"width: 16.6%;font-size: 35px;text-align: center;\">数量(吨)</td>";
+		if(outCountCbChecked)
+			appendStr+="<td style=\"width: 16.6%;font-size: 35px;text-align: center;\">数量(吨)</td>";
+		if(saveCountCbChecked)
+			appendStr+="<td style=\"width: 16.6%;font-size: 35px;text-align: center;\">数量(吨)</td>";
+		appendStr+="</tr>";
 		
-	
+		var dataArr=[];
+		var data={time:"2024年1月23日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月24日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月25日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月26日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月27日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月28日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月29日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月30日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月31日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr style=\"height: 60px;\">";
+			if(timeCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 28px;text-align: center;\">"+dataArr[i].time+"</td>";
+			if(inCountCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 28px;text-align: center;\">"+dataArr[i].inCount+"</td>";
+			if(outCountCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 28px;text-align: center;\">"+dataArr[i].outCount+"</td>";
+			if(saveCountCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 28px;text-align: center;\">"+dataArr[i].saveCount+"</td>";
+			if(recCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 28px;text-align: center;\">"+dataArr[i].rec+"</td>";
+			if(memoCbChecked)
+				appendStr+="<td style=\"width: 16.6%;font-size: 28px;text-align: center;\">"+dataArr[i].memo+"</td>";
+			appendStr+="</tr>";
+		}
+		
+		tab2.append(appendStr);
 	}
 }
 
@@ -338,6 +467,9 @@ function exportExcel(tabName){
     var fileName;
     if(tabName=="tab1"){
     	fileName="1#硝酸铵库房多孔粒状硝酸铵出入库登记簿";
+    }
+    else if(tabName=="tab2"){
+    	fileName="2#硝酸铵库房多孔粒状硝酸铵出入库登记簿";
     }
     var a = document.createElement("a");
     a.download = fileName+".xlsx";
@@ -449,6 +581,7 @@ body{
 	text-align: center;
 }
 .data_tab1,
+.data_tab2,
 .tab1,
 .tab2,
 .tab3,
@@ -464,12 +597,14 @@ body{
 	border: 1px;
 }
 .data_tab1 tr td,
+.data_tab2 tr td,
 .tab1 tr td,
 .tab2 tr td{
 	width: 16.6%;
 	text-align: center;
 }
 .data_tab1 .tr1,
+.data_tab2 .tr1,
 .tab1 .tr1,
 .tab2 .tr1{
 	height:70px;
@@ -479,6 +614,7 @@ body{
 	height:80px;
 }
 .data_tab1 tr td,
+.data_tab2 tr td,
 .tab1 .tr1 .td1,
 .tab1 .tr1 .td5,
 .tab2 .tr1 .td1,
@@ -573,20 +709,25 @@ body{
 	text-align: center;
 }
 
-.tab1_div .tool_bar{
+.tab1_div .tool_bar,
+.tab2_div .tool_bar{
 	font-size: 35px;
 }
-.tab1_div .tool_bar input{
+.tab1_div .tool_bar input,
+.tab2_div .tool_bar input{
 	width: 30px;
 	height: 30px;
 }
-.tab1_div .tool_bar .sear_but{
+.tab1_div .tool_bar .sear_but,
+.tab2_div .tool_bar .sear_but{
 	width: 100px;
 	height: 50px;
 	font-size: 35px;
 }
 .tab1_div .tool_bar .report_but,
-.tab1_div .output_exc_but{
+.tab1_div .output_exc_but,
+.tab2_div .tool_bar .report_but,
+.tab2_div .output_exc_but{
 	width: 180px;
 	height: 50px;
 	font-size: 35px;
@@ -1068,7 +1209,26 @@ body{
 		
 		<div class="tab2_div" id="tab2_div">
 			<div class="name_div">2#硝酸铵库房多孔粒状硝酸铵出入库登记簿</div>
-			<table class="tab2" border="1" cellspacing="0">
+			
+			<div class="tool_bar" id="tool_bar2">
+				显示列:
+				时间:<input type="checkbox" id="time_cb" checked="checked"/>
+				入库数量:<input type="checkbox" id="in_count_cb" checked="checked"/>
+				出库数量:<input type="checkbox" id="out_count_cb" checked="checked"/>
+				库存数量:<input type="checkbox" id="save_count_cb" checked="checked"/>
+				记录人:<input type="checkbox" id="rec_cb" checked="checked"/>
+				备注:<input type="checkbox" id="memo_cb" checked="checked"/>
+				<input class="sear_but" type="button" value="查询" onclick="createDataTab('tab2')"/>
+				<input class="report_but" type="button" value="生成报表" onclick="createReportTab('tab2')"/>
+			</div>
+			
+			<table class="data_tab2" id="data_tab2" border="1" cellspacing="0">
+			</table>
+			
+			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab2')"/>
+			
+			<table class="tab2" id="tab2" border="1" cellspacing="0">
+				<!-- 
 				<tr class="tr1">
 					<td class="td1" rowspan="2">时间</td>
 					<td class="td2">入库</td>
@@ -1154,6 +1314,7 @@ body{
 					<td class="td5">天赐</td>
 					<td class="td6">李天亯</td>
 				</tr>
+				 -->
 			</table>
 		</div>
 		
