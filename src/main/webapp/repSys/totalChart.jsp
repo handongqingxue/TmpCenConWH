@@ -450,6 +450,81 @@ function createReportTab(tabName){
 		
 		tab2.append(appendStr);
 	}
+	else if(tabName=="tab3"){
+		var tab3=$("#tab3");
+		tab3.empty();
+		
+		var noCbChecked=$("#tool_bar3 #no_cb").prop("checked");
+		var outRecCbChecked=$("#tool_bar3 #out_rec_cb").prop("checked");
+		var inRecCbChecked=$("#tool_bar3 #in_rec_cb").prop("checked");
+		var totalCbChecked=$("#tool_bar3 #total_cb").prop("checked");
+		var outGoodsCbChecked=$("#tool_bar3 #out_goods_cb").prop("checked");
+		var memoCbChecked=$("#tool_bar3 #memo_cb").prop("checked");
+		
+		var appendStr="<tr style=\"height: 70px;\">";
+					if(noCbChecked)
+				appendStr+="<td style=\"width: 7%;font-size: 25px;text-align: center;\" rowspan=\"2\">序号</td>";
+					if(outRecCbChecked)
+				appendStr+="<td style=\"width: 21%;font-size: 25px;text-align: center;\" colspan=\"3\">出库记录</td>";
+					if(inRecCbChecked)
+				appendStr+="<td style=\"width: 21%;font-size: 25px;text-align: center;\" colspan=\"3\">入库记录</td>";
+					if(totalCbChecked)
+				appendStr+="<td style=\"width: 15%;font-size: 25px;text-align: center;\" rowspan=\"2\">总库存(kg)</td>";
+				if(outGoodsCbChecked)
+					appendStr+="<td style=\"width: 15%;font-size: 25px;text-align: center;\" rowspan=\"2\">出料人</td>";
+				if(memoCbChecked)
+					appendStr+="<td style=\"width: 15%;font-size: 25px;text-align: center;\" rowspan=\"2\">备注</td>";
+			appendStr+="</tr>";
+			appendStr+="<tr style=\"height: 80px;\">";
+			if(outRecCbChecked){
+				appendStr+="<td style=\"width: 7%;font-size: 25px;text-align: center;\">日期</td>";
+				appendStr+="<td style=\"width: 7%;font-size: 25px;text-align: center;\">数量(kg)</td>";
+				appendStr+="<td style=\"width: 7%;font-size: 25px;text-align: center;\">签名</td>";
+			}
+			if(inRecCbChecked){
+				appendStr+="<td style=\"width: 7%;font-size: 25px;text-align: center;\">日期</td>";
+				appendStr+="<td style=\"width: 7%;font-size: 25px;text-align: center;\">数量(kg)</td>";
+				appendStr+="<td style=\"width: 7%;font-size: 25px;text-align: center;\">签名</td>";
+			}
+			appendStr+="</tr>";
+		
+		var dataArr=[];
+		var data={no:1,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:4,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:5,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr style=\"height: 70px;\">";
+						if(noCbChecked)
+				appendStr+="<td style=\"font-size: 25px;text-align: center;\">"+dataArr[i].no+"</td>";
+						if(outRecCbChecked){
+				appendStr+="<td style=\"font-size: 25px;text-align: center;\">"+dataArr[i].outDate+"</td>";
+				appendStr+="<td style=\"font-size: 25px;text-align: center;\">"+dataArr[i].outCount+"</td>";
+				appendStr+="<td style=\"font-size: 25px;text-align: center;\">"+dataArr[i].outSign+"</td>";
+						}
+						if(inRecCbChecked){
+				appendStr+="<td style=\"font-size: 25px;text-align: center;\">"+dataArr[i].inDate+"</td>";
+				appendStr+="<td style=\"font-size: 25px;text-align: center;\">"+dataArr[i].inCount+"</td>";
+				appendStr+="<td style=\"font-size: 25px;text-align: center;\">"+dataArr[i].inSign+"</td>";
+						}
+						if(totalCbChecked)
+				appendStr+="<td style=\"font-size: 25px;text-align: center;\">"+dataArr[i].total+"</td>";
+						if(outGoodsCbChecked)
+				appendStr+="<td style=\"font-size: 25px;text-align: center;\">"+dataArr[i].outGoods+"</td>";
+						if(memoCbChecked)
+				appendStr+="<td style=\"font-size: 25px;text-align: center;\">"+dataArr[i].memo+"</td>";
+			appendStr+="</tr>";
+		}
+		
+		tab3.append(appendStr);
+	}
 }
 
 function exportExcel(tabName){
@@ -710,16 +785,19 @@ body{
 }
 
 .tab1_div .tool_bar,
-.tab2_div .tool_bar{
+.tab2_div .tool_bar,
+.tab3_div .tool_bar{
 	font-size: 35px;
 }
 .tab1_div .tool_bar input,
-.tab2_div .tool_bar input{
+.tab2_div .tool_bar input,
+.tab3_div .tool_bar input{
 	width: 30px;
 	height: 30px;
 }
 .tab1_div .tool_bar .sear_but,
-.tab2_div .tool_bar .sear_but{
+.tab2_div .tool_bar .sear_but,
+.tab3_div .tool_bar .sear_but{
 	width: 100px;
 	height: 50px;
 	font-size: 35px;
@@ -727,7 +805,9 @@ body{
 .tab1_div .tool_bar .report_but,
 .tab1_div .output_exc_but,
 .tab2_div .tool_bar .report_but,
-.tab2_div .output_exc_but{
+.tab2_div .output_exc_but,
+.tab3_div .tool_bar .report_but,
+.tab3_div .output_exc_but{
 	width: 180px;
 	height: 50px;
 	font-size: 35px;
@@ -1320,6 +1400,25 @@ body{
 		
 		<div class="tab3_div" id="tab3_div">
 			<div class="name_div">制药车间化工原料（醋 酸）出入库登记表</div>
+			
+			<div class="tool_bar" id="tool_bar3">
+				显示列:
+				序号:<input type="checkbox" id="no_cb" checked="checked"/>
+				出库记录:<input type="checkbox" id="out_rec_cb" checked="checked"/>
+				入库记录:<input type="checkbox" id="in_rec_cb" checked="checked"/>
+				总库存:<input type="checkbox" id="total_cb" checked="checked"/>
+				出料人:<input type="checkbox" id="out_goods_cb" checked="checked"/>
+				备注:<input type="checkbox" id="memo_cb" checked="checked"/>
+				<input class="sear_but" type="button" value="查询" onclick="createDataTab('tab3')"/>
+				<input class="report_but" type="button" value="生成报表" onclick="createReportTab('tab3')"/>
+			</div>
+			
+			<table class="data_tab3" id="data_tab3" border="1" cellspacing="0">
+			</table>
+			
+			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab3')"/>
+			
+			<!-- 
 			<table class="tab3" border="1" cellspacing="0">
 				<tr class="tr1">
 					<td class="td1" rowspan="2">序号</td>
@@ -1397,6 +1496,40 @@ body{
 					<td class="td9">10</td>
 					<td class="td10">10</td>
 				</tr>
+			</table>
+			 -->
+			
+			<table id="tab3" style="width:100%;border: 1px;" border="1" cellspacing="0">
+				<!-- 
+				<tr style="height: 70px;">
+					<td style="width: 7%;font-size: 25px;text-align: center;" rowspan="2">序号</td>
+					<td style="width: 21%;font-size: 25px;text-align: center;" colspan="3">出库记录</td>
+					<td style="width: 21%;font-size: 25px;text-align: center;" colspan="3">入库记录</td>
+					<td style="width: 15%;font-size: 25px;text-align: center;" rowspan="2">总库存(kg)</td>
+					<td style="width: 15%;font-size: 25px;text-align: center;" rowspan="2">出料人</td>
+					<td style="width: 15%;font-size: 25px;text-align: center;" rowspan="2">备注</td>
+				</tr>
+				<tr style="height: 80px;">
+					<td style="width: 7%;font-size: 25px;text-align: center;">日期</td>
+					<td style="width: 7%;font-size: 25px;text-align: center;">数量(kg)</td>
+					<td style="width: 7%;font-size: 25px;text-align: center;">签名</td>
+					<td style="width: 7%;font-size: 25px;text-align: center;">日期</td>
+					<td style="width: 7%;font-size: 25px;text-align: center;">数量(kg)</td>
+					<td style="width: 7%;font-size: 25px;text-align: center;">签名</td>
+				</tr>
+				<tr style="height: 70px;">
+					<td style="font-size: 25px;text-align: center;">1</td>
+					<td style="font-size: 25px;text-align: center;">100</td>
+					<td style="font-size: 25px;text-align: center;">1</td>
+					<td style="font-size: 25px;text-align: center;">1</td>
+					<td style="font-size: 25px;text-align: center;">10</td>
+					<td style="font-size: 25px;text-align: center;">10</td>
+					<td style="font-size: 25px;text-align: center;">1</td>
+					<td style="font-size: 25px;text-align: center;">1</td>
+					<td style="font-size: 25px;text-align: center;">10</td>
+					<td style="font-size: 25px;text-align: center;">10</td>
+				</tr>
+				 -->
 			</table>
 		</div>
 		
