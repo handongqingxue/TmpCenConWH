@@ -1410,6 +1410,33 @@ function createReportTab(tabName){
 		
 		tab9.append(appendStr);
 	}
+	else if(tabName=="tab10"){
+		var tab10=$("#tab10");
+		tab10.empty();
+
+		var dataArr=[];
+		var data={comp:"成分",stand:"标准(kg)",count:"加入量(kg)"};
+		dataArr.push(data);
+		var data={comp:"添加剂",stand:"100-3000",count:""};
+		dataArr.push(data);
+		var data={comp:"水",stand:"300-9000",count:""};
+		dataArr.push(data);
+		var data={comp:"乙二醇",stand:"300-9000",count:""};
+		dataArr.push(data);
+		var data={comp:"总计",stand:"12000",count:""};
+		dataArr.push(data);
+		
+		var appendStr="";
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr>";
+				appendStr+="<td style=\"width: 33%;height: 120px;font-size: 30px;text-align: center;\">"+dataArr[i].comp+"</td>";
+				appendStr+="<td style=\"width: 33%;height: 120px;font-size: 30px;text-align: center;\">"+dataArr[i].stand+"</td>";
+				appendStr+="<td style=\"width: 33%;height: 120px;font-size: 30px;text-align: center;\">"+dataArr[i].count+"</td>";
+			appendStr+="</tr>";
+		}
+		
+		tab10.append(appendStr);
+	}
 }
 
 function exportExcel(tabName){
@@ -1436,6 +1463,9 @@ function exportExcel(tabName){
     }
     else if(tabName=="tab4"||tabName=="tab5"||tabName=="tab6"||tabName=="tab7"||tabName=="tab8"||tabName=="tab9"){
     	fileName="制药车间化工原料出入库登记表";
+    }
+    else if(tabName=="tab10"){
+    	fileName="添加剂制备记录";
     }
     var a = document.createElement("a");
     a.download = fileName+".xlsx";
@@ -1694,6 +1724,7 @@ body{
 .tab8_div,
 .tab9_div{
 	width: 2000px;
+	margin-top: 100px;
 	/* display: none; */
 }
 .tab4_div .name_div,
@@ -1759,7 +1790,9 @@ body{
 .tab8_div .tool_bar .report_but,
 .tab8_div .output_exc_but,
 .tab9_div .tool_bar .report_but,
-.tab9_div .output_exc_but{
+.tab9_div .output_exc_but,
+.tab10_div .tool_bar .report_but,
+.tab10_div .output_exc_but{
 	width: 180px;
 	height: 50px;
 	font-size: 35px;
@@ -1931,7 +1964,8 @@ body{
 
 .tab10_div{
 	width: 1000px;
-	display: none;
+	margin-top: 100px;
+	/* display: none; */
 }
 .tab10_div .name_div{
 	font-size:35px;
@@ -1965,6 +1999,7 @@ body{
 
 .tab11_div{
 	width: 1500px;
+	margin-top: 100px;
 	display: none;
 }
 .tab11_div .name_div{
@@ -2961,11 +2996,17 @@ body{
 			</table>
 		</div>
 		
+			
 		<div class="tab10_div" id="tab10_div">
+			<div class="tool_bar" id="tool_bar10">
+				<input class="report_but" type="button" value="生成报表" onclick="createReportTab('tab10')"/>
+			</div>
+			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab10')"/>
 			<div class="name_div">添加剂制备记录</div>
 			<div class="lotNo_div">批次序号:</div>
 			<div class="date_div">日期:</div>
 			<div class="operator_div">操作工:</div>
+			<!-- 
 			<table class="tab10" border="1" cellspacing="0">
 				<tr>
 					<td>成分</td>
@@ -2992,6 +3033,9 @@ body{
 					<td>12000</td>
 					<td></td>
 				</tr>
+			</table>
+			 -->
+			<table id="tab10" style="width: 100%;border: 1px;" border="1" cellspacing="0">
 			</table>
 			<div class="temp_div">当天气温：</div>
 			<div class="free_point_div">冰点（℃）：</div>
