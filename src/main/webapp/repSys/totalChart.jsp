@@ -297,6 +297,75 @@ function createDataTab(tabName){
 		
 		dataTab2.append(appendStr);
 	}
+	else if(tabName=="tab3"){
+		var dataTab3=$("#data_tab3");
+		dataTab3.empty();
+		
+		var noCbChecked=$("#tool_bar3 #no_cb").prop("checked");
+		var outRecCbChecked=$("#tool_bar3 #out_rec_cb").prop("checked");
+		var inRecCbChecked=$("#tool_bar3 #in_rec_cb").prop("checked");
+		var totalCbChecked=$("#tool_bar3 #total_cb").prop("checked");
+		var outGoodsCbChecked=$("#tool_bar3 #out_goods_cb").prop("checked");
+		var memoCbChecked=$("#tool_bar3 #memo_cb").prop("checked");
+		
+		var appendStr="<tr class=\"tr1\">";
+			if(noCbChecked)
+				appendStr+="<td>序号</td>";
+			if(outRecCbChecked){
+				appendStr+="<td>出库日期</td>";
+				appendStr+="<td>出库数量(吨)</td>";
+				appendStr+="<td>出库签名</td>";
+			}
+			if(inRecCbChecked){
+				appendStr+="<td>入库日期</td>";
+				appendStr+="<td>入库数量(吨)</td>";
+				appendStr+="<td>入库签名</td>";
+			}
+			if(totalCbChecked)
+				appendStr+="<td>总库存(kg)</td>";
+			if(outGoodsCbChecked)
+				appendStr+="<td>出料人</td>";
+			if(memoCbChecked)
+				appendStr+="<td>备注</td>";
+			appendStr+="</tr>";
+			
+		var dataArr=[];
+		var data={no:1,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:4,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:5,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr>";
+			if(noCbChecked)
+				appendStr+="<td>"+dataArr[i].no+"</td>";
+			if(outRecCbChecked){
+				appendStr+="<td>"+dataArr[i].outDate+"</td>";
+				appendStr+="<td>"+dataArr[i].outCount+"</td>";
+				appendStr+="<td>"+dataArr[i].outSign+"</td>";
+			}
+			if(inRecCbChecked){
+				appendStr+="<td>"+dataArr[i].inDate+"</td>";
+				appendStr+="<td>"+dataArr[i].inCount+"</td>";
+				appendStr+="<td>"+dataArr[i].inSign+"</td>";
+			}
+			if(totalCbChecked)
+				appendStr+="<td>"+dataArr[i].total+"</td>";
+			if(outGoodsCbChecked)
+				appendStr+="<td>"+dataArr[i].outGoods+"</td>";
+			if(memoCbChecked)
+				appendStr+="<td>"+dataArr[i].memo+"</td>";
+			appendStr+="</tr>";
+		}
+		
+		dataTab3.append(appendStr);
+	}
 }
 
 function createReportTab(tabName){
@@ -546,6 +615,9 @@ function exportExcel(tabName){
     else if(tabName=="tab2"){
     	fileName="2#硝酸铵库房多孔粒状硝酸铵出入库登记簿";
     }
+    else if(tabName=="tab3"){
+    	fileName="制药车间化工原料（醋 酸）出入库登记表";
+    }
     var a = document.createElement("a");
     a.download = fileName+".xlsx";
     a.href = link;
@@ -657,6 +729,7 @@ body{
 }
 .data_tab1,
 .data_tab2,
+.data_tab3,
 .tab1,
 .tab2,
 .tab3,
@@ -678,8 +751,13 @@ body{
 	width: 16.6%;
 	text-align: center;
 }
+.data_tab3 tr td{
+	width: 10%;
+	text-align: center;
+}
 .data_tab1 .tr1,
 .data_tab2 .tr1,
+.data_tab3 .tr1,
 .tab1 .tr1,
 .tab2 .tr1{
 	height:70px;
@@ -690,6 +768,7 @@ body{
 }
 .data_tab1 tr td,
 .data_tab2 tr td,
+.data_tab3 tr td,
 .tab1 .tr1 .td1,
 .tab1 .tr1 .td5,
 .tab2 .tr1 .td1,
