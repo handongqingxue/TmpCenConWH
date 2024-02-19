@@ -434,6 +434,210 @@ function createDataTab(tabName){
 
 		dataTab4.append(appendStr);
 	}
+	else if(tabName=="tab5"){
+		var dataTab5=$("#data_tab5");
+		dataTab5.empty();
+		
+		var noCbChecked=$("#tool_bar5 #no_cb").prop("checked");
+		var outInDateCbChecked=$("#tool_bar5 #out_in_date_cb").prop("checked");
+		var outCountCbChecked=$("#tool_bar5 #out_count_cb").prop("checked");
+		var inCountCbChecked=$("#tool_bar5 #in_count_cb").prop("checked");
+		var totalCbChecked=$("#tool_bar5 #total_cb").prop("checked");
+		var groLeaCbChecked=$("#tool_bar5 #gro_lea_cb").prop("checked");
+		var whMasterCbChecked=$("#tool_bar5 #wh_master_cb").prop("checked");
+		var recGoodsCbChecked=$("#tool_bar5 #rec_goods_cb").prop("checked");
+		var memoCbChecked=$("#tool_bar5 #memo_cb").prop("checked");
+
+		var appendStr="<tr class=\"tr1\">";
+			if(noCbChecked)
+				appendStr+="<td>序号</td>";
+			if(outInDateCbChecked)
+				appendStr+="<td>出入库日期</td>";
+			if(outCountCbChecked)
+				appendStr+="<td>出库量(kg)</td>";
+			if(inCountCbChecked)
+				appendStr+="<td>入库量(kg)</td>";
+			if(totalCbChecked)
+				appendStr+="<td>总库存(kg)</td>";
+			if(whMasterCbChecked)
+				appendStr+="<td>库房责任人</td>";
+			if(recGoodsCbChecked)
+				appendStr+="<td>领料人</td>";
+			if(groLeaCbChecked)
+				appendStr+="<td>班组长</td>";
+			if(memoCbChecked)
+				appendStr+="<td>备注</td>";
+			appendStr+="</tr>";
+			
+		var dataArr=[];
+		var data={no:1,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr>";
+			if(noCbChecked)
+				appendStr+="<td>"+dataArr[i].no+"</td>";
+			if(outInDateCbChecked)
+				appendStr+="<td>"+dataArr[i].outInDate+"</td>";
+			if(outCountCbChecked)
+				appendStr+="<td>"+dataArr[i].outCount+"</td>";
+			if(inCountCbChecked)
+				appendStr+="<td>"+dataArr[i].inCount+"</td>";
+			if(totalCbChecked)
+				appendStr+="<td>"+dataArr[i].total+"</td>";
+			if(whMasterCbChecked)
+				appendStr+="<td>"+dataArr[i].whMaster+"</td>";
+			if(recGoodsCbChecked)
+				appendStr+="<td>"+dataArr[i].recGoods+"</td>";
+			if(groLeaCbChecked)
+				appendStr+="<td>"+dataArr[i].groLea+"</td>";
+			if(memoCbChecked)
+				appendStr+="<td>"+dataArr[i].memo+"</td>";
+			appendStr+="</tr>";
+		}
+
+		dataTab5.append(appendStr);
+	}
+	else if(tabName=="tab6"){
+		var dataTab6=$("#data_tab6");
+		dataTab6.empty();
+		
+		var noCbChecked=$("#tool_bar6 #no_cb").prop("checked");
+		var outInDateCbChecked=$("#tool_bar6 #out_in_date_cb").prop("checked");
+		var outCountCbChecked=$("#tool_bar6 #out_count_cb").prop("checked");
+		var inCountCbChecked=$("#tool_bar6 #in_count_cb").prop("checked");
+		var totalCbChecked=$("#tool_bar6 #total_cb").prop("checked");
+		var whMasterCbChecked=$("#tool_bar6 #wh_master_cb").prop("checked");
+		var groLeaCbChecked=$("#tool_bar6 #gro_lea_cb").prop("checked");
+		var recGoodsCbChecked=$("#tool_bar6 #rec_goods_cb").prop("checked");
+		var memoCbChecked=$("#tool_bar6 #memo_cb").prop("checked");
+
+		var appendStr="<tr class=\"tr1\">";
+			if(noCbChecked)
+				appendStr+="<td>序号</td>";
+			if(outInDateCbChecked)
+				appendStr+="<td>出入库日期</td>";
+			if(outCountCbChecked)
+				appendStr+="<td>出库量(kg)</td>";
+			if(inCountCbChecked)
+				appendStr+="<td>入库量(kg)</td>";
+			if(totalCbChecked)
+				appendStr+="<td>总库存(kg)</td>";
+			if(whMasterCbChecked)
+				appendStr+="<td>库房责任人</td>";
+			if(groLeaCbChecked)
+				appendStr+="<td>班组长</td>";
+			if(recGoodsCbChecked)
+				appendStr+="<td>领料人</td>";
+			if(memoCbChecked)
+				appendStr+="<td>备注</td>";
+			appendStr+="</tr>";
+			
+		var dataArr=[];
+		var data={no:1,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr>";
+			if(noCbChecked)
+				appendStr+="<td>"+dataArr[i].no+"</td>";
+			if(outInDateCbChecked)
+				appendStr+="<td>"+dataArr[i].outInDate+"</td>";
+			if(outCountCbChecked)
+				appendStr+="<td>"+dataArr[i].outCount+"</td>";
+			if(inCountCbChecked)
+				appendStr+="<td>"+dataArr[i].inCount+"</td>";
+			if(totalCbChecked)
+				appendStr+="<td>"+dataArr[i].total+"</td>";
+			if(whMasterCbChecked)
+				appendStr+="<td>"+dataArr[i].whMaster+"</td>";
+			if(groLeaCbChecked)
+				appendStr+="<td>"+dataArr[i].groLea+"</td>";
+			if(recGoodsCbChecked)
+				appendStr+="<td>"+dataArr[i].recGoods+"</td>";
+			if(memoCbChecked)
+				appendStr+="<td>"+dataArr[i].memo+"</td>";
+			appendStr+="</tr>";
+		}
+
+		dataTab6.append(appendStr);
+	}
+	else if(tabName=="tab7"){
+		var dataTab7=$("#data_tab7");
+		dataTab7.empty();
+		
+		var noCbChecked=$("#tool_bar7 #no_cb").prop("checked");
+		var outInDateCbChecked=$("#tool_bar7 #out_in_date_cb").prop("checked");
+		var outCountCbChecked=$("#tool_bar7 #out_count_cb").prop("checked");
+		var inCountCbChecked=$("#tool_bar7 #in_count_cb").prop("checked");
+		var totalCbChecked=$("#tool_bar7 #total_cb").prop("checked");
+		var groLeaCbChecked=$("#tool_bar7 #gro_lea_cb").prop("checked");
+		var whMasterCbChecked=$("#tool_bar7 #wh_master_cb").prop("checked");
+		var recGoodsCbChecked=$("#tool_bar7 #rec_goods_cb").prop("checked");
+		var memoCbChecked=$("#tool_bar7 #memo_cb").prop("checked");
+
+		var appendStr="<tr class=\"tr1\">";
+			if(noCbChecked)
+				appendStr+="<td>序号</td>";
+			if(outInDateCbChecked)
+				appendStr+="<td>出入库日期</td>";
+			if(outCountCbChecked)
+				appendStr+="<td>出库量(kg)</td>";
+			if(inCountCbChecked)
+				appendStr+="<td>入库量(kg)</td>";
+			if(totalCbChecked)
+				appendStr+="<td>总库存(kg)</td>";
+			if(whMasterCbChecked)
+				appendStr+="<td>库房责任人</td>";
+			if(recGoodsCbChecked)
+				appendStr+="<td>领料人</td>";
+			if(groLeaCbChecked)
+				appendStr+="<td>班组长</td>";
+			if(memoCbChecked)
+				appendStr+="<td>备注</td>";
+			appendStr+="</tr>";
+			
+		var dataArr=[];
+		var data={no:1,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr>";
+			if(noCbChecked)
+				appendStr+="<td>"+dataArr[i].no+"</td>";
+			if(outInDateCbChecked)
+				appendStr+="<td>"+dataArr[i].outInDate+"</td>";
+			if(outCountCbChecked)
+				appendStr+="<td>"+dataArr[i].outCount+"</td>";
+			if(inCountCbChecked)
+				appendStr+="<td>"+dataArr[i].inCount+"</td>";
+			if(totalCbChecked)
+				appendStr+="<td>"+dataArr[i].total+"</td>";
+			if(whMasterCbChecked)
+				appendStr+="<td>"+dataArr[i].whMaster+"</td>";
+			if(recGoodsCbChecked)
+				appendStr+="<td>"+dataArr[i].recGoods+"</td>";
+			if(groLeaCbChecked)
+				appendStr+="<td>"+dataArr[i].groLea+"</td>";
+			if(memoCbChecked)
+				appendStr+="<td>"+dataArr[i].memo+"</td>";
+			appendStr+="</tr>";
+		}
+
+		dataTab7.append(appendStr);
+	}
 }
 
 function createReportTab(tabName){
@@ -730,6 +934,210 @@ function createReportTab(tabName){
 		
 		tab4.append(appendStr);
 	}
+	else if(tabName=="tab5"){
+		var tab5=$("#tab5");
+		tab5.empty();
+		
+		var noCbChecked=$("#tool_bar5 #no_cb").prop("checked");
+		var outInDateCbChecked=$("#tool_bar5 #out_in_date_cb").prop("checked");
+		var outCountCbChecked=$("#tool_bar5 #out_count_cb").prop("checked");
+		var inCountCbChecked=$("#tool_bar5 #in_count_cb").prop("checked");
+		var totalCbChecked=$("#tool_bar5 #total_cb").prop("checked");
+		var whMasterCbChecked=$("#tool_bar5 #wh_master_cb").prop("checked");
+		var recGoodsCbChecked=$("#tool_bar5 #rec_goods_cb").prop("checked");
+		var groLeaCbChecked=$("#tool_bar5 #gro_lea_cb").prop("checked");
+		var memoCbChecked=$("#tool_bar5 #memo_cb").prop("checked");
+
+		var appendStr="<tr style=\"height: 120px;\">";
+				if(noCbChecked)
+		appendStr+="<td style=\"width: 5%;font-size: 30px;text-align: center;\">序号</td>";
+				if(outInDateCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">出入库日期</td>";
+				if(outCountCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">出库量(kg)</td>";
+				if(inCountCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">入库量(kg)</td>";
+				if(totalCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">总库存(kg)</td>";
+				if(whMasterCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">库房责任人</td>";
+				if(recGoodsCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">领料人</td>";
+				if(groLeaCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">班组长</td>";
+				if(memoCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">备注</td>";
+		appendStr+="</tr>";
+		
+		var dataArr=[];
+		var data={no:1,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr style=\"height: 80px;\">";
+						if(noCbChecked)
+				appendStr+="<td style=\"width: 5%;font-size: 30px;text-align: center;\">"+dataArr[i].no+"</td>";
+						if(outInDateCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].outInDate+"</td>";
+						if(outCountCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].outCount+"</td>";
+						if(inCountCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].inCount+"</td>";
+						if(totalCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].total+"</td>";
+						if(whMasterCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].whMaster+"</td>";
+						if(recGoodsCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].recGoods+"</td>";
+						if(groLeaCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].groLea+"</td>";
+						if(memoCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].memo+"</td>";
+			appendStr+="</tr>";
+		}
+		
+		tab5.append(appendStr);
+	}
+	else if(tabName=="tab6"){
+		var tab6=$("#tab6");
+		tab6.empty();
+		
+		var noCbChecked=$("#tool_bar6 #no_cb").prop("checked");
+		var outInDateCbChecked=$("#tool_bar6 #out_in_date_cb").prop("checked");
+		var outCountCbChecked=$("#tool_bar6 #out_count_cb").prop("checked");
+		var inCountCbChecked=$("#tool_bar6 #in_count_cb").prop("checked");
+		var totalCbChecked=$("#tool_bar6 #total_cb").prop("checked");
+		var whMasterCbChecked=$("#tool_bar6 #wh_master_cb").prop("checked");
+		var groLeaCbChecked=$("#tool_bar6 #gro_lea_cb").prop("checked");
+		var recGoodsCbChecked=$("#tool_bar6 #rec_goods_cb").prop("checked");
+		var memoCbChecked=$("#tool_bar6 #memo_cb").prop("checked");
+
+		var appendStr="<tr style=\"height: 120px;\">";
+				if(noCbChecked)
+		appendStr+="<td style=\"width: 5%;font-size: 30px;text-align: center;\">序号</td>";
+				if(outInDateCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">出入库日期</td>";
+				if(outCountCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">出库量(kg)</td>";
+				if(inCountCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">入库量(kg)</td>";
+				if(totalCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">总库存(kg)</td>";
+				if(whMasterCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">库房责任人</td>";
+				if(groLeaCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">班组长</td>";
+				if(recGoodsCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">领料人</td>";
+				if(memoCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">备注</td>";
+		appendStr+="</tr>";
+		
+		var dataArr=[];
+		var data={no:1,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr style=\"height: 80px;\">";
+						if(noCbChecked)
+				appendStr+="<td style=\"width: 5%;font-size: 30px;text-align: center;\">"+dataArr[i].no+"</td>";
+						if(outInDateCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].outInDate+"</td>";
+						if(outCountCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].outCount+"</td>";
+						if(inCountCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].inCount+"</td>";
+						if(totalCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].total+"</td>";
+						if(whMasterCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].whMaster+"</td>";
+						if(groLeaCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].groLea+"</td>";
+						if(recGoodsCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].recGoods+"</td>";
+						if(memoCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].memo+"</td>";
+			appendStr+="</tr>";
+		}
+		
+		tab6.append(appendStr);
+	}
+	else if(tabName=="tab7"){
+		var tab7=$("#tab7");
+		tab7.empty();
+		
+		var noCbChecked=$("#tool_bar7 #no_cb").prop("checked");
+		var outInDateCbChecked=$("#tool_bar7 #out_in_date_cb").prop("checked");
+		var outCountCbChecked=$("#tool_bar7 #out_count_cb").prop("checked");
+		var inCountCbChecked=$("#tool_bar7 #in_count_cb").prop("checked");
+		var totalCbChecked=$("#tool_bar7 #total_cb").prop("checked");
+		var whMasterCbChecked=$("#tool_bar7 #wh_master_cb").prop("checked");
+		var recGoodsCbChecked=$("#tool_bar7 #rec_goods_cb").prop("checked");
+		var groLeaCbChecked=$("#tool_bar7 #gro_lea_cb").prop("checked");
+		var memoCbChecked=$("#tool_bar7 #memo_cb").prop("checked");
+
+		var appendStr="<tr style=\"height: 120px;\">";
+				if(noCbChecked)
+		appendStr+="<td style=\"width: 5%;font-size: 30px;text-align: center;\">序号</td>";
+				if(outInDateCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">出入库日期</td>";
+				if(outCountCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">出库量(kg)</td>";
+				if(inCountCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">入库量(kg)</td>";
+				if(totalCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">总库存(kg)</td>";
+				if(whMasterCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">库房责任人</td>";
+				if(recGoodsCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">领料人</td>";
+				if(groLeaCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">班组长</td>";
+				if(memoCbChecked)
+		appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">备注</td>";
+		appendStr+="</tr>";
+		
+		var dataArr=[];
+		var data={no:1,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr style=\"height: 80px;\">";
+						if(noCbChecked)
+				appendStr+="<td style=\"width: 5%;font-size: 30px;text-align: center;\">"+dataArr[i].no+"</td>";
+						if(outInDateCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].outInDate+"</td>";
+						if(outCountCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].outCount+"</td>";
+						if(inCountCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].inCount+"</td>";
+						if(totalCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].total+"</td>";
+						if(whMasterCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].whMaster+"</td>";
+						if(recGoodsCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].recGoods+"</td>";
+						if(groLeaCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].groLea+"</td>";
+						if(memoCbChecked)
+				appendStr+="<td style=\"width: 10%;font-size: 30px;text-align: center;\">"+dataArr[i].memo+"</td>";
+			appendStr+="</tr>";
+		}
+		
+		tab7.append(appendStr);
+	}
 }
 
 function exportExcel(tabName){
@@ -754,7 +1162,7 @@ function exportExcel(tabName){
     else if(tabName=="tab3"){
     	fileName="制药车间化工原料（醋 酸）出入库登记表";
     }
-    else if(tabName=="tab4"){
+    else if(tabName=="tab4"||tabName=="tab5"||tabName=="tab6"||tabName=="tab7"){
     	fileName="制药车间化工原料出入库登记表";
     }
     var a = document.createElement("a");
@@ -870,6 +1278,9 @@ body{
 .data_tab2,
 .data_tab3,
 .data_tab4,
+.data_tab5,
+.data_tab6,
+.data_tab7,
 .tab1,
 .tab2,
 .tab3,
@@ -892,7 +1303,10 @@ body{
 	text-align: center;
 }
 .data_tab3 tr td,
-.data_tab4 tr td{
+.data_tab4 tr td,
+.data_tab5 tr td,
+.data_tab6 tr td,
+.data_tab7 tr td{
 	width: 10%;
 	text-align: center;
 }
@@ -900,6 +1314,9 @@ body{
 .data_tab2 .tr1,
 .data_tab3 .tr1,
 .data_tab4 .tr1,
+.data_tab5 .tr1,
+.data_tab6 .tr1,
+.data_tab7 .tr1,
 .tab1 .tr1,
 .tab2 .tr1{
 	height:70px;
@@ -912,6 +1329,9 @@ body{
 .data_tab2 tr td,
 .data_tab3 tr td,
 .data_tab4 tr td,
+.data_tab5 tr td,
+.data_tab6 tr td,
+.data_tab7 tr td,
 .tab1 .tr1 .td1,
 .tab1 .tr1 .td5,
 .tab2 .tr1 .td1,
@@ -1009,20 +1429,29 @@ body{
 .tab1_div .tool_bar,
 .tab2_div .tool_bar,
 .tab3_div .tool_bar,
-.tab4_div .tool_bar{
+.tab4_div .tool_bar,
+.tab5_div .tool_bar,
+.tab6_div .tool_bar,
+.tab7_div .tool_bar{
 	font-size: 35px;
 }
 .tab1_div .tool_bar input,
 .tab2_div .tool_bar input,
 .tab3_div .tool_bar input,
-.tab4_div .tool_bar input{
+.tab4_div .tool_bar input,
+.tab5_div .tool_bar input,
+.tab6_div .tool_bar input,
+.tab7_div .tool_bar input{
 	width: 30px;
 	height: 30px;
 }
 .tab1_div .tool_bar .sear_but,
 .tab2_div .tool_bar .sear_but,
 .tab3_div .tool_bar .sear_but,
-.tab4_div .tool_bar .sear_but{
+.tab4_div .tool_bar .sear_but,
+.tab5_div .tool_bar .sear_but,
+.tab6_div .tool_bar .sear_but,
+.tab7_div .tool_bar .sear_but{
 	width: 100px;
 	height: 50px;
 	font-size: 35px;
@@ -1034,7 +1463,13 @@ body{
 .tab3_div .tool_bar .report_but,
 .tab3_div .output_exc_but,
 .tab4_div .tool_bar .report_but,
-.tab4_div .output_exc_but{
+.tab4_div .output_exc_but,
+.tab5_div .tool_bar .report_but,
+.tab5_div .output_exc_but,
+.tab6_div .tool_bar .report_but,
+.tab6_div .output_exc_but,
+.tab7_div .tool_bar .report_but,
+.tab7_div .output_exc_but{
 	width: 180px;
 	height: 50px;
 	font-size: 35px;
@@ -1845,7 +2280,29 @@ body{
 				<span class="ylmc_span">原料名称：国产油相</span>
 				<span class="nf_span">年份： 2024</span>
 			</div>
-			<table class="tab5" border="1" cellspacing="0">
+			
+			<div class="tool_bar" id="tool_bar5">
+				显示列:
+				<input type="checkbox" id="no_cb" checked="checked"/>序号
+				<input type="checkbox" id="out_in_date_cb" checked="checked"/>出入库日期
+				<input type="checkbox" id="out_count_cb" checked="checked"/>出库量
+				<input type="checkbox" id="in_count_cb" checked="checked"/>入库量
+				<input type="checkbox" id="total_cb" checked="checked"/>总库存
+				<input type="checkbox" id="wh_master_cb" checked="checked"/>库房责任人
+				<input type="checkbox" id="rec_goods_cb" checked="checked"/>领料人
+				<input type="checkbox" id="gro_lea_cb" checked="checked"/>班组长
+				<input type="checkbox" id="memo_cb" checked="checked"/>备注
+				<input class="sear_but" type="button" value="查询" onclick="createDataTab('tab5')"/>
+				<input class="report_but" type="button" value="生成报表" onclick="createReportTab('tab5')"/>
+			</div>
+			
+			<table class="data_tab5" id="data_tab5" border="1" cellspacing="0">
+			</table>
+			
+			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab5')"/>
+			
+			<table id="tab5" style="width: 100%;border: 1px;" border="1" cellspacing="0">
+				<!-- 
 				<tr class="tr1">
 					<td class="td1">序号</td>
 					<td class="td2">出入库日期</td>
@@ -1890,6 +2347,7 @@ body{
 					<td class="td8">天赐</td>
 					<td class="td9">备注</td>
 				</tr>
+				 -->
 			</table>
 		</div>
 		
@@ -1899,6 +2357,28 @@ body{
 				<span class="ylmc_span">原料名称：硫脲</span>
 				<span class="nf_span">年份： 2024</span>
 			</div>
+			
+			<div class="tool_bar" id="tool_bar6">
+				显示列:
+				<input type="checkbox" id="no_cb" checked="checked"/>序号
+				<input type="checkbox" id="out_in_date_cb" checked="checked"/>出入库日期
+				<input type="checkbox" id="out_count_cb" checked="checked"/>出库量
+				<input type="checkbox" id="in_count_cb" checked="checked"/>入库量
+				<input type="checkbox" id="total_cb" checked="checked"/>总库存
+				<input type="checkbox" id="wh_master_cb" checked="checked"/>库房责任人
+				<input type="checkbox" id="gro_lea_cb" checked="checked"/>班组长
+				<input type="checkbox" id="rec_goods_cb" checked="checked"/>领料人
+				<input type="checkbox" id="memo_cb" checked="checked"/>备注
+				<input class="sear_but" type="button" value="查询" onclick="createDataTab('tab6')"/>
+				<input class="report_but" type="button" value="生成报表" onclick="createReportTab('tab6')"/>
+			</div>
+			
+			<table class="data_tab6" id="data_tab6" border="1" cellspacing="0">
+			</table>
+			
+			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab6')"/>
+			
+			<!-- 
 			<table class="tab6" border="1" cellspacing="0">
 				<tr class="tr1">
 					<td class="td1">序号</td>
@@ -1945,6 +2425,10 @@ body{
 					<td class="td9">备注</td>
 				</tr>
 			</table>
+			 -->
+			 
+			<table id="tab6" style="width: 100%;border: 1px;" border="1" cellspacing="0">
+			</table>
 		</div>
 		
 		<div class="tab7_div" id="tab7_div">
@@ -1953,6 +2437,28 @@ body{
 				<span class="ylmc_span">原料名称：碳酸钠</span>
 				<span class="nf_span">年份： 2024</span>
 			</div>
+			
+			<div class="tool_bar" id="tool_bar7">
+				显示列:
+				<input type="checkbox" id="no_cb" checked="checked"/>序号
+				<input type="checkbox" id="out_in_date_cb" checked="checked"/>出入库日期
+				<input type="checkbox" id="out_count_cb" checked="checked"/>出库量
+				<input type="checkbox" id="in_count_cb" checked="checked"/>入库量
+				<input type="checkbox" id="total_cb" checked="checked"/>总库存
+				<input type="checkbox" id="wh_master_cb" checked="checked"/>库房责任人
+				<input type="checkbox" id="rec_goods_cb" checked="checked"/>领料人
+				<input type="checkbox" id="gro_lea_cb" checked="checked"/>班组长
+				<input type="checkbox" id="memo_cb" checked="checked"/>备注
+				<input class="sear_but" type="button" value="查询" onclick="createDataTab('tab7')"/>
+				<input class="report_but" type="button" value="生成报表" onclick="createReportTab('tab7')"/>
+			</div>
+			
+			<table class="data_tab7" id="data_tab7" border="1" cellspacing="0">
+			</table>
+			
+			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab7')"/>
+			
+			<!-- 
 			<table class="tab7" border="1" cellspacing="0">
 				<tr class="tr1">
 					<td class="td1">序号</td>
@@ -1998,6 +2504,10 @@ body{
 					<td class="td8">天赐</td>
 					<td class="td9">备注</td>
 				</tr>
+			</table>
+			 -->
+			 
+			<table id="tab7" style="width: 100%;border: 1px;" border="1" cellspacing="0">
 			</table>
 		</div>
 		
