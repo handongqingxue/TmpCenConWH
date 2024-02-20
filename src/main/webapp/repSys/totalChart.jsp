@@ -1852,24 +1852,34 @@ body{
 .tab1_div .print_rep_but,
 .tab1_div .output_exc_but,
 .tab2_div .tool_bar .report_but,
+.tab2_div .print_rep_but,
 .tab2_div .output_exc_but,
 .tab3_div .tool_bar .report_but,
+.tab3_div .print_rep_but,
 .tab3_div .output_exc_but,
 .tab4_div .tool_bar .report_but,
+.tab4_div .print_rep_but,
 .tab4_div .output_exc_but,
 .tab5_div .tool_bar .report_but,
+.tab5_div .print_rep_but,
 .tab5_div .output_exc_but,
 .tab6_div .tool_bar .report_but,
+.tab6_div .print_rep_but,
 .tab6_div .output_exc_but,
 .tab7_div .tool_bar .report_but,
+.tab7_div .print_rep_but,
 .tab7_div .output_exc_but,
 .tab8_div .tool_bar .report_but,
+.tab8_div .print_rep_but,
 .tab8_div .output_exc_but,
 .tab9_div .tool_bar .report_but,
+.tab9_div .print_rep_but,
 .tab9_div .output_exc_but,
 .tab10_div .tool_bar .report_but,
+.tab10_div .print_rep_but,
 .tab10_div .output_exc_but,
 .tab11_div .tool_bar .report_but,
+.tab11_div .print_rep_but,
 .tab11_div .output_exc_but{
 	width: 180px;
 	height: 50px;
@@ -2371,6 +2381,7 @@ body{
 			<table class="data_tab2" id="data_tab2" border="1" cellspacing="0">
 			</table>
 			
+			<input class="print_rep_but" type="button" value="打印报表" onclick="printRep('tab2')"/>
 			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab2')"/>
 			
 			<table class="tab2" id="tab2" border="1" cellspacing="0">
@@ -2482,6 +2493,7 @@ body{
 			<table class="data_tab3" id="data_tab3" border="1" cellspacing="0">
 			</table>
 			
+			<input class="print_rep_but" type="button" value="打印报表" onclick="printRep('tab3')"/>
 			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab3')"/>
 			
 			<!-- 
@@ -2624,6 +2636,7 @@ body{
 			<table class="data_tab4" id="data_tab4" border="1" cellspacing="0">
 			</table>
 			
+			<input class="print_rep_but" type="button" value="打印报表" onclick="printRep('tab4')"/>
 			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab4')"/>
 			
 			<!-- 
@@ -2703,6 +2716,7 @@ body{
 			<table class="data_tab5" id="data_tab5" border="1" cellspacing="0">
 			</table>
 			
+			<input class="print_rep_but" type="button" value="打印报表" onclick="printRep('tab5')"/>
 			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab5')"/>
 			
 			<table id="tab5" style="width: 100%;border: 1px;" border="1" cellspacing="0">
@@ -2780,6 +2794,7 @@ body{
 			<table class="data_tab6" id="data_tab6" border="1" cellspacing="0">
 			</table>
 			
+			<input class="print_rep_but" type="button" value="打印报表" onclick="printRep('tab6')"/>
 			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab6')"/>
 			
 			<!-- 
@@ -2860,6 +2875,7 @@ body{
 			<table class="data_tab7" id="data_tab7" border="1" cellspacing="0">
 			</table>
 			
+			<input class="print_rep_but" type="button" value="打印报表" onclick="printRep('tab7')"/>
 			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab7')"/>
 			
 			<!-- 
@@ -2940,6 +2956,7 @@ body{
 			<table class="data_tab8" id="data_tab8" border="1" cellspacing="0">
 			</table>
 			
+			<input class="print_rep_but" type="button" value="打印报表" onclick="printRep('tab8')"/>
 			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab8')"/>
 			
 			<!-- 
@@ -3020,6 +3037,7 @@ body{
 			<table class="data_tab9" id="data_tab9" border="1" cellspacing="0">
 			</table>
 			
+			<input class="print_rep_but" type="button" value="打印报表" onclick="printRep('tab9')"/>
 			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab9')"/>
 			
 			<!-- 
@@ -3080,6 +3098,7 @@ body{
 			<div class="tool_bar" id="tool_bar10">
 				<input class="report_but" type="button" value="生成报表" onclick="createReportTab('tab10')"/>
 			</div>
+			<input class="print_rep_but" type="button" value="打印报表" onclick="printRep('tab10')"/>
 			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab10')"/>
 			<div class="name_div">添加剂制备记录</div>
 			<div class="lotNo_div">批次序号:</div>
@@ -3127,6 +3146,7 @@ body{
 			<div class="tool_bar" id="tool_bar11">
 				<input class="report_but" type="button" value="生成报表" onclick="createReportTab('tab11')"/>
 			</div>
+			<input class="print_rep_but" type="button" value="打印报表" onclick="printRep('tab11')"/>
 			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab11')"/>
 			<!-- 
 			<table class="tab11" border="1" cellspacing="0">
