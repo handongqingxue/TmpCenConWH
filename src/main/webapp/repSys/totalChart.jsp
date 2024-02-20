@@ -13,6 +13,7 @@
 <script type="text/javascript" src="<%=basePath %>resource/js/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="<%=basePath %>resource/js/echarts.min.js"></script>
 <script type="text/javascript">
+var repSysPath='<%=basePath %>repSys/';
 $(function(){
 	initBarChartDiv();
 	initPieChartDiv();
@@ -1498,8 +1499,20 @@ function createReportTab(tabName){
 	}
 }
 
+function printRep(tabName){
+	var time=new Date().getTime();
+	var printHtml = $("#"+tabName).prop("outerHTML");//获得包括div本身在内的标签内容,参考链接:https://www.jb51.net/article/61916.htm
+    $.post(repSysPath+"addPrintRec",
+	  {time:time,html:printHtml},
+   	  function(data){
+	   	 if(data.message=="ok"){
+	         window.open("goPrint?time="+time);
+	   	 }
+      }
+    ,"json");
+}
+
 function exportExcel(tabName){
-	alert(tabName)
 	var table = $("#"+tabName);
     var excelContent = table[0].innerHTML;
     var excelFile = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' xmlns='http://www.w3.org/TR/REC-html40'>";
@@ -1836,6 +1849,7 @@ body{
 	font-size: 35px;
 }
 .tab1_div .tool_bar .report_but,
+.tab1_div .print_rep_but,
 .tab1_div .output_exc_but,
 .tab2_div .tool_bar .report_but,
 .tab2_div .output_exc_but,
@@ -2195,6 +2209,7 @@ body{
 				 -->
 			</table>
 			
+			<input class="print_rep_but" type="button" value="打印报表" onclick="printRep('tab1')"/>
 			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab1')"/>
 			
 			<!-- 
