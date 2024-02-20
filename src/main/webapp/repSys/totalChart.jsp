@@ -1437,6 +1437,65 @@ function createReportTab(tabName){
 		
 		tab10.append(appendStr);
 	}
+	else if(tabName=="tab11"){
+		var tab11=$("#tab11");
+		tab11.empty();
+
+		var appendStr="<tr style=\"height: 90px;\">";
+			appendStr+="<td style=\"width: 20%;font-size: 30px;text-align: center;\">接收日期</td>";
+			appendStr+="<td style=\"width: 30%;font-size: 30px;text-align: center;\"></td>";
+			appendStr+="<td style=\"width: 20%;font-size: 30px;text-align: center;\">运输车辆车牌号</td>";
+			appendStr+="<td style=\"width: 30%;font-size: 30px;text-align: center;\" colspan=\"2\"></td>";
+		appendStr+="</tr>";
+		appendStr+="<tr style=\"height: 90px;\">";
+			appendStr+="<td style=\"width: 20%;font-size: 30px;text-align: center;\">产生单位</td>";
+			appendStr+="<td style=\"width: 80%;font-size: 30px;text-align: center;\" colspan=\"4\"></td>";
+		appendStr+="</tr>";
+		appendStr+="<tr style=\"height: 180px;\">";
+			appendStr+="<td style=\"width: 20%;font-size: 30px;text-align: center;\">物资类别</td>";
+			appendStr+="<td colspan=\"4\"></td>";
+		appendStr+="</tr>";
+		appendStr+="<tr style=\"height: 70px;\">";
+			appendStr+="<td style=\"width: 20%;font-size: 30px;text-align: center;\" rowspan=\"2\">到货重量(kg)</td>";
+			appendStr+="<td style=\"width: 30%;font-size: 30px;text-align: center;\">毛重</td>";
+			appendStr+="<td style=\"width: 20%;font-size: 30px;text-align: center;\">皮重</td>";
+			appendStr+="<td style=\"width: 30%;font-size: 30px;text-align: center;\" colspan=\"2\">净重</td>";
+		appendStr+="</tr>";
+		appendStr+="<tr style=\"height: 70px;\">";
+			appendStr+="<td style=\"width: 30%;font-size: 30px;text-align: center;\">11kg</td>";
+			appendStr+="<td style=\"width: 20%;font-size: 30px;text-align: center;\">11kg</td>";
+			appendStr+="<td style=\"width: 30%;font-size: 30px;text-align: center;\" colspan=\"2\">11kg</td>";
+		appendStr+="</tr>";
+		appendStr+="<tr style=\"height: 70px;\">";
+			appendStr+="<td style=\"width: 20%;font-size: 30px;text-align: center;\" rowspan=\"3\">验收内容</td>";
+			appendStr+="<td style=\"width: 60%;font-size: 30px;text-align: center;\" colspan=\"3\">1.包装无破损，无跑冒滴漏现象；</td>";
+			appendStr+="<td style=\"width: 20%;font-size: 30px;text-align: center;\"></td>";
+		appendStr+="</tr>";
+		appendStr+="<tr style=\"height: 70px;\">";
+			appendStr+="<td style=\"width: 60%;font-size: 30px;text-align: center;\" colspan=\"3\">2.到货废物矿油是否为废机油、液压油、废柴油；</td>";
+			appendStr+="<td></td>";
+		appendStr+="</tr>";
+		appendStr+="<tr style=\"height: 70px;\">";
+			appendStr+="<td style=\"width: 60%;font-size: 30px;text-align: center;\" colspan=\"3\">3.废机油、液压油、废柴油无杂物；</td>";
+			appendStr+="<td></td>";
+		appendStr+="</tr>";
+		appendStr+="<tr style=\"height: 140px;\">";
+			appendStr+="<td style=\"width: 20%;font-size: 30px;text-align: center;\">验收意见</td>";
+			appendStr+="<td style=\"width: 80%;font-size: 30px;\" colspan=\"4\">同意接收口 拒绝接收口 拒收理由</td>";
+		appendStr+="</tr>";
+		appendStr+="<tr style=\"height: 140px;\">";
+			appendStr+="<td style=\"width: 20%;font-size: 30px;text-align: center;\">验收人签字</td>";
+			appendStr+="<td></td>";
+			appendStr+="<td style=\"width: 20%;font-size: 30px;text-align: center;\">送货人签字</td>";
+			appendStr+="<td colspan=\"2\"></td>";
+		appendStr+="</tr>";
+		appendStr+="<tr style=\"height: 180px;\">";
+			appendStr+="<td style=\"width: 20%;font-size: 30px;text-align: center;\">接收单位负责人签字</td>";
+			appendStr+="<td style=\"width: 80%;font-size: 30px;\" colspan=\"4\">年月日</td>";
+		appendStr+="</tr>";
+		
+		tab11.append(appendStr);
+	}
 }
 
 function exportExcel(tabName){
@@ -1466,6 +1525,9 @@ function exportExcel(tabName){
     }
     else if(tabName=="tab10"){
     	fileName="添加剂制备记录";
+    }
+    else if(tabName=="tab11"){
+    	fileName="制药车间废矿物油到货验收确认单";
     }
     var a = document.createElement("a");
     a.download = fileName+".xlsx";
@@ -1792,7 +1854,9 @@ body{
 .tab9_div .tool_bar .report_but,
 .tab9_div .output_exc_but,
 .tab10_div .tool_bar .report_but,
-.tab10_div .output_exc_but{
+.tab10_div .output_exc_but,
+.tab11_div .tool_bar .report_but,
+.tab11_div .output_exc_but{
 	width: 180px;
 	height: 50px;
 	font-size: 35px;
@@ -2000,7 +2064,7 @@ body{
 .tab11_div{
 	width: 1500px;
 	margin-top: 100px;
-	display: none;
+	/* display: none; */
 }
 .tab11_div .name_div{
 	font-size:35px;
@@ -3045,6 +3109,11 @@ body{
 		
 		<div class="tab11_div" id="tab11_div">
 			<div class="name_div">制药车间废矿物油到货验收确认单</div>
+			<div class="tool_bar" id="tool_bar11">
+				<input class="report_but" type="button" value="生成报表" onclick="createReportTab('tab11')"/>
+			</div>
+			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab11')"/>
+			<!-- 
 			<table class="tab11" border="1" cellspacing="0">
 				<tr class="tr1">
 					<td class="td1">接收日期</td>
@@ -3098,6 +3167,9 @@ body{
 					<td class="td1">接收单位负责人签字</td>
 					<td class="td2" colspan="4">年月日</td>
 				</tr>
+			</table>
+			 -->
+			<table id="tab11" style="width: 100%;border: 1px;" border="1" cellspacing="0">
 			</table>
 		</div>
 		
