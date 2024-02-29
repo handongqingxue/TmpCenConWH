@@ -15,10 +15,34 @@
 <script type="text/javascript">
 var repSysPath='<%=basePath %>repSys/';
 $(function(){
-	initBarChartDiv();
-	initPieChartDiv();
-	initLineChartDiv();
+	initLayoutDivSize();
+	//initBarChartDiv();
+	//initPieChartDiv();
+	//initLineChartDiv();
 });
+
+function initLayoutDivSize(){
+	var body=$("body");
+	var bodyWidth=body.width();
+	var bodyHeight=body.height();
+	
+	var topDiv=$("#top_div");
+	var topDivHeight=topDiv.height();
+	
+	var leftNavDiv=$("#left_nav_div");
+	var leftNavDivWidth=leftNavDiv.width();
+	
+	var rightDiv=$("#right_div");
+	var rightDivWidth=rightDiv.width();
+
+	var centerDiv=$("#center_div");
+	centerDiv.width(bodyWidth-leftNavDivWidth-rightDivWidth-200);
+	centerDiv.height(bodyHeight-topDivHeight);
+	
+	rightDiv.css("margin-top",-centerDiv.height()+"px");
+	
+	
+}
 
 function initBarChartDiv(){
 	var dom = document.getElementById('bar_chart_div');
@@ -1565,11 +1589,12 @@ body{
 }
 
 .center_div{
-	width: 2000px;
-	height: 2160px;
 	margin-top:-550px;
 	margin-left:300px;
+	overflow-y: auto;
 }
+
+/*
 .center_div .bar_chart_div{
 	width: 600px;
 	height: 500px;
@@ -1586,12 +1611,13 @@ body{
 	margin-top:-500px;
 	margin-left:1300px;
 }
+*/
 
 .right_div{
 	width:500px;
 	height:2160px;
 	margin-top:-3575px;
-	margin-right:-1550px;
+	margin-right:50px;
 	float: right;
 }
 .right_div .in_out_real_data_div{
@@ -2159,13 +2185,15 @@ body{
 <div class="main_div">
 	<%@include file="../inc/top.jsp"%>
 	<%@include file="../inc/leftNav.jsp"%>
-	<div class="center_div">
+	<div class="center_div" id="center_div">
+		<!-- 
 		<div class="bar_chart_div" id="bar_chart_div">
 		</div>
 		<div class="pie_chart_div" id="pie_chart_div">
 		</div>
 		<div class="line_chart_div" id="line_chart_div">
 		</div>
+		 -->
 		
 		<div class="tab1_div" id="tab1_div">
 			<div class="name_div">1#硝酸铵库房多孔粒状硝酸铵出入库登记簿</div>
@@ -3210,7 +3238,7 @@ body{
 		
 		
 	</div>
-	<div class="right_div">
+	<div class="right_div" id="right_div">
 		<div class="in_out_real_data_div">
 			<div class="title_div">出入库实时数据</div>
 			<div class="content_div">

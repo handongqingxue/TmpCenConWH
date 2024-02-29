@@ -107,7 +107,7 @@ a{
 </style>
 </head>
 <body>
-<div class="top_div">
+<div class="top_div" id="top_div">
 	<img class="system_name_img" alt="" src="<%=basePath %>resource/image/001.png">
 	<span class="system_name_span">远程集中监控系统</span>
 	<div class="nav_div">

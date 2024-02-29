@@ -33,6 +33,18 @@ public class RepSysController {
 		return MODULE_NAME+"/totalChart";
 	}
 
+	/**
+	 * 跳转到出入库报表
+	 * @return
+	 */
+	@RequestMapping(value="/goInOut")
+	public String goInOut() {
+		
+		//http://localhost:8080/TmpCenConWH/repSys/goInOut
+		
+		return MODULE_NAME+"/inOut";
+	}
+
 	@RequestMapping(value="/goPrint")
 	public String goPrint(HttpServletRequest request) {
 

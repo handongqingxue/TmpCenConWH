@@ -331,8 +331,12 @@ function convertCartesian3ToCartographic(position){
 					<span class="title_span">实时数据</span>
 					<div class="content_div">
 						<div class="row_div">
-							<div class="key_div">库存总量</div>
-							<div class="val_div">601件</div>
+							<div class="key_div">温度</div>
+							<div class="val_div">30</div>
+						</div>
+						<div class="row_div">
+							<div class="key_div">湿度</div>
+							<div class="val_div">10%RH</div>
 						</div>
 						<div class="row_div">
 							<div class="key_div">今日入库量</div>
@@ -343,12 +347,8 @@ function convertCartesian3ToCartographic(position){
 							<div class="val_div">301件</div>
 						</div>
 						<div class="row_div">
-							<div class="key_div">叉车数量</div>
-							<div class="val_div">3辆</div>
-						</div>
-						<div class="row_div">
-							<div class="key_div">库存报警</div>
-							<div class="val_div">1起</div>
+							<div class="key_div">库存总量</div>
+							<div class="val_div">601件</div>
 						</div>
 					</div>
 				</div>
@@ -356,24 +356,16 @@ function convertCartesian3ToCartographic(position){
 					<span class="title_span">AGV叉车数据</span>
 					<div class="content_div">
 						<div class="row_div">
-							<div class="key_div">高度上限</div>
-							<div class="val_div">601mm</div>
+							<div class="key_div">进入数量</div>
+							<div class="val_div">3</div>
 						</div>
 						<div class="row_div">
-							<div class="key_div">高度下限</div>
-							<div class="val_div">601mm</div>
+							<div class="key_div">离开数量</div>
+							<div class="val_div">6</div>
 						</div>
 						<div class="row_div">
-							<div class="key_div">下降时长</div>
-							<div class="val_div">601ms</div>
-						</div>
-						<div class="row_div">
-							<div class="key_div">上升时长</div>
-							<div class="val_div">601ms</div>
-						</div>
-						<div class="row_div">
-							<div class="key_div">左右侧移</div>
-							<div class="val_div">601mm</div>
+							<div class="key_div">现有数量</div>
+							<div class="val_div">20</div>
 						</div>
 					</div>
 				</div>
