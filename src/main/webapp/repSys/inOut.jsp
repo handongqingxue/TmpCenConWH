@@ -78,6 +78,182 @@ function showFilterCondDiv(){
 	}
 }
 
+function createEChart(){
+	var echartName=$("#echart_name_sel").val();
+	
+	var barChartDiv=$("#bar_chart_div");
+	barChartDiv.css("display","none");
+	
+	var lineChartDiv=$("#line_chart_div");
+	lineChartDiv.css("display","none");
+	
+	var pieChartDiv=$("#pie_chart_div");
+	pieChartDiv.css("display","none");
+	
+	if(echartName=="bar")
+		initBarChartDiv();
+	else if(echartName=="line")
+		initLineChartDiv();
+	else if(echartName=="pie")
+		initPieChartDiv();
+}
+
+function initBarChartDiv(){
+	var barChartDiv=$("#bar_chart_div");
+	barChartDiv.css("display","block");
+	
+	var dom = document.getElementById('bar_chart_div');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    var option;
+    option = {
+	  xAxis: {
+	    type: 'category',
+	    data: ['2024年1月23日', '2024年1月24日', '2024年1月25日', '2024年1月26日', '2024年1月27日', '2024年1月28日', '2024年1月29日']
+	  },
+	  yAxis: {
+	    type: 'value'
+	  },
+	  series: [
+	    {
+	    	data: [120, 200, 150, 80, 70, 110, 130],
+	        type: 'bar',
+	        barGap: 0,
+	    },
+	    {
+	    	data: [120, 200, 150, 80, 70, 110, 130],
+	        type: 'bar'
+	    }
+	  ]
+	};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+}
+
+function initLineChartDiv(){
+	var lineChartDiv=$("#line_chart_div");
+	lineChartDiv.css("display","block");
+	
+	var dom = document.getElementById('line_chart_div');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    var option;
+    option = {
+	  title: {
+	    text: 'Stacked Line'
+	  },
+	  tooltip: {
+	    trigger: 'axis'
+	  },
+	  legend: {
+	    data: ['出库量','入库量']
+	  },
+	  grid: {
+	    left: '3%',
+	    right: '4%',
+	    bottom: '3%',
+	    containLabel: true
+	  },
+	  toolbox: {
+	    feature: {
+	      saveAsImage: {}
+	    }
+	  },
+	  xAxis: {
+	    type: 'category',
+	    boundaryGap: false,
+	    data: ['2024年1月23日', '2024年1月24日', '2024年1月25日', '2024年1月26日', '2024年1月27日', '2024年1月28日', '2024年1月29日']
+	  },
+	  yAxis: {
+	    type: 'value'
+	  },
+	  series: [
+	    {
+	      name: '出库量',
+	      type: 'line',
+	      stack: 'Total',
+	      data: [320, 332, 301, 334, 390, 330, 320]
+	    },
+	    {
+	      name: '入库量',
+	      type: 'line',
+	      stack: 'Total',
+	      data: [820, 932, 901, 934, 1290, 1330, 1320]
+	    }
+	  ]
+	};
+
+    if(option&&typeof option === 'object') {
+      myChart.setOption(option);
+    }
+}
+
+function initPieChartDiv(){
+	var pieChartDiv=$("#pie_chart_div");
+	pieChartDiv.css("display","block");
+	
+	var dom = document.getElementById('pie_chart_div');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    var option;
+    option = {
+	  tooltip: {
+	    trigger: 'item'
+	  },
+	  legend: {
+	    top: '5%',
+	    left: 'center'
+	  },
+	  series: [
+	    {
+	      name: 'Access From',
+	      type: 'pie',
+	      radius: ['50%', '70%'],
+	      avoidLabelOverlap: false,
+	      itemStyle: {
+	        borderRadius: 0,
+	        borderColor: '#fff',
+	        borderWidth: 2
+	      },
+	      label: {
+	        show: false,
+	        position: 'center'
+	      },
+	      emphasis: {
+	        label: {
+	          show: true,
+	          fontSize: 40,
+	          fontWeight: 'bold'
+	        }
+	      },
+	      labelLine: {
+	        show: false
+	      },
+	      data: [
+	        { value: 580, name: '滞留' },
+	        { value: 484, name: '入库量' },
+	        { value: 300, name: '出库量' }
+	      ]
+	    }
+	  ]
+	};
+
+    if(option&&typeof option==='object') {
+      myChart.setOption(option);
+    }
+}
+
 function createReportTab(){
 	var tabName=$("#rep_name_sel").val();
 	if(tabName=="tab1"){
@@ -1679,6 +1855,53 @@ function showCreaRepDiaDiv(flag){
 		creaRepDiaDiv.css("display","none");
 	}
 }
+
+function showCreaEChartDiaDiv(flag){
+	var creaEChartDiaDiv=$("#crea_echart_dia_div");
+	if(flag){
+		var creaEChartDiaDiv=$("#crea_echart_dia_div");
+		
+		var textSpan=creaEChartDiaDiv.find("#tit_div").find("#text_span");
+		textSpan.text("");
+		
+		var tabName=$("#rep_name_sel").val();
+		if(tabName=="tab1"){
+			textSpan.text("1#硝酸铵库房多孔粒状硝酸铵出入库登记簿");
+		}
+		else if(tabName=="tab2"){
+			textSpan.text("2#硝酸铵库房多孔粒状硝酸铵出入库登记簿");
+		}
+		else if(tabName=="tab3"){
+			textSpan.text("15-1醋酸出入库登记表_文档1");
+		}
+		else if(tabName=="tab4"){
+			textSpan.text("15-1柠檬酸出入库登记表");
+		}
+		else if(tabName=="tab5"){
+			textSpan.text("15-3国产油相出入库登记表_文档1");
+		}
+		else if(tabName=="tab6"){
+			textSpan.text("15-4硫脲出入库登记表_文档1");
+		}
+		else if(tabName=="tab7"){
+			textSpan.text("15-5碳酸钠出入库登记表_文档1");
+		}
+		else if(tabName=="tab8"){
+			textSpan.text("15-6亚硝酸钠出入库登记表_文档1");
+		}
+		else if(tabName=="tab9"){
+			textSpan.text("15-7乙二醇出入库登记表_文档1");
+		}
+		else if(tabName=="tab10"){
+			textSpan.text("15-9添加剂出入库登记表");
+		}
+		
+		creaEChartDiaDiv.css("display","block");
+	}
+	else{
+		creaEChartDiaDiv.css("display","none");
+	}
+}
 </script>
 <style type="text/css">
 body{
@@ -1695,12 +1918,14 @@ body{
 	overflow-y: auto;
 }
 .center_div .tool_bar,
-.crea_rep_dia_div .tool_bar{
+.crea_rep_dia_div .tool_bar,
+.crea_echart_dia_div .tool_bar{
 	width:100%;
 	height:80px;
 	line-height:80px;
 }
-.center_div .tool_bar .choose_rep_text_span{
+.center_div .tool_bar .choose_rep_text_span,
+.crea_echart_dia_div .tool_bar .choose_echart_text_span{
 	color: #111;
 	font-size: 25px;
 	margin-left:50px;
@@ -1716,8 +1941,10 @@ body{
 }
 .center_div .tool_bar .sear_but,
 .center_div .tool_bar .report_but,
+.center_div .tool_bar .cre_echart_but,
 .crea_rep_dia_div .tool_bar .print_rep_but,
-.crea_rep_dia_div .tool_bar .output_exc_but{
+.crea_rep_dia_div .tool_bar .output_exc_but,
+.crea_echart_dia_div .tool_bar .create_but{
 	width: 180px;
 	height: 50px;
 	margin-left:50px;
@@ -1803,7 +2030,8 @@ body{
 	z-index: 1;
 	display: none;
 }
-.crea_rep_dia_div .tit_div{
+.crea_rep_dia_div .tit_div,
+.crea_echart_dia_div .tit_div{
 	width: 100%;
 	height: 100px;
 	line-height: 100px;
@@ -1811,10 +2039,12 @@ body{
 	text-align:center;
 	border-bottom: #F3F3F3 solid 1px;
 }
-.crea_rep_dia_div .tit_div .text_span{
+.crea_rep_dia_div .tit_div .text_span,
+.crea_echart_dia_div .tit_div .text_span{
 	font-size:30px;
 }
-.crea_rep_dia_div .tit_div .close_span{
+.crea_rep_dia_div .tit_div .close_span,
+.crea_echart_dia_div .tit_div .close_span{
 	color:#999;
 	font-size:25px;
 	margin-right: 20px;
@@ -1824,6 +2054,47 @@ body{
 .crea_rep_dia_div .crea_rep_div{
 	width: 100%;
 	height: 1220px;
+}
+
+.crea_echart_dia_div{
+	width: 2000px;
+	height: 1400px;
+	margin:auto;
+	top:150px;
+	left:0;
+	right:0;
+	background-color:#fff;
+	border:#347CAF solid 1px;
+	position:absolute;
+	z-index: 1;
+	display: none;
+}
+.crea_echart_dia_div .tool_bar .echart_name_sel{
+	width:200px;
+	height:50px;
+	color: #999;
+	font-size: 25px;
+	margin-left:50px;
+	background-color: #fff;
+	border: #eee solid 1px;	
+}
+.crea_echart_dia_div .bar_chart_div{
+	width: 90%;
+	height: 700px;
+	margin:auto;
+	display: none;
+}
+.crea_echart_dia_div .line_chart_div{
+	width: 90%;
+	height: 800px;
+	margin:auto;
+	display: none;
+}
+.crea_echart_dia_div .pie_chart_div{
+	width: 600px;
+	height: 500px;
+	margin:auto;
+	display: none;
 }
 
 .right_div{
@@ -1892,6 +2163,7 @@ body{
 			</select>
 			<input class="sear_but" type="button" value="查询" onclick="createDataTab()"/>
 			<input class="report_but" type="button" value="生成报表" onclick="createReportTab()"/>
+			<input class="cre_echart_but" type="button" value="生成图表" onclick="showCreaEChartDiaDiv(true)"/>
 		</div>
 		<div class="data_tab_div" id="data_tab_div">
 		</div>
@@ -2273,6 +2545,28 @@ body{
 			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab2')"/>
 		</div>
 		<div class="crea_rep_div" id="crea_rep_div">
+		</div>
+	</div>
+	
+	<div class="crea_echart_dia_div" id="crea_echart_dia_div">
+		<div class="tit_div" id="tit_div">
+			<span class="text_span" id="text_span"></span>
+			<span class="close_span" onclick="showCreaEChartDiaDiv(false)">X</span>
+		</div>
+		<div class="tool_bar" id="tool_bar">
+			<span class="choose_echart_text_span">请选择图表</span>
+			<select class="echart_name_sel" id="echart_name_sel">
+				<option value="bar">柱状图</option>
+				<option value="line">折线图</option>
+				<option value="pie">饼状图</option>
+			</select>
+			<input class="create_but" type="button" value="生成" onclick="createEChart()"/>
+		</div>
+		<div class="bar_chart_div" id="bar_chart_div">
+		</div>
+		<div class="line_chart_div" id="line_chart_div">
+		</div>
+		<div class="pie_chart_div" id="pie_chart_div">
 		</div>
 	</div>
 </div>
