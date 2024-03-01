@@ -1603,6 +1603,73 @@ function createDataTab(){
 	}
 }
 
+function printRep(){
+	var tabName=$("#rep_name_sel").val();
+	var time=new Date().getTime();
+	var printHtml = $("#rep_tab"+tabName.substring(3)).prop("outerHTML");//获得包括div本身在内的标签内容,参考链接:https://www.jb51.net/article/61916.htm
+    $.post(repSysPath+"addPrintRec",
+	  {time:time,html:printHtml},
+   	  function(data){
+	   	 if(data.message=="ok"){
+	         window.open("goPrint?time="+time);
+	   	 }
+      }
+    ,"json");
+}
+
+function exportExcel(){
+	var tabName=$("#rep_name_sel").val();
+	var table = $("#rep_tab"+tabName.substring(3));
+    var excelContent = table[0].innerHTML;
+    var excelFile = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' xmlns='http://www.w3.org/TR/REC-html40'>";
+    excelFile += "<head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head>";
+    excelFile += "<body><table>";
+    excelFile += excelContent;
+    excelFile += "</table></body>";
+    excelFile += "</html>";
+    var link = "data:application/vnd.ms-excel;base64," + base64(excelFile);
+    
+    var fileName;
+    if(tabName=="tab1"){
+    	fileName="1#硝酸铵库房多孔粒状硝酸铵出入库登记簿";
+    }
+    else if(tabName=="tab2"){
+    	fileName="2#硝酸铵库房多孔粒状硝酸铵出入库登记簿";
+    }
+    else if(tabName=="tab3"){
+    	fileName="15-1醋酸出入库登记表_文档1";
+    }
+    else if(tabName=="tab4"){
+    	fileName="15-1柠檬酸出入库登记表";
+    }
+    else if(tabName=="tab5"){
+    	fileName="15-3国产油相出入库登记表_文档1";
+    }
+    else if(tabName=="tab6"){
+    	fileName="15-4硫脲出入库登记表_文档1";
+    }
+    else if(tabName=="tab7"){
+    	fileName="15-5碳酸钠出入库登记表_文档1";
+    }
+    else if(tabName=="tab8"){
+    	fileName="15-6亚硝酸钠出入库登记表_文档1";
+    }
+    else if(tabName=="tab9"){
+    	fileName="15-7乙二醇出入库登记表_文档1";
+    }
+    else if(tabName=="tab10"){
+    	fileName="15-9添加剂出入库登记表";
+    }
+    var a = document.createElement("a");
+    a.download = fileName+".xlsx";
+    a.href = link;
+    a.click();
+}
+
+function base64 (content) {
+    return window.btoa(unescape(encodeURIComponent(content)));
+}
+
 function showCreaRepDiaDiv(flag){
 	var creaRepDiaDiv=$("#crea_rep_dia_div");
 	if(flag){
@@ -1649,8 +1716,8 @@ body{
 }
 .center_div .tool_bar .sear_but,
 .center_div .tool_bar .report_but,
-.center_div .tool_bar .output_exc_but,
-.crea_rep_dia_div .tool_bar .print_rep_but{
+.crea_rep_dia_div .tool_bar .print_rep_but,
+.crea_rep_dia_div .tool_bar .output_exc_but{
 	width: 180px;
 	height: 50px;
 	margin-left:50px;
@@ -1825,7 +1892,6 @@ body{
 			</select>
 			<input class="sear_but" type="button" value="查询" onclick="createDataTab()"/>
 			<input class="report_but" type="button" value="生成报表" onclick="createReportTab()"/>
-			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab2')"/>
 		</div>
 		<div class="data_tab_div" id="data_tab_div">
 		</div>
@@ -2203,7 +2269,8 @@ body{
 			<span class="close_span" onclick="showCreaRepDiaDiv(false)">X</span>
 		</div>
 		<div class="tool_bar" id="tool_bar">
-			<input class="print_rep_but" type="button" value="打印报表" onclick="printRep('tab2')"/>
+			<input class="print_rep_but" type="button" value="打印报表" onclick="printRep()"/>
+			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab2')"/>
 		</div>
 		<div class="crea_rep_div" id="crea_rep_div">
 		</div>
