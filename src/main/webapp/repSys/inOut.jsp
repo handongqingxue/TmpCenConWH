@@ -38,8 +38,6 @@ function initLayoutDivSize(){
 	centerDiv.height(bodyHeight-topDivHeight);
 	
 	rightDiv.css("margin-top",-centerDiv.height()+"px");
-	
-	
 }
 
 function showFilterCondDiv(){

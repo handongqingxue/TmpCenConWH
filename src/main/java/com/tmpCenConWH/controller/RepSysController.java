@@ -45,6 +45,18 @@ public class RepSysController {
 		return MODULE_NAME+"/inOut";
 	}
 
+	/**
+	 * 跳转到图表统计
+	 * @return
+	 */
+	@RequestMapping(value="/goChartTotal")
+	public String goChartTotal() {
+		
+		//http://localhost:8080/TmpCenConWH/repSys/goChartTotal
+		
+		return MODULE_NAME+"/chartTotal";
+	}
+
 	@RequestMapping(value="/goPrint")
 	public String goPrint(HttpServletRequest request) {
 
