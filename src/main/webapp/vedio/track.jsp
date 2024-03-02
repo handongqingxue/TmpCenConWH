@@ -38,6 +38,10 @@ body{
 .real_frame_div{
 	width: 1600px;
 	height: 1400px;
+	margin:auto;
+	top:150px;
+	left:0;
+	right:0;
 	background-color:#fff;
 	position: fixed;
 	z-index: 1;
@@ -45,15 +49,19 @@ body{
 }
 .real_frame_div .tit_div{
 	width: 100%;
-	height: 40px;
-	line-height: 40px;
+	height: 100px;
+	line-height: 100px;
+	font-weight:bold;
+	text-align:center;
 	border-bottom: #666 solid 1px;
 }
 .real_frame_div .tit_div .text_span{
+	font-size:30px;
 	margin-left: 15px;
 }
 .real_frame_div .tit_div .close_span{
 	color:#999;
+	font-size:30px;
 	margin-right: 20px;
 	float: right;
 	cursor: pointer;
@@ -76,7 +84,8 @@ body{
 	z-index: 1;
 	display: none;
 }
-.vedio_div .tit_div{
+.vedio_div .tit_div,
+.amp_vedio_div .tit_div{
 	width: 100%;
 	height: 100px;
 	line-height: 100px;
@@ -84,10 +93,12 @@ body{
 	text-align:center;
 	border-bottom: #F3F3F3 solid 1px;
 }
-.vedio_div .tit_div .text_span{
+.vedio_div .tit_div .text_span,
+.amp_vedio_div .tit_div .text_span{
 	font-size:30px;
 }
-.vedio_div .tit_div .close_span{
+.vedio_div .tit_div .close_span,
+.amp_vedio_div .tit_div .close_span{
 	color:#999;
 	font-size:25px;
 	margin-right: 20px;
@@ -103,11 +114,19 @@ body{
 .vedio_div .inp_div .key_span{
 	font-size:25px;
 }
-.vedio_div .inp_div .val_inp{
-	width: 400px;
-	height: 50px;
+.vedio_div .inp_div .val_sel{
+	width:430px;
+	height: 60px;
+	font-size: 25px;
 	margin-top:20px;
-	margin-right:20px;
+	background-color:#fff;
+	float: right;
+}
+.vedio_div .inp_div .val_inp{
+	width: 390px;
+	height: 50px;
+	margin-top:-76px;
+	margin-right:30px;
 	color:#347CAF;
 	font-size:25px;
 	border-top:0px;
@@ -142,10 +161,38 @@ body{
 	letter-spacing:5px;
 	border: #CBCBCB solid 1px;
 }
-.vedio_div .real_vedio_div iframe{
+.vedio_div .real_vedio_div .ifr_div{
+	width: 100%;
+	height: 800px;
+	overflow: auto;
+}
+.vedio_div .real_vedio_div .ifr_div iframe{
 	width: 100%;
 	height: 750px;
+}
+.vedio_div .real_vedio_div .ifr_div .first_per_ifr{
 	margin-top: 10px;
+}
+.vedio_div .real_vedio_div .ifr_div .third_per_ifr{
+	margin-top: 50px;
+}
+
+.amp_vedio_div{
+	width: 1800px;
+	height: 1700px;
+	margin:auto;
+	top:50px;
+	left:0;
+	right:0;
+	background-color:#fff;
+	border:#347CAF solid 1px;
+	position:absolute;
+	z-index: 1;
+	display: none;
+}
+.amp_vedio_div iframe{
+	width: 100%;
+	height: 1600px;
 }
 </style>
 <title>Insert title here</title>
@@ -322,6 +369,35 @@ function showVedioDiv(flag){
 	}
 }
 
+function showAmpVedioDiv(angFlag,showFlag){
+	var ampVedioDiv=$("#amp_vedio_div");
+	var textSpan=$("#amp_vedio_div #tit_div #text_span");
+	var ampIframe=$("#amp_vedio_div iframe");
+	if(showFlag){
+		ampVedioDiv.css("display","block");
+		if(angFlag=="first"){
+			textSpan.text("第一视角视频追踪");
+			
+			var iframe=$("#vedio_div #first_per_ifr");
+			var src=iframe.attr("src");
+			ampIframe.attr("src",src);
+		}
+		else if(angFlag=="third"){
+			textSpan.text("第三视角视频追踪");
+			
+			var iframe=$("#vedio_div #third_per_ifr");
+			var src=iframe.attr("src");
+			ampIframe.attr("src",src);
+		}
+	}
+	else{
+		textSpan.text("");
+		
+		ampIframe.attr("src","");
+		ampVedioDiv.css("display","none");
+	}
+}
+
 function showVedioInDiv(){
 	var tagId=$("#agv_inp").val();
 	if(tagId==""||tagId==null){
@@ -367,8 +443,8 @@ function checkInCameraScopeByList(x,y){
 		openCameras=openCameras.substring(1);
 		openCameraUrls=openCameraUrls.substring(1);
 		
-		alert(openCameraUrls.split(",")[0])
-		$("#vedio_div iframe").attr("src",openCameraUrls.split(",")[0]);
+		$("#vedio_div #first_per_ifr").attr("src",openCameraUrls.split(",")[0]);
+		$("#vedio_div #third_per_ifr").attr("src",openCameraUrls.split(",")[0]);
 		
 		openCameras="";
 		openCameraUrls="";
@@ -407,6 +483,13 @@ function getLineDistance(x1,y1,x2,y2){
 		b=y2-y1;
 	return Math.sqrt(a*a+b*b);
 }
+
+function putValInAgvInp(){
+	var agvVal=$("#agv_sel").val();
+	$("#agv_inp").val(agvVal);
+}
+
+
 </script>
 </head>
 <body>
@@ -425,13 +508,30 @@ function getLineDistance(x1,y1,x2,y2){
 	</div>
 	<div class="inp_div">
 		<span class="key_span">请输入叉车编号：</span>
+		<select class="val_sel" id="agv_sel" onchange="putValInAgvInp()">
+			<option>001</option>
+			<option>002</option>
+		</select>
 		<input class="val_inp" id="agv_inp" type="text"/>
 	</div>
 	<div class="sea_but_div" onclick="showVedioInDiv()">点击搜索</div>
 	<div class="real_vedio_div">
 		<div class="tit_div">实时视频画面</div>
-		<iframe></iframe>
+		<div class="ifr_div">
+			<input type="button" value="放大" onclick="showAmpVedioDiv('first',true)"/>
+			<iframe class="first_per_ifr" id="first_per_ifr"></iframe>
+			<input type="button" value="放大" onclick="showAmpVedioDiv('third',true)"/>
+			<iframe class="third_per_ifr" id="third_per_ifr"></iframe>
+		</div>
 	</div>
+</div>
+
+<div class="amp_vedio_div" id="amp_vedio_div">
+	<div class="tit_div" id="tit_div">
+		<span class="text_span" id="text_span"></span>
+		<span class="close_span" onclick="showAmpVedioDiv('first',false)">X</span>
+	</div>
+	<iframe></iframe>
 </div>
  
 <div class="main_div">

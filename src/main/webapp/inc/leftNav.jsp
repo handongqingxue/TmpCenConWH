@@ -46,10 +46,14 @@
 			<div class="item_div">视频联动</div>
 		</c:when>
 		<c:when test="${uri.contains('/repSys/')}">
-			<div class="item_div">出入库报表</div>
+			<a href="<%=basePath %>repSys/goInOut">
+				<div class="item_div">出入库报表</div>
+			</a>
 			<div class="item_div">统计报表</div>
 			<div class="item_div">验收单</div>
-			<div class="item_div">图表统计</div>
+			<a href="<%=basePath %>repSys/goChartTotal">
+				<div class="item_div">图表统计</div>
+			</a>
 		</c:when>
 	</c:choose>
 </div>
