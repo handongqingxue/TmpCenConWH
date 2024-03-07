@@ -16,7 +16,7 @@ import com.tmpCenConWH.service.*;
 @RequestMapping(PhoneController.MODULE_NAME)
 public class PhoneController {
 
-	public static final String MODULE_NAME="/main";
+	public static final String MODULE_NAME="/phone";
 	
 	@RequestMapping(value="/login")
 	@ResponseBody

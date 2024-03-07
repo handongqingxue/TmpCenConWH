@@ -25,6 +25,7 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/main/**=anon
+				/phone/**=anon
 				/agv/**=anon
 				/vedio/**=anon
 				/repSys/**=anon

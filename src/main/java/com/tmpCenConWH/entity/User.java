@@ -21,6 +21,27 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getRoleIds() {
+		return roleIds;
+	}
+	public void setRoleIds(String roleIds) {
+		this.roleIds = roleIds;
+	}
+	public String getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 	private String username;
 	private String password;
+	private String roleIds;
+	private String createTime;
+	private String remark;
 }

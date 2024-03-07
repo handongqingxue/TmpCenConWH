@@ -129,7 +129,7 @@ a{
 			<span class="text_span">视频监控</span>
 		</div>
 		</a>
-		<a href="<%=basePath %>repSys/goTotalChart">
+		<a href="<%=basePath %>repSys/goInOut">
 		<div class="rep_sys_nav_div${uri.contains('totalChart.jsp')?' selected':'' }">
 			<img class="nav_img" alt="" src="<%=basePath %>resource/image/005.png">
 			<span class="text_span">报表系统</span>
