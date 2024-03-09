@@ -46,13 +46,17 @@ $(function(){
 	loadTileset();
 	getBoxList();
 	getCameraList();
-	drawTrack();
+	//drawTrack();
 	setTimeout(function(){
 		initCameraView();
 	},1000);
 	setInterval(() => {
+		drawHisTrack();
 		updateBoxList();
 	}, 5000);
+	setInterval(() => {
+		addForkliftHisTrack();
+	}, 500);
 });
 
 //遍历所有监控，验证是否在监控范围
@@ -523,6 +527,41 @@ function drawTrack(){
 		}
 	,"json");
 	
+}
+
+function drawHisTrack(){
+	$.post(path+"main/getForkliftHisTrack",
+		function(result){
+			if(result.status=="ok"){
+				var positions = [];
+				var positionJA=result.positionJA;
+				for(var i=0;i<positionJA.length;i++){
+					var position=positionJA[i];
+					positions.push(Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude,50));
+				}
+				
+				viewer.entities.add({
+				  polyline: {
+				    positions: positions,
+				    width: 10.0,
+				    material: new Cesium.PolylineGlowMaterialProperty({
+				      color: Cesium.Color.DEEPSKYBLUE,
+				      glowPower: 0.25,
+				    }),
+				  },
+				});
+			}
+		}
+	,"json");
+	
+}
+
+function addForkliftHisTrack(){
+	$.post(path+"main/addForkliftHisTrack",
+		function(result){
+		
+		}
+	,"json");
 }
 </script>
 </head>
