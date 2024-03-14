@@ -11,6 +11,43 @@
 <script type="text/javascript" src="<%=basePath %>resource/js/jquery-3.3.1.js"></script>
 <script src="<%=basePath %>resource/cesiumjs/releases/1.83/Build/Cesium/Cesium.js"></script>
 <link href="<%=basePath %>resource/cesiumjs/releases/1.83/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+<style type="text/css">
+body{
+	margin:0;
+}
+.main_div{
+	width:3840px;
+	height:2160px;
+}
+.main_div .tool_bar{
+	width:100%;
+	height:80px;
+	line-height:80px;
+}
+.main_div .tool_bar .choose_area_text_span,
+.main_div .tool_bar .choose_agv_text_span,
+.main_div .tool_bar .choose_date_text_span{
+	color: #111;
+	font-size: 25px;
+	margin-left:50px;
+}
+.main_div .tool_bar .area_name_sel,
+.main_div .tool_bar .agv_name_sel{
+	width:400px;
+	height:50px;
+	color: #999;
+	font-size: 25px;
+	margin-left:50px;
+	background-color: #fff;
+	border: #eee solid 1px;
+}
+.start_date,
+.end_date{
+	width: 250px;
+	height: 50px;
+}
+
+</style>
 <title>Insert title here</title>
 <script>  
 var path='<%=basePath%>';
@@ -95,7 +132,25 @@ function drawTrack(){
 </script>
 </head>
 <body>
-<div class="cesuim_div" id="cesuim_div">
+<div class="main_div">
+		<div class="tool_bar" id="tool_bar">
+			<span class="choose_area_text_span">请选择区域</span>
+			<select class="area_name_sel" id="area_name_sel">
+				<option value="001">1#仓库</option>
+				<option value="002">2#仓库</option>
+			</select>
+			<span class="choose_agv_text_span">请选择叉车</span>
+			<select class="agv_name_sel" id="agv_name_sel">
+				<option value="001">001</option>
+				<option value="002">002</option>
+			</select>
+			<span class="choose_date_text_span">请选择日期</span>
+			<input class="start_date" type="date"/>
+			至
+			<input class="end_date" type="date"/>
+		</div>
+	<div class="cesuim_div" id="cesuim_div">
+	</div>
 </div>
 </body>
 </html>
