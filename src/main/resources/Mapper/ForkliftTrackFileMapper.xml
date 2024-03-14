@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmpCenConWH.dao.ForkliftTrackFileMapper">
+	<insert id="addFromList">
+		insert into forklift_track_file(path,tagId,date) values
+		<foreach collection="ftfList" item="ftf" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<choose>
+					<when test="ftf.path!=null">
+						#{ftf.path},
+					</when>
+					<otherwise>
+						'',
+					</otherwise>
+				</choose>
+				<choose>
+					<when test="ftf.tagId!=null">
+						#{ftf.tagId},
+					</when>
+					<otherwise>
+						'',
+					</otherwise>
+				</choose>
+				<choose>
+					<when test="ftf.date!=null">
+						#{ftf.date},
+					</when>
+					<otherwise>
+						'',
+					</otherwise>
+				</choose>
+			</trim>
+		</foreach>
+	</insert>
+	<select id="getList" resultType="com.tmpCenConWH.entity.ForkliftTrackFile">
+		select DATE_FORMAT(date, '%Y-%m-%d'),path from forklift_track_file where date>=DATE_SUB(DATE_FORMAT(NOW(), '%Y-%m-%d'), INTERVAL #{day} DAY) and tagId=#{tagId}
+	</select>
+</mapper>

@@ -38,6 +38,8 @@ public class MainController {
 	private PositionService positionService;
 	@Autowired
 	private ForkliftTrackService forkliftTrackService;
+	@Autowired
+	private ForkliftTrackFileService forkliftTrackFileService;
 	private JSONArray ftTestJA;
 	public static final String MODULE_NAME="/main";
 
@@ -137,9 +139,10 @@ public class MainController {
 				Date nowDate = new Date();
 				Calendar calendar=Calendar.getInstance();
 				calendar.setTime(nowDate);
-				calendar.add(Calendar.DATE, -1);
+				calendar.add(Calendar.DATE, -3);
 				Date yestDate = calendar.getTime();
-				String yestDateFolderPath = "D:/resource/TmpCenConWH/ForkliftHisTrack/"+new SimpleDateFormat("YYYYMMdd").format(yestDate);
+				String yestDateFmt = new SimpleDateFormat("YYYYMMdd").format(yestDate);
+				String yestDateFolderPath = "D:/resource/TmpCenConWH/ForkliftHisTrack/"+yestDateFmt;
 				System.out.println(yestDateFolderPath);
 				File yestDateFolderFile = new File(yestDateFolderPath);
 				System.out.println(yestDateFolderFile.exists());
@@ -170,6 +173,9 @@ public class MainController {
 						ftMap.put(tagId, ftMapList);
 					}
 				}
+				
+				List<ForkliftTrackFile> ftfList=new ArrayList<ForkliftTrackFile>();
+				ForkliftTrackFile ftf=null;
 				Set<String> ftMapKeySet = ftMap.keySet();
 				for (String ftMapKey : ftMapKeySet) {
 					String yestDateFileName = yestDateFolderPath+"/"+ftMapKey+".txt";
@@ -181,7 +187,16 @@ public class MainController {
 					String ftJAStr = JSONArray.toJSONString(ftMapList);
 					System.out.println("ftJAStr==="+ftJAStr);
 					LogUtil.createHisTra(yestDateFileName,ftJAStr);
+					
+					ftf=new ForkliftTrackFile();
+					ftf.setPath(yestDateFileName);
+					ftf.setTagId(ftMapKey);
+					ftf.setDate(yestDateFmt);
+					
+					ftfList.add(ftf);
 				}
+				
+				forkliftTrackFileService.addFromList(ftfList);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -193,26 +208,25 @@ public class MainController {
 
 	@RequestMapping(value="/getForkliftHisTrack")
 	@ResponseBody
-	public Map<String, Object> getForkliftHisTrack() {
+	public Map<String, Object> getForkliftHisTrack(String tagId, Integer day) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
-		String str = LogUtil.getHisTra();
-		if(StringUtils.isEmpty(str)) {
-			
-		}
-		else {
+		List<ForkliftTrack> ftList = new ArrayList<ForkliftTrack>();
+		List<ForkliftTrackFile> ftfList=forkliftTrackFileService.getList(tagId,day);
+		for (int i = 0; i < ftfList.size(); i++) {
+			ForkliftTrackFile ftf = ftfList.get(i);
+			String path = ftf.getPath();
+			String str = LogUtil.getHisTra(path);
 			JSONArray ja = JSONArray.parseArray(str);
-			System.out.println("jasize==="+ja.size());
-			/*
-			for (int i = 0; i < ja.size(); i++) {
-				System.out.println("getJSONObject==="+"i="+i+","+ja.getJSONObject(i).toString());
-			}
-			*/
-			
-			jsonMap.put("status", "ok");
-			jsonMap.put("positionJA", ja);
+			List<ForkliftTrack> ftJAList = ja.toJavaList(ForkliftTrack.class);
+			System.out.println("ftJAListsize==="+ftJAList.size());
+			ftList.addAll(ftJAList);
 		}
+
+		System.out.println("ftListsize==="+ftList.size());
+		jsonMap.put("status", "ok");
+		jsonMap.put("forkliftTrackList", ftList);
 		
 		return jsonMap;
 	}
@@ -262,7 +276,7 @@ public class MainController {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
 		try {
-			String str = LogUtil.getHisTra();
+			String str = LogUtil.getHisTra("D:/resource/TmpCenConWH/aaa.txt");
 			System.out.println("str1==="+str);
 	        if(!str.startsWith("[")) {
 	        	str=str.substring(1);

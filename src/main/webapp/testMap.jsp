@@ -531,13 +531,14 @@ function drawTrack(){
 
 function drawHisTrack(){
 	$.post(path+"main/getForkliftHisTrack",
+		{tagId:"001",day:7},
 		function(result){
 			if(result.status=="ok"){
 				var positions = [];
-				var positionJA=result.positionJA;
-				for(var i=0;i<positionJA.length;i++){
-					var position=positionJA[i];
-					positions.push(Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude,50));
+				var forkliftTrackList=result.forkliftTrackList;
+				for(var i=0;i<forkliftTrackList.length;i++){
+					var forkliftTrack=forkliftTrackList[i];
+					positions.push(Cesium.Cartesian3.fromDegrees(forkliftTrack.longitude, forkliftTrack.latitude,50));
 				}
 				
 				viewer.entities.add({

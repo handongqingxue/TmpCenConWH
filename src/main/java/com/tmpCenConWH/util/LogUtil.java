@@ -7,11 +7,11 @@ import org.apache.commons.lang.StringUtils;
 
 public class LogUtil {
 
-	public static String getHisTra() {
+	public static String getHisTra(String fileName) {
 		String preSBStr = null;
 		try {
 			FileInputStream fis = null;
-			File eventFile=new File("D:/resource/TmpCenConWH/aaa.txt");
+			File eventFile=new File(fileName);
 			StringBuffer preSB=new StringBuffer();
 				fis = new FileInputStream(eventFile);
 	        int data;
