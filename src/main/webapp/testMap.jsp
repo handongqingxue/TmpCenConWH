@@ -46,17 +46,17 @@ $(function(){
 	loadTileset();
 	getBoxList();
 	getCameraList();
-	//drawTrack();
+	drawTrack();
 	setTimeout(function(){
 		initCameraView();
 	},1000);
 	setInterval(() => {
-		drawHisTrack();
 		updateBoxList();
 	}, 5000);
 	setInterval(() => {
 		addForkliftHisTrack();
-	}, 500);
+	}, 1000);
+	drawHisTrack();
 });
 
 //遍历所有监控，验证是否在监控范围
@@ -563,9 +563,18 @@ function addForkliftHisTrack(){
 		}
 	,"json");
 }
+
+function createForkHisTraFile(){
+	$.post(path+"main/createForkHisTraFile",
+		function(result){
+		
+		}
+	,"json");
+}
 </script>
 </head>
 <body>
-<div id="cesiumContainer" style="width: 1500px; height:700px"></div>  
+<div id="cesiumContainer" style="width: 1500px; height:700px"></div>
+<input type="button" value="归档历史轨迹" onclick="createForkHisTraFile()"/>
 </body>
 </html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmpCenConWH.dao.ForkliftTrackMapper">
+	<insert id="addFromList">
+		insert into forklift_track(tagId,longitude,latitude,createTime) values
+		<foreach collection="ftList" item="ft" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<choose>
+					<when test="ft.tagId!=null">
+						#{ft.tagId},
+					</when>
+					<otherwise>
+						'',
+					</otherwise>
+				</choose>
+				<choose>
+					<when test="ft.longitude!=null">
+						#{ft.longitude},
+					</when>
+					<otherwise>
+						'',
+					</otherwise>
+				</choose>
+				<choose>
+					<when test="ft.latitude!=null">
+						#{ft.latitude},
+					</when>
+					<otherwise>
+						'',
+					</otherwise>
+				</choose>
+				now()
+			</trim>
+		</foreach>
+	</insert>
+	<select id="getYestList" resultType="com.tmpCenConWH.entity.ForkliftTrack">
+		select * from forklift_track where DATE_FORMAT(createTime, '%Y-%m-%d') =DATE_SUB(DATE_FORMAT(NOW(), '%Y-%m-%d'), INTERVAL 0 DAY)
+	</select>
+</mapper>
