@@ -3,6 +3,7 @@ package com.tmpCenConWH.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -130,28 +131,61 @@ public class MainController {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 
-		List<ForkliftTrack> ftList=forkliftTrackService.getYestList();
-		if(ftList.size()>0) {
-			Date nowDate = new Date();
-			Calendar calendar=Calendar.getInstance();
-			calendar.setTime(nowDate);
-			calendar.add(Calendar.DATE, -1);
-			Date yestDate = calendar.getTime();
-			String yestDateFolderPath = "D:/resource/TmpCenConWH/ForkliftHisTrack/"+new SimpleDateFormat("YYYYMMdd").format(yestDate);
-			System.out.println(yestDateFolderPath);
-			File yestDateFolderFile = new File(yestDateFolderPath);
-			System.out.println(yestDateFolderFile.exists());
-			if(!yestDateFolderFile.exists()) {
-				yestDateFolderFile.mkdir();
-			}
-			
-			Map<String,List<ForkliftTrack>> ftMap=new HashMap<String,List<ForkliftTrack>>();
-			for (int i = 0; i < ftList.size(); i++) {
-				ForkliftTrack ft = ftList.get(i);
-				String tagId = ft.getTagId();
+		try {
+			List<ForkliftTrack> ftList=forkliftTrackService.getYestList();
+			if(ftList.size()>0) {
+				Date nowDate = new Date();
+				Calendar calendar=Calendar.getInstance();
+				calendar.setTime(nowDate);
+				calendar.add(Calendar.DATE, -1);
+				Date yestDate = calendar.getTime();
+				String yestDateFolderPath = "D:/resource/TmpCenConWH/ForkliftHisTrack/"+new SimpleDateFormat("YYYYMMdd").format(yestDate);
+				System.out.println(yestDateFolderPath);
+				File yestDateFolderFile = new File(yestDateFolderPath);
+				System.out.println(yestDateFolderFile.exists());
+				if(!yestDateFolderFile.exists()) {
+					yestDateFolderFile.mkdir();
+				}
+				
+				Map<String,List<ForkliftTrack>> ftMap=new HashMap<String,List<ForkliftTrack>>();
+				for (int i = 0; i < ftList.size(); i++) {
+					ForkliftTrack ft = ftList.get(i);
+					String tagId = ft.getTagId();
+					Set<String> ftMapKeySet = ftMap.keySet();
+					boolean exist=false;
+					for (String ftMapKey : ftMapKeySet) {
+						//System.out.println("ftMapKey==="+ftMapKey);
+						if(ftMapKey.equals(tagId)) {
+							exist=true;
+							break;
+						}
+					}
+					if(exist) {
+						List<ForkliftTrack> ftMapList=(List<ForkliftTrack>)ftMap.get(tagId);
+						ftMapList.add(ft);
+					}
+					else {
+						List<ForkliftTrack> ftMapList=new ArrayList<ForkliftTrack>();
+						ftMapList.add(ft);
+						ftMap.put(tagId, ftMapList);
+					}
+				}
 				Set<String> ftMapKeySet = ftMap.keySet();
-				Iterator<String> ftMapKeys = ftMapKeySet.iterator();
+				for (String ftMapKey : ftMapKeySet) {
+					String yestDateFileName = yestDateFolderPath+"/"+ftMapKey+".txt";
+					File yestDateFile = new File(yestDateFileName);
+					if(!yestDateFile.exists()) {
+						yestDateFile.createNewFile();
+					}
+					List<ForkliftTrack> ftMapList=(List<ForkliftTrack>)ftMap.get(ftMapKey);
+					String ftJAStr = JSONArray.toJSONString(ftMapList);
+					System.out.println("ftJAStr==="+ftJAStr);
+					LogUtil.createHisTra(yestDateFileName,ftJAStr);
+				}
 			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return jsonMap;
@@ -237,7 +271,7 @@ public class MainController {
 	            currMsgSB.append(str);
 	            str =currMsgSB.toString();
 	    		System.out.println("str2==="+str);
-	    		LogUtil.createHisTra(str);
+	    		LogUtil.createHisTra("D:/resource/TmpCenConWH/aaa.txt",str);
 	        }
 			JSONArray ja = JSONArray.parseArray(str);
 			JSONObject lastJO = ja.getJSONObject(ja.size()-1);

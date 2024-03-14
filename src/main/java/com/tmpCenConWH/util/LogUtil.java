@@ -31,10 +31,11 @@ public class LogUtil {
 		}
 	}
 	
-	public static void createHisTra(String msg) {
+	public static void createHisTra(String fileName, String msg) {
 		FileOutputStream fos=null;
 		try {
-			File eventFile=new File("D:/resource/TmpCenConWH/aaa.txt");
+			//File eventFile=new File("D:/resource/TmpCenConWH/aaa.txt");
+			File eventFile=new File(fileName);
 			if(!eventFile.exists())
 				eventFile.createNewFile();
 			
