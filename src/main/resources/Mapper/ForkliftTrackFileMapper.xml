@@ -35,6 +35,6 @@
 		</foreach>
 	</insert>
 	<select id="getList" resultType="com.tmpCenConWH.entity.ForkliftTrackFile">
-		select DATE_FORMAT(date, '%Y-%m-%d'),path from forklift_track_file where date>=DATE_SUB(DATE_FORMAT(NOW(), '%Y-%m-%d'), INTERVAL #{day} DAY) and tagId=#{tagId}
+		select DATE_FORMAT(date, '%Y-%m-%d'),path from forklift_track_file where date between #{startDate} and #{endDate} and tagId=#{tagId}
 	</select>
 </mapper>

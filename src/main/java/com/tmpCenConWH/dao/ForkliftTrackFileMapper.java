@@ -10,5 +10,5 @@ public interface ForkliftTrackFileMapper {
 
 	int addFromList(@Param("ftfList") List<ForkliftTrackFile> ftfList);
 
-	List<ForkliftTrackFile> getList(@Param("tagId") String tagId, @Param("day") Integer day);
+	List<ForkliftTrackFile> getList(@Param("tagId") String tagId, @Param("startDate") String startDate, @Param("endDate") String endDate);
 }

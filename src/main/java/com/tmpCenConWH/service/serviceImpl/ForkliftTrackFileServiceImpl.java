@@ -22,9 +22,9 @@ public class ForkliftTrackFileServiceImpl implements ForkliftTrackFileService {
 	}
 
 	@Override
-	public List<ForkliftTrackFile> getList(String tagId, Integer day) {
+	public List<ForkliftTrackFile> getList(String tagId, String startDate, String endDate) {
 		// TODO Auto-generated method stub
-		return forkliftTrackFileDao.getList(tagId,day);
+		return forkliftTrackFileDao.getList(tagId,startDate,endDate);
 	}
 
 }

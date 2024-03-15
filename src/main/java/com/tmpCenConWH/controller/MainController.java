@@ -208,12 +208,16 @@ public class MainController {
 
 	@RequestMapping(value="/getForkliftHisTrack")
 	@ResponseBody
-	public Map<String, Object> getForkliftHisTrack(String tagId, Integer day) {
+	public Map<String, Object> getForkliftHisTrack(String tagId, String startDate, String endDate) {
+		
+		System.out.println("tagId==="+tagId);
+		System.out.println("startDate==="+startDate);
+		System.out.println("endDate==="+endDate);
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
 		List<ForkliftTrack> ftList = new ArrayList<ForkliftTrack>();
-		List<ForkliftTrackFile> ftfList=forkliftTrackFileService.getList(tagId,day);
+		List<ForkliftTrackFile> ftfList=forkliftTrackFileService.getList(tagId,startDate,endDate);
 		for (int i = 0; i < ftfList.size(); i++) {
 			ForkliftTrackFile ftf = ftfList.get(i);
 			String path = ftf.getPath();

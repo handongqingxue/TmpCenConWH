@@ -15,6 +15,24 @@
 body{
 	margin:0;
 }
+
+/**
+* div高度100%让文字居中:https://blog.csdn.net/qq_43014842/article/details/122885314
+**/
+.loading_div{
+	width: 100%;
+	height: 100%;
+	color: #fff;
+	font-size: 45px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background: rgba(0,0,0,0.5);
+	position: fixed;
+	z-index: 1;
+	display: none;
+}
+
 .main_div{
 	width:3840px;
 	height:2160px;
@@ -46,6 +64,14 @@ body{
 	width: 250px;
 	height: 50px;
 }
+.main_div .tool_bar .sear_but{
+	width: 180px;
+	height: 50px;
+	margin-top:20px;
+	margin-left:50px;
+	font-size: 35px;
+	position: absolute;
+}
 
 </style>
 <title>Insert title here</title>
@@ -56,7 +82,6 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 $(function(){
 	initViewer();
 	loadTileset();
-	drawTrack();
 });
 
 //https://frontend.devrank.cn/traffic-information/7262307343408138298
@@ -85,6 +110,14 @@ function initViewer(){
   	handler.setInputAction(function(event){
   	
   },Cesium.ScreenSpaceEventType.LEFT_CLICK);
+  	
+	var helper = new Cesium.EventHelper();
+	helper.add(this.viewer.scene.globe.tileLoadProgressEvent, function (e) {
+		//console.log('每次加载地图服务矢量切片都会进入这个回调',e);
+		if (e== 0) {
+			//console.log("矢量切片加载完成时的回调");
+		}
+	});
 }
 
 function loadTileset(){
@@ -104,14 +137,19 @@ function loadTileset(){
 
 //绘制轨迹
 function drawTrack(){
-	$.post(path+"main/getPositionList",
+	showLoadingDiv(true);
+	var tagId=$("#agv_name_sel").val();
+	var startDate=$("#start_date").val();
+	var endDate=$("#end_date").val();
+	$.post(path+"main/getForkliftHisTrack",
+		{tagId:tagId,startDate:startDate,endDate:endDate},
 		function(result){
 			if(result.status=="ok"){
 				var positions = [];
-				var positionList=result.positionList;
-				for(var i=0;i<positionList.length;i++){
-					var position=positionList[i];
-					positions.push(Cesium.Cartesian3.fromDegrees(position.longitude, position.latitude,position.z));
+				var forkliftTrackList=result.forkliftTrackList;
+				for(var i=0;i<forkliftTrackList.length;i++){
+					var forkliftTrack=forkliftTrackList[i];
+					positions.push(Cesium.Cartesian3.fromDegrees(forkliftTrack.longitude, forkliftTrack.latitude,50));
 				}
 				
 				viewer.entities.add({
@@ -125,13 +163,19 @@ function drawTrack(){
 				  },
 				});
 			}
+			showLoadingDiv(false);
 		}
 	,"json");
 	
 }
+
+function showLoadingDiv(flag){
+	$("#loading_div").css("display",flag?"flex":"none");
+}
 </script>
 </head>
 <body>
+<div class="loading_div" id="loading_div">轨迹加载中</div>
 <div class="main_div">
 		<div class="tool_bar" id="tool_bar">
 			<span class="choose_area_text_span">请选择区域</span>
@@ -145,9 +189,10 @@ function drawTrack(){
 				<option value="002">002</option>
 			</select>
 			<span class="choose_date_text_span">请选择日期</span>
-			<input class="start_date" type="date"/>
+			<input class="start_date" id="start_date" type="date"/>
 			至
-			<input class="end_date" type="date"/>
+			<input class="end_date" id="end_date" type="date"/>
+			<input class="sear_but" type="button" value="查询" onclick="drawTrack()"/>
 		</div>
 	<div class="cesuim_div" id="cesuim_div">
 	</div>
