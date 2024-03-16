@@ -40,6 +40,12 @@ public class ForkliftTrackServiceImpl implements ForkliftTrackService {
 	}
 
 	@Override
+	public int deleteYestList() {
+		// TODO Auto-generated method stub
+		return forkliftTrackDao.deleteYestList();
+	}
+
+	@Override
 	public List<ForkliftTrack> getYestList() {
 		// TODO Auto-generated method stub
 		return forkliftTrackDao.getYestList();

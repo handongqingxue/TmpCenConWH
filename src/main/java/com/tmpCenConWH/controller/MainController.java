@@ -24,6 +24,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.tmpCenConWH.entity.*;
 import com.tmpCenConWH.service.*;
 import com.tmpCenConWH.util.LogUtil;
+import com.tmpCenConWH.util.TimerManager;
 
 //eclipse搭建maven项目:https://blog.csdn.net/weixin_62332711/article/details/125630418
 @Controller
@@ -42,6 +43,11 @@ public class MainController {
 	private ForkliftTrackFileService forkliftTrackFileService;
 	private JSONArray ftTestJA;
 	public static final String MODULE_NAME="/main";
+	
+	static {
+		//System.out.println("1111111111111111");
+		//TimerManager.schedule();
+	}
 
 	/**
 	 * 跳转到地图模型测试页
@@ -139,7 +145,7 @@ public class MainController {
 				Date nowDate = new Date();
 				Calendar calendar=Calendar.getInstance();
 				calendar.setTime(nowDate);
-				calendar.add(Calendar.DATE, -3);
+				calendar.add(Calendar.DATE, -4);
 				Date yestDate = calendar.getTime();
 				String yestDateFmt = new SimpleDateFormat("YYYYMMdd").format(yestDate);
 				String yestDateFolderPath = "D:/resource/TmpCenConWH/ForkliftHisTrack/"+yestDateFmt;
@@ -196,7 +202,12 @@ public class MainController {
 					ftfList.add(ftf);
 				}
 				
-				forkliftTrackFileService.addFromList(ftfList);
+				int count = forkliftTrackFileService.addFromList(ftfList);
+				if(count>0) {
+					count = forkliftTrackService.deleteYestList();
+				}
+				
+				jsonMap.put("status", "ok");
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

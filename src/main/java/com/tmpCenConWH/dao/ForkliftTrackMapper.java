@@ -10,5 +10,7 @@ public interface ForkliftTrackMapper {
 
 	int addFromList(@Param("ftList") List<ForkliftTrack> ftList);
 
+	int deleteYestList();
+
 	List<ForkliftTrack> getYestList();
 }

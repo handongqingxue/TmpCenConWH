@@ -9,6 +9,8 @@ public interface ForkliftTrackService {
 
 	int addFromJA(JSONArray ja);
 
+	int deleteYestList();
+
 	List<ForkliftTrack> getYestList();
 
 }

@@ -35,7 +35,10 @@
 			</trim>
 		</foreach>
 	</insert>
+	<delete id="deleteYestList">
+		delete from forklift_track where DATE_FORMAT(createTime, '%Y-%m-%d') =DATE_SUB(DATE_FORMAT(NOW(), '%Y-%m-%d'), INTERVAL 1 DAY)
+	</delete>
 	<select id="getYestList" resultType="com.tmpCenConWH.entity.ForkliftTrack">
-		select * from forklift_track where DATE_FORMAT(createTime, '%Y-%m-%d') =DATE_SUB(DATE_FORMAT(NOW(), '%Y-%m-%d'), INTERVAL 0 DAY)
+		select * from forklift_track where DATE_FORMAT(createTime, '%Y-%m-%d') =DATE_SUB(DATE_FORMAT(NOW(), '%Y-%m-%d'), INTERVAL 1 DAY)
 	</select>
 </mapper>
