@@ -5,23 +5,40 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+var bodyHeight;
+var topDivHeight;
+var leftNavDivWidth;
+var leftNavDivHeight;
+$(function(){
+	
+});
+
+function initLeftDivSize(){
+	var leftNavDiv=$("#left_nav_div");
+	leftNavDiv.height(bodyHeight-topDivHeight);
+	leftNavDivWidth=leftNavDiv.width();
+	leftNavDivHeight=leftNavDiv.height();
+}
+</script>
 <style type="text/css">
 .left_nav_div{
-	width: 250px;
-	height: 550px;
-	margin-top:60px;
-	margin-left:20px;
-	background-color: #EFEFEF;
+	width: 4.5%;
+	text-align:center;
+	margin-top:2px;
+	background-color: #fff;
 	border: #5DA4DF solid 1px;
 	border-radius: 10px;
 }
 .left_nav_div .item_div{
 	width: 100%;
-	height: 90px;
-	line-height: 90px;
-	color: #5DA4DF;
-	font-size:25px;
-	text-align: center;
+	height: 190px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+}
+.left_nav_div .item_div img{
+	width:45%;
 }
 </style>
 <title>Insert title here</title>
@@ -46,13 +63,29 @@
 			<div class="item_div">视频联动</div>
 		</c:when>
 		<c:when test="${uri.contains('/repSys/')}">
+			<!-- 出入库报表 -->
 			<a href="<%=basePath %>repSys/goInOut">
-				<div class="item_div">出入库报表</div>
+				<div class="item_div">
+					<img alt="" src="<%=basePath %>resource/image/009.png">
+				</div>
 			</a>
-			<div class="item_div">统计报表</div>
-			<div class="item_div">验收单</div>
+			<!-- 统计报表 -->
+			<a href="">
+				<div class="item_div">
+					<img alt="" src="<%=basePath %>resource/image/010.png">
+				</div>
+			</a>
+			<!-- 叉车记录 -->
+			<a href="">
+				<div class="item_div">
+					<img alt="" src="<%=basePath %>resource/image/011.png">
+				</div>
+			</a>
+			<!-- 图表统计 -->
 			<a href="<%=basePath %>repSys/goChartTotal">
-				<div class="item_div">图表统计</div>
+				<div class="item_div">
+					<img alt="" src="<%=basePath %>resource/image/012.png">
+				</div>
 			</a>
 		</c:when>
 	</c:choose>

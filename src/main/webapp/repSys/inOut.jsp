@@ -15,6 +15,8 @@
 <script type="text/javascript">
 var repSysPath='<%=basePath %>repSys/';
 $(function(){
+	initTopDivSize();
+	initLeftDivSize();
 	initLayoutDivSize();
 	showFilterCondDiv();
 });
@@ -36,6 +38,8 @@ function initLayoutDivSize(){
 	var centerDiv=$("#center_div");
 	centerDiv.width(bodyWidth-leftNavDivWidth-rightDivWidth-200);
 	centerDiv.height(bodyHeight-topDivHeight);
+	centerDiv.css("margin-top",-leftNavDivHeight+"px");
+	centerDiv.css("margin-left",leftNavDivWidth+"px");
 	
 	rightDiv.css("margin-top",-centerDiv.height()+"px");
 }
@@ -1911,8 +1915,6 @@ body{
 }
 
 .center_div{
-	margin-top:-550px;
-	margin-left:300px;
 	overflow-y: auto;
 }
 .center_div .tool_bar,
@@ -1925,7 +1927,8 @@ body{
 .center_div .tool_bar .choose_rep_text_span,
 .crea_echart_dia_div .tool_bar .choose_echart_text_span{
 	color: #111;
-	font-size: 25px;
+	font-size: 28px;
+	font-style:italic;
 	margin-left:50px;
 }
 .center_div .tool_bar .rep_name_sel{
@@ -2146,7 +2149,7 @@ body{
 	<%@include file="../inc/leftNav.jsp"%>
 	<div class="center_div" id="center_div">
 		<div class="tool_bar" id="tool_bar">
-			<span class="choose_rep_text_span">请选择报表</span>
+			<span class="choose_rep_text_span">请选择库区报表:</span>
 			<select class="rep_name_sel" id="rep_name_sel" onchange="showFilterCondDiv()">
 				<option value="tab1">1#硝酸铵库房多孔粒状硝酸铵出入库登记簿</option>
 				<option value="tab2">2#硝酸铵库房多孔粒状硝酸铵出入库登记簿</option>

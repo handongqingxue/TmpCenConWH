@@ -116,16 +116,17 @@ body{
 	margin-top:-100px;
 	margin-left: 660px;
 }
-.aear_real_data_div .content_div .data_div .angle_div .angle_but_list_div .item_div .sel_div{
+.aear_real_data_div .content_div .data_div .angle_div .angle_but_list_div .item_div .rad_div{
 	width:40px;
 	height:40px;
 	line-height:40px;
 	color:#fff;
 	font-size:25px;
 	text-align:center;
-	margin-top:20px;
+	margin-top:30px;
 	margin-left:20px;
 	border: #F0F0F0 solid 1px;
+	cursor:pointer;
 	position: absolute;
 }
 .aear_real_data_div .content_div .data_div .angle_div .angle_but_list_div .item_div .selected{
@@ -290,6 +291,41 @@ function convertCartesian3ToCartographic(position){
     console.log(cartographic);
     return JSON.parse("{\"longitude\":"+Cesium.Math.toDegrees(cartographic.longitude)+",\"latitude\":"+Cesium.Math.toDegrees(cartographic.latitude)+"}");
 }
+
+function changeAngle(flag){
+    var camera = viewer.scene.camera;
+    var position = camera.position;
+    var heading = camera.heading;
+    var pitch = camera.pitch;
+    var roll = camera.roll;
+    
+	$("#angle_but_list_div .item_div .rad_div").removeClass("selected");
+	switch (flag) {
+	case 1:
+		$("#angle_but_list_div .item_div #zs_rad_div").addClass("selected");
+		break;
+	case 2:
+		$("#angle_but_list_div .item_div #fs_rad_div").addClass("selected");
+		break;
+	case 3:
+		$("#angle_but_list_div .item_div #cs_rad_div").addClass("selected");
+		heading += Cesium.Math.toRadians(90); // 向左旋转90度
+		break;
+	}
+	
+    // 设置相机位置，保持距离不变
+    var newPosition = new Cesium.Cartesian3();
+	
+    // 设置新的相机位置和方向
+    viewer.scene.camera.setView({
+        destination: newPosition,
+        orientation: {
+            heading: heading,
+            pitch: pitch,
+            roll: roll
+        }
+    });
+}
 </script>  
 </head>
 <body>
@@ -312,17 +348,17 @@ function convertCartesian3ToCartographic(position){
 			<div class="data_div">
 				<div class="angle_div">
 					<span class="title_span">选择视角</span>
-					<div class="angle_but_list_div">
+					<div class="angle_but_list_div" id="angle_but_list_div">
 						<div class="item_div">
-							<div class="sel_div selected">√</div>
+							<div class="rad_div selected" id="zs_rad_div" onclick="changeAngle(1)">√</div>
 							<span class="name_span">主视</span>
 						</div>
 						<div class="item_div fs_item_div">
-							<div class="sel_div">√</div>
+							<div class="rad_div" id="fs_rad_div" onclick="changeAngle(2)">√</div>
 							<span class="name_span">俯视</span>
 						</div>
 						<div class="item_div cs_item_div">
-							<div class="sel_div">√</div>
+							<div class="rad_div" id="cs_rad_div" onclick="changeAngle(3)">√</div>
 							<span class="name_span">侧视</span>
 						</div>
 					</div>

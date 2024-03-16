@@ -4,6 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+var bodyHeight;
+var topDivHeight;
+function initTopDivSize(){
+	bodyHeight=$("body").height();
+	topDivHeight=$("#top_div").height();
+}
+</script>
 <title>Insert title here</title>
 <style type="text/css">
 a{
