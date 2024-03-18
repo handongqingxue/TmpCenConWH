@@ -16,7 +16,7 @@ $(function(){
 
 function initLeftDivSize(){
 	var leftNavDiv=$("#left_nav_div");
-	leftNavDiv.height(bodyHeight-topDivHeight);
+	leftNavDiv.height(bodyHeight-topDivHeight*4);
 	leftNavDivWidth=leftNavDiv.width();
 	leftNavDivHeight=leftNavDiv.height();
 }

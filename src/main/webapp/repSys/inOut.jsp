@@ -37,11 +37,14 @@ function initLayoutDivSize(){
 
 	var centerDiv=$("#center_div");
 	centerDiv.width(bodyWidth-leftNavDivWidth-rightDivWidth-200);
-	centerDiv.height(bodyHeight-topDivHeight);
+	centerDiv.height(leftNavDiv.height());
 	centerDiv.css("margin-top",-leftNavDivHeight+"px");
 	centerDiv.css("margin-left",leftNavDivWidth+"px");
-	
+
+	rightDiv.height(centerDiv.height()-100);
 	rightDiv.css("margin-top",-centerDiv.height()+80+"px");
+	
+	$(".filter_condition_div").height(rightDiv.height());
 }
 
 function showFilterCondDiv(){
@@ -1071,6 +1074,15 @@ function createReportTab(){
 	}
 }
 
+function createTabCellStr(flag,val){
+	var str;
+	if(flag=="th")
+		str="<th>"+val+"</th>";
+	else if(flag=="td")
+		str="<td>"+val+"</td>";
+	return str;
+}
+
 function createDataTab(){
 	var tabName=$("#rep_name_sel").val();
 	if(tabName=="tab1"){
@@ -1084,23 +1096,60 @@ function createDataTab(){
 		var recCbChecked=$("#data_tab1_cond_div #rec_cb").prop("checked");
 		var memoCbChecked=$("#data_tab1_cond_div #memo_cb").prop("checked");
 		
+		var titleArr=["时间","入库数量(吨)","出库数量(吨)","库存数量(吨)","记录人签字","备注"];
 		var appendStr="<div class=\"tab_name_div\">1#硝酸铵库房多孔粒状硝酸铵出入库登记簿</div>";
 			appendStr+="<table class=\"data_tab1\" id=\"data_tab\" border=\"1\" cellspacing=\"0\">";
-			appendStr+="<tr class=\"tr1\">";
-				if(timeCbChecked)
-					appendStr+="<td>时间</td>";
-				if(inCountCbChecked)
-					appendStr+="<td>入库数量(吨)</td>";
-				if(outCountCbChecked)
-					appendStr+="<td>出库数量(吨)</td>";
-				if(saveCountCbChecked)
-					appendStr+="<td>库存数量(吨)</td>";
-				if(recCbChecked)
-					appendStr+="<td>记录人签字</td>";
-				if(memoCbChecked)
-					appendStr+="<td>备注</td>";
+				appendStr+="<tr class=\"tr1\">";
+			var colCount=0;
+			for(var i=0;i<titleArr.length;i++){
+				switch (i) {
+				case 0:
+					if(timeCbChecked){
+						appendStr+=createTabCellStr("th",titleArr[i]);
+						colCount++;
+					}
+					break;
+				case 1:
+					if(inCountCbChecked){
+						appendStr+=createTabCellStr("th",titleArr[i]);
+						colCount++;
+					}
+					break;
+				case 2:
+					if(outCountCbChecked){
+						appendStr+=createTabCellStr("th",titleArr[i]);
+						colCount++;
+					}
+					break;
+				case 3:
+					if(saveCountCbChecked){
+						appendStr+=createTabCellStr("th",titleArr[i]);
+						colCount++;
+					}
+					break;
+				case 4:
+					if(recCbChecked){
+						appendStr+=createTabCellStr("th",titleArr[i]);
+						colCount++;
+					}
+					break;
+				case 5:
+					if(memoCbChecked){
+						appendStr+=createTabCellStr("th",titleArr[i]);
+						colCount++;
+					}
+					break;
+				}
+			}
+			
+			if(colCount<titleArr.length){
+				for(var i=0;i<titleArr.length-colCount;i++){
+					appendStr+="<th></th>";
+				}
+			}
+			
 			appendStr+="</tr>";
-		
+			
 		var dataArr=[];
 		var data={time:"2024年1月23日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
 		dataArr.push(data);
@@ -1120,21 +1169,40 @@ function createDataTab(){
 		dataArr.push(data);
 		var data={time:"2024年1月31日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
 		dataArr.push(data);
-		
 		for(var i=0;i<dataArr.length;i++){
-			appendStr+="<tr class=\"tr2\">";
-				if(timeCbChecked)
-					appendStr+="<td>"+dataArr[i].time+"</td>";
-				if(inCountCbChecked)
-					appendStr+="<td>"+dataArr[i].inCount+"</td>";
-				if(outCountCbChecked)
-					appendStr+="<td>"+dataArr[i].outCount+"</td>";
-				if(saveCountCbChecked)
-					appendStr+="<td>"+dataArr[i].saveCount+"</td>";
-				if(recCbChecked)
-					appendStr+="<td>"+dataArr[i].rec+"</td>";
-				if(memoCbChecked)
-					appendStr+="<td>"+dataArr[i].memo+"</td>";
+			colCount=0;
+			appendStr+="<tr class=\"tr"+(i%2==0?2:3)+"\">";
+
+				if(timeCbChecked){
+					appendStr+=createTabCellStr("td",dataArr[i].time);
+					colCount++;
+				}
+				if(inCountCbChecked){
+					appendStr+=createTabCellStr("td",dataArr[i].inCount);
+					colCount++;
+				}
+				if(outCountCbChecked){
+					appendStr+=createTabCellStr("td",dataArr[i].outCount);
+					colCount++;
+				}
+				if(saveCountCbChecked){
+					appendStr+=createTabCellStr("td",dataArr[i].saveCount);
+					colCount++;
+				}
+				if(recCbChecked){
+					appendStr+=createTabCellStr("td",dataArr[i].rec);
+					colCount++;
+				}
+				if(memoCbChecked){
+					appendStr+=createTabCellStr("td",dataArr[i].memo);
+					colCount++;
+				}
+
+				if(colCount<titleArr.length){
+					for(var j=0;j<titleArr.length-colCount;j++){
+						appendStr+="<td></td>";
+					}
+				}
 			appendStr+="</tr>";
 		}
 		appendStr+="</table>";
@@ -1918,22 +1986,24 @@ body{
 	border-right:#EFEFEF solid 1px;
 	overflow-y: auto;
 }
-.center_div .tool_bar,
+.center_div .tool_bar{
+	width:100%;
+	margin-top: 20px;
+}
 .crea_rep_dia_div .tool_bar,
 .crea_echart_dia_div .tool_bar{
 	width:100%;
-	height:80px;
-	line-height:80px;
+	height:180px;
+	line-height:180px;
 }
 .center_div .tool_bar .choose_area_sel_img{
-	margin-top: 60px;
+	margin-top: 10px;
 	margin-left: 85px;
 	position: absolute;
 }
 .center_div .tool_bar .choose_area_sel{
 	width: 500px;
 	height: 70px;
-	margin-top:50px; 
 	margin-left:80px;
 	padding-left: 100px;
 	font-size:25px; 
@@ -1961,7 +2031,7 @@ body{
 	width: 180px;
 	height: 70px;
 	line-height: 70px;
-	margin-top:-83px;
+	margin-top:-70px;
 	margin-left:1970px;
 	color:#fff;
 	font-size: 28px;
@@ -1971,8 +2041,6 @@ body{
 	border-radius:10px;
 	cursor: pointer;
 }
-.center_div .tool_bar .report_but,
-.center_div .tool_bar .cre_echart_but,
 .crea_rep_dia_div .tool_bar .print_rep_but,
 .crea_rep_dia_div .tool_bar .output_exc_but,
 .crea_echart_dia_div .tool_bar .create_but{
@@ -1983,29 +2051,24 @@ body{
 }
 
 .data_tab_div{
-	width: 100%;
+	width: 93%;
+	margin: auto;
 }
 .data_tab_div .tab_name_div {
     width: 100%;
-	height: 150px;
-	line-height: 150px;
-    font-size: 35px;
+	height: 200px;
+	line-height: 200px;
+    font-size: 40px;
     text-align: center;
+    font-weight: bold;
 }
-.data_tab1,
-.data_tab2,
-.data_tab3,
-.data_tab4,
-.data_tab5,
-.data_tab6,
-.data_tab7,
-.data_tab8,
-.data_tab9,
-.data_tab10{
+.data_tab_div table{
 	width: 100%;
 	border: 1px;
 }
-.data_tab1 .tr1,
+.data_tab_div table tr{
+	height:80px;
+}
 .data_tab2 .tr1,
 .data_tab3 .tr1,
 .data_tab4 .tr1,
@@ -2017,7 +2080,9 @@ body{
 .data_tab10 .tr1{
 	height:70px;
 }
-.data_tab1 .tr2,
+.data_tab1 .tr2{
+	background-color: #fff;
+}
 .data_tab2 .tr2,
 .data_tab3 .tr2,
 .data_tab4 .tr2,
@@ -2029,11 +2094,24 @@ body{
 .data_tab10 .tr2{
 	height:60px;
 }
+.data_tab1 .tr3{
+	background-color: #F2F2F2;
+}
+.data_tab_div table tr th{
+	color:#fff;
+	font-size: 25px;
+	text-align: center;
+	background-color: #6C6C6C;
+	border: #DBDBDB solid 1px;
+}
+.data_tab_div table tr td{
+	font-size: 25px;
+	text-align: center;
+	border: #DBDBDB solid 1px;
+}
 .data_tab1 tr td,
 .data_tab2 tr td{
 	width: 16.6%;
-	font-size: 25px;
-	text-align: center;
 }
 .data_tab3 tr td,
 .data_tab4 tr td,
@@ -2130,7 +2208,6 @@ body{
 
 .right_div{
 	width:500px;
-	height:2160px;
 	margin-right:50px;
 	float: right;
 }
@@ -2145,13 +2222,74 @@ body{
 }
 .right_div .filter_condition_div .title_div{
 	width:100%;
-	height:80px;
-	line-height:80px;
-	margin-top:30px;
+	height:100px;
+	line-height:100px;
+	margin-top:-3px;
+	margin-left:-3px;
+	background-color: #BEBEBE;
+	border: #6C6C6C solid 1px;
+	border-radius:5px; 
+}
+.right_div .filter_condition_div .title_div .title_span{
+	margin-left:60px;
+	color:#101010;
+	font-size:35px;
+}
+.right_div .filter_condition_div .title_div .title_img{
+	margin-top: 20px;
+	margin-right: 50px;
+	float: right;
+}
+.right_div .filter_condition_div .cho_time_scope_div{
+	width:80%;
+	height:70px;
+	line-height:70px;
+	margin:30px auto 0;
 	color:#666;
 	font-size:35px;
-	text-align:center;
+	font-style:italic;
 }
+.right_div .filter_condition_div .date_div{
+	margin-top:30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.right_div .filter_condition_div .date_div input{
+	width:80%;
+	height:40px;
+	color:#888;
+	font-size:25px;
+	border: #BBB solid 1px;
+	border-radius:15px; 
+}
+.right_div .filter_condition_div .but_div{
+	width:80%;
+	height:90px;
+	line-height:90px;
+	color:#fff;
+	font-size:28px;
+	text-align:center;
+	border-radius:25px;
+	cursor: pointer;
+}
+.right_div .filter_condition_div .screen_but_div{
+	margin:50px auto 0;
+	letter-spacing:15px;
+	background-color: #53CB72;
+}
+.right_div .filter_condition_div .cre_rep_but_div{
+	margin:80px auto 0;
+	letter-spacing:15px;
+	background-color: #4095E5;
+}
+.right_div .filter_condition_div .line_div{
+	width:80%;
+	height: 3px;
+	margin:40px auto 0; 
+	background-color: #CECECE;
+}
+
 .right_div .filter_condition_div .data_choose_div,
 .right_div .filter_condition_div .row_div{
 	width:80%;
@@ -2160,6 +2298,9 @@ body{
 	margin:auto;
 	color:#666;
 	font-size:25px;
+}
+.right_div .filter_condition_div .time_row_div{
+	margin-top:30px;
 }
 .right_div .filter_condition_div .row_div input{
 	width: 30px;
@@ -2197,17 +2338,17 @@ body{
 				<option value="tab10">15-9添加剂出入库登记表</option>
 			</select>
 			<div class="sear_but_div" onclick="createDataTab()">查询</div>
-			<input class="report_but" type="button" value="生成报表" onclick="createReportTab()"/>
-			<input class="cre_echart_but" type="button" value="生成图表" onclick="showCreaEChartDiaDiv(true)"/>
 		</div>
 		<div class="data_tab_div" id="data_tab_div">
 		</div>
 	</div>
 	<div class="right_div" id="right_div">
 		<div class="filter_condition_div" id="data_tab1_cond_div">
-			<div class="title_div">过滤条件</div>
-			<div class="data_choose_div">数据选择</div>
-			<div class="row_div">
+			<div class="title_div">
+				<span class="title_span">过滤条件选择</span>
+				<img class="title_img" alt="" src="<%=basePath %>resource/image/013.png">
+			</div>
+			<div class="row_div time_row_div">
 				<input type="checkbox" id="time_cb" checked="checked"/>
 				<span class="col_text_span">时间</span>
 			</div>
@@ -2231,6 +2372,17 @@ body{
 				<input type="checkbox" id="memo_cb" checked="checked"/>
 				<span class="col_text_span">备注</span>
 			</div>
+			<div class="cho_time_scope_div">选择时间范围:</div>
+			<div class="date_div">
+				<input type="date"/>
+			</div>
+			<div class="date_div">
+				<input type="date"/>
+			</div>
+			<div class="but_div screen_but_div">筛选</div>
+			<div class="line_div"></div>
+			<div class="but_div cre_rep_but_div" onclick="createReportTab()">生成报表</div>
+			<div class="but_div screen_but_div" onclick="showCreaEChartDiaDiv(true)">生成图表</div>
 		</div>
 		<div class="filter_condition_div" id="data_tab2_cond_div">
 			<div class="title_div">过滤条件</div>
