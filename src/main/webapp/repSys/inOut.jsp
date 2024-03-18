@@ -41,7 +41,7 @@ function initLayoutDivSize(){
 	centerDiv.css("margin-top",-leftNavDivHeight+"px");
 	centerDiv.css("margin-left",leftNavDivWidth+"px");
 	
-	rightDiv.css("margin-top",-centerDiv.height()+"px");
+	rightDiv.css("margin-top",-centerDiv.height()+80+"px");
 }
 
 function showFilterCondDiv(){
@@ -1915,6 +1915,7 @@ body{
 }
 
 .center_div{
+	border-right:#EFEFEF solid 1px;
 	overflow-y: auto;
 }
 .center_div .tool_bar,
@@ -1924,23 +1925,52 @@ body{
 	height:80px;
 	line-height:80px;
 }
+.center_div .tool_bar .choose_area_sel_img{
+	margin-top: 60px;
+	margin-left: 85px;
+	position: absolute;
+}
+.center_div .tool_bar .choose_area_sel{
+	width: 500px;
+	height: 70px;
+	margin-top:50px; 
+	margin-left:80px;
+	padding-left: 100px;
+	font-size:25px; 
+	background-color: #CECECE;
+	border: #4F4F4F solid 1px;
+	border-radius:10px;
+}
 .center_div .tool_bar .choose_rep_text_span,
 .crea_echart_dia_div .tool_bar .choose_echart_text_span{
 	color: #111;
-	font-size: 28px;
+	font-size: 30px;
 	font-style:italic;
 	margin-left:50px;
 }
 .center_div .tool_bar .rep_name_sel{
 	width:1000px;
-	height:50px;
+	height:70px;
 	color: #999;
-	font-size: 25px;
+	font-size: 28px;
 	margin-left:50px;
 	background-color: #fff;
 	border: #eee solid 1px;
 }
-.center_div .tool_bar .sear_but,
+.center_div .tool_bar .sear_but_div{
+	width: 180px;
+	height: 70px;
+	line-height: 70px;
+	margin-top:-83px;
+	margin-left:1970px;
+	color:#fff;
+	font-size: 28px;
+	text-align:center;
+	letter-spacing:15px;
+	background-color: #4095E5;
+	border-radius:10px;
+	cursor: pointer;
+}
 .center_div .tool_bar .report_but,
 .center_div .tool_bar .cre_echart_but,
 .crea_rep_dia_div .tool_bar .print_rep_but,
@@ -2149,6 +2179,10 @@ body{
 	<%@include file="../inc/leftNav.jsp"%>
 	<div class="center_div" id="center_div">
 		<div class="tool_bar" id="tool_bar">
+			<img class="choose_area_sel_img" alt="" src="<%=basePath %>resource/image/013.png">
+			<select class="choose_area_sel">
+				<option>选择仓库</option>
+			</select>
 			<span class="choose_rep_text_span">请选择库区报表:</span>
 			<select class="rep_name_sel" id="rep_name_sel" onchange="showFilterCondDiv()">
 				<option value="tab1">1#硝酸铵库房多孔粒状硝酸铵出入库登记簿</option>
@@ -2162,7 +2196,7 @@ body{
 				<option value="tab9">15-7乙二醇出入库登记表_文档1</option>
 				<option value="tab10">15-9添加剂出入库登记表</option>
 			</select>
-			<input class="sear_but" type="button" value="查询" onclick="createDataTab()"/>
+			<div class="sear_but_div" onclick="createDataTab()">查询</div>
 			<input class="report_but" type="button" value="生成报表" onclick="createReportTab()"/>
 			<input class="cre_echart_but" type="button" value="生成图表" onclick="showCreaEChartDiaDiv(true)"/>
 		</div>
