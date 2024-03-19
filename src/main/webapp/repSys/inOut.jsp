@@ -1100,55 +1100,56 @@ function createDataTab(){
 		var appendStr="<div class=\"tab_name_div\">1#硝酸铵库房多孔粒状硝酸铵出入库登记簿</div>";
 			appendStr+="<table class=\"data_tab1\" id=\"data_tab\" border=\"1\" cellspacing=\"0\">";
 				appendStr+="<tr class=\"tr1\">";
-			var colCount=0;
-			for(var i=0;i<titleArr.length;i++){
-				switch (i) {
-				case 0:
-					if(timeCbChecked){
-						appendStr+=createTabCellStr("th",titleArr[i]);
-						colCount++;
-					}
-					break;
-				case 1:
-					if(inCountCbChecked){
-						appendStr+=createTabCellStr("th",titleArr[i]);
-						colCount++;
-					}
-					break;
-				case 2:
-					if(outCountCbChecked){
-						appendStr+=createTabCellStr("th",titleArr[i]);
-						colCount++;
-					}
-					break;
-				case 3:
-					if(saveCountCbChecked){
-						appendStr+=createTabCellStr("th",titleArr[i]);
-						colCount++;
-					}
-					break;
-				case 4:
-					if(recCbChecked){
-						appendStr+=createTabCellStr("th",titleArr[i]);
-						colCount++;
-					}
-					break;
-				case 5:
-					if(memoCbChecked){
-						appendStr+=createTabCellStr("th",titleArr[i]);
-						colCount++;
-					}
-					break;
+				
+		var colCount=0;
+		for(var i=0;i<titleArr.length;i++){
+			switch (i) {
+			case 0:
+				if(timeCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
 				}
-			}
-			
-			if(colCount<titleArr.length){
-				for(var i=0;i<titleArr.length-colCount;i++){
-					appendStr+="<th></th>";
+				break;
+			case 1:
+				if(inCountCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
 				}
+				break;
+			case 2:
+				if(outCountCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
+			case 3:
+				if(saveCountCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
+			case 4:
+				if(recCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
+			case 5:
+				if(memoCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
 			}
+		}
 			
-			appendStr+="</tr>";
+		if(colCount<titleArr.length){
+			for(var i=0;i<titleArr.length-colCount;i++){
+				appendStr+="<th></th>";
+			}
+		}
+		
+		appendStr+="</tr>";
 			
 		var dataArr=[];
 		var data={time:"2024年1月23日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
@@ -1172,37 +1173,36 @@ function createDataTab(){
 		for(var i=0;i<dataArr.length;i++){
 			colCount=0;
 			appendStr+="<tr class=\"tr"+(i%2==0?2:3)+"\">";
+			if(timeCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].time);
+				colCount++;
+			}
+			if(inCountCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].inCount);
+				colCount++;
+			}
+			if(outCountCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].outCount);
+				colCount++;
+			}
+			if(saveCountCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].saveCount);
+				colCount++;
+			}
+			if(recCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].rec);
+				colCount++;
+			}
+			if(memoCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].memo);
+				colCount++;
+			}
 
-				if(timeCbChecked){
-					appendStr+=createTabCellStr("td",dataArr[i].time);
-					colCount++;
+			if(colCount<titleArr.length){
+				for(var j=0;j<titleArr.length-colCount;j++){
+					appendStr+="<td></td>";
 				}
-				if(inCountCbChecked){
-					appendStr+=createTabCellStr("td",dataArr[i].inCount);
-					colCount++;
-				}
-				if(outCountCbChecked){
-					appendStr+=createTabCellStr("td",dataArr[i].outCount);
-					colCount++;
-				}
-				if(saveCountCbChecked){
-					appendStr+=createTabCellStr("td",dataArr[i].saveCount);
-					colCount++;
-				}
-				if(recCbChecked){
-					appendStr+=createTabCellStr("td",dataArr[i].rec);
-					colCount++;
-				}
-				if(memoCbChecked){
-					appendStr+=createTabCellStr("td",dataArr[i].memo);
-					colCount++;
-				}
-
-				if(colCount<titleArr.length){
-					for(var j=0;j<titleArr.length-colCount;j++){
-						appendStr+="<td></td>";
-					}
-				}
+			}
 			appendStr+="</tr>";
 		}
 		appendStr+="</table>";
@@ -1220,22 +1220,61 @@ function createDataTab(){
 		var recCbChecked=$("#data_tab2_cond_div #rec_cb").prop("checked");
 		var memoCbChecked=$("#data_tab2_cond_div #memo_cb").prop("checked");
 
+		var titleArr=["时间","入库数量(吨)","出库数量(吨)","库存数量(吨)","记录人签字","备注"];
 		var appendStr="<div class=\"tab_name_div\">2#硝酸铵库房多孔粒状硝酸铵出入库登记簿</div>";
 			appendStr+="<table class=\"data_tab2\" id=\"data_tab\" border=\"1\" cellspacing=\"0\">";
 			appendStr+="<tr class=\"tr1\">";
-				if(timeCbChecked)
-					appendStr+="<td>时间</td>";
-				if(inCountCbChecked)
-					appendStr+="<td>入库数量(吨)</td>";
-				if(outCountCbChecked)
-					appendStr+="<td>出库数量(吨)</td>";
-				if(saveCountCbChecked)
-					appendStr+="<td>库存数量(吨)</td>";
-				if(recCbChecked)
-					appendStr+="<td>记录人签字</td>";
-				if(memoCbChecked)
-					appendStr+="<td>备注</td>";
-			appendStr+="</tr>";
+			
+		var colCount=0;
+
+		for(var i=0;i<titleArr.length;i++){
+			switch (i) {
+			case 0:
+				if(timeCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
+			case 1:
+				if(inCountCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
+			case 2:
+				if(outCountCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
+			case 3:
+				if(saveCountCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
+			case 4:
+				if(recCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
+			case 5:
+				if(memoCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
+			}
+		}
+				
+		if(colCount<titleArr.length){
+			for(var i=0;i<titleArr.length-colCount;i++){
+				appendStr+="<th></th>";
+			}
+		}
+					
+		appendStr+="</tr>";
 		
 		var dataArr=[];
 		var data={time:"2024年1月23日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
@@ -1258,19 +1297,38 @@ function createDataTab(){
 		dataArr.push(data);
 		
 		for(var i=0;i<dataArr.length;i++){
-			appendStr+="<tr class=\"tr2\">";
-				if(timeCbChecked)
-					appendStr+="<td>"+dataArr[i].time+"</td>";
-				if(inCountCbChecked)
-					appendStr+="<td>"+dataArr[i].inCount+"</td>";
-				if(outCountCbChecked)
-					appendStr+="<td>"+dataArr[i].outCount+"</td>";
-				if(saveCountCbChecked)
-					appendStr+="<td>"+dataArr[i].saveCount+"</td>";
-				if(recCbChecked)
-					appendStr+="<td>"+dataArr[i].rec+"</td>";
-				if(memoCbChecked)
-					appendStr+="<td>"+dataArr[i].memo+"</td>";
+			colCount=0;
+			appendStr+="<tr class=\"tr"+(i%2==0?2:3)+"\">";
+			if(timeCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].time);
+				colCount++;
+			}
+			if(inCountCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].inCount);
+				colCount++;
+			}
+			if(outCountCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].outCount);
+				colCount++;
+			}
+			if(saveCountCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].saveCount);
+				colCount++;
+			}
+			if(recCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].rec);
+				colCount++;
+			}
+			if(memoCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].memo);
+				colCount++;
+			}
+
+			if(colCount<titleArr.length){
+				for(var j=0;j<titleArr.length-colCount;j++){
+					appendStr+="<td></td>";
+				}
+			}
 			appendStr+="</tr>";
 		}
 		appendStr+="</table>";
@@ -1288,28 +1346,65 @@ function createDataTab(){
 		var outGoodsCbChecked=$("#data_tab3_cond_div #out_goods_cb").prop("checked");
 		var memoCbChecked=$("#data_tab3_cond_div #memo_cb").prop("checked");
 
+		var titleArr=["序号","出库日期","出库数量(吨)","出库签名","入库日期","入库数量(吨)","入库签名","总库存(kg)","出料人","备注"];
 		var appendStr="<div class=\"tab_name_div\">15-1醋酸出入库登记表_文档1</div>";
 			appendStr+="<table class=\"data_tab3\" id=\"data_tab\" border=\"1\" cellspacing=\"0\">";
 			appendStr+="<tr class=\"tr1\">";
-			if(noCbChecked)
-				appendStr+="<td>序号</td>";
-			if(outRecCbChecked){
-				appendStr+="<td>出库日期</td>";
-				appendStr+="<td>出库数量(吨)</td>";
-				appendStr+="<td>出库签名</td>";
+
+		var colCount=0;
+
+		for(var i=0;i<titleArr.length;i++){
+			switch (i) {
+			case 0:
+				if(noCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
+			case 1:
+			case 2:
+			case 3:
+				if(outRecCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
+			case 4:
+			case 5:
+			case 6:
+				if(inRecCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
+			case 7:
+				if(totalCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
+			case 8:
+				if(outGoodsCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
+			case 9:
+				if(memoCbChecked){
+					appendStr+=createTabCellStr("th",titleArr[i]);
+					colCount++;
+				}
+				break;
 			}
-			if(inRecCbChecked){
-				appendStr+="<td>入库日期</td>";
-				appendStr+="<td>入库数量(吨)</td>";
-				appendStr+="<td>入库签名</td>";
+		}
+				
+		if(colCount<titleArr.length){
+			for(var i=0;i<titleArr.length-colCount;i++){
+				appendStr+="<th></th>";
 			}
-			if(totalCbChecked)
-				appendStr+="<td>总库存(kg)</td>";
-			if(outGoodsCbChecked)
-				appendStr+="<td>出料人</td>";
-			if(memoCbChecked)
-				appendStr+="<td>备注</td>";
-			appendStr+="</tr>";
+		}
+					
+		appendStr+="</tr>";
 			
 		var dataArr=[];
 		var data={no:1,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
@@ -1324,25 +1419,42 @@ function createDataTab(){
 		dataArr.push(data);
 		
 		for(var i=0;i<dataArr.length;i++){
-			appendStr+="<tr class=\"tr2\">";
-			if(noCbChecked)
-				appendStr+="<td>"+dataArr[i].no+"</td>";
+			colCount=0;
+			appendStr+="<tr class=\"tr2"+(i%2==0?2:3)+"\">";
+			if(noCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].no);
+				colCount++;
+			}
 			if(outRecCbChecked){
-				appendStr+="<td>"+dataArr[i].outDate+"</td>";
-				appendStr+="<td>"+dataArr[i].outCount+"</td>";
-				appendStr+="<td>"+dataArr[i].outSign+"</td>";
+				appendStr+=createTabCellStr("td",dataArr[i].outDate);
+				appendStr+=createTabCellStr("td",dataArr[i].outCount);
+				appendStr+=createTabCellStr("td",dataArr[i].outSign);
+				colCount+=3;
 			}
 			if(inRecCbChecked){
-				appendStr+="<td>"+dataArr[i].inDate+"</td>";
-				appendStr+="<td>"+dataArr[i].inCount+"</td>";
-				appendStr+="<td>"+dataArr[i].inSign+"</td>";
+				appendStr+=createTabCellStr("td",dataArr[i].inDate);
+				appendStr+=createTabCellStr("td",dataArr[i].inCount);
+				appendStr+=createTabCellStr("td",dataArr[i].inSign);
+				colCount+=3;
 			}
-			if(totalCbChecked)
-				appendStr+="<td>"+dataArr[i].total+"</td>";
-			if(outGoodsCbChecked)
-				appendStr+="<td>"+dataArr[i].outGoods+"</td>";
-			if(memoCbChecked)
-				appendStr+="<td>"+dataArr[i].memo+"</td>";
+			if(totalCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].total);
+				colCount++;
+			}
+			if(outGoodsCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].outGoods);
+				colCount++;
+			}
+			if(memoCbChecked){
+				appendStr+=createTabCellStr("td",dataArr[i].memo);
+				colCount++;
+			}
+
+			if(colCount<titleArr.length){
+				for(var j=0;j<titleArr.length-colCount;j++){
+					appendStr+="<td></td>";
+				}
+			}
 			appendStr+="</tr>";
 		}
 		appendStr+="</table>";
@@ -2069,7 +2181,6 @@ body{
 .data_tab_div table tr{
 	height:80px;
 }
-.data_tab2 .tr1,
 .data_tab3 .tr1,
 .data_tab4 .tr1,
 .data_tab5 .tr1,
@@ -2080,21 +2191,14 @@ body{
 .data_tab10 .tr1{
 	height:70px;
 }
-.data_tab1 .tr2{
+.data_tab1 .tr2,
+.data_tab2 .tr2,
+.data_tab3 .tr2{
 	background-color: #fff;
 }
-.data_tab2 .tr2,
-.data_tab3 .tr2,
-.data_tab4 .tr2,
-.data_tab5 .tr2,
-.data_tab6 .tr2,
-.data_tab7 .tr2,
-.data_tab8 .tr2,
-.data_tab9 .tr2,
-.data_tab10 .tr2{
-	height:60px;
-}
-.data_tab1 .tr3{
+.data_tab1 .tr3,
+.data_tab2 .tr3,
+.data_tab3 .tr3{
 	background-color: #F2F2F2;
 }
 .data_tab_div table tr th{
@@ -2299,7 +2403,8 @@ body{
 	color:#666;
 	font-size:25px;
 }
-.right_div .filter_condition_div .time_row_div{
+.right_div .filter_condition_div .time_row_div,
+.right_div .filter_condition_div .no_row_div{
 	margin-top:30px;
 }
 .right_div .filter_condition_div .row_div input{
@@ -2384,10 +2489,13 @@ body{
 			<div class="but_div cre_rep_but_div" onclick="createReportTab()">生成报表</div>
 			<div class="but_div screen_but_div" onclick="showCreaEChartDiaDiv(true)">生成图表</div>
 		</div>
+		
 		<div class="filter_condition_div" id="data_tab2_cond_div">
-			<div class="title_div">过滤条件</div>
-			<div class="data_choose_div">数据选择</div>
-			<div class="row_div">
+			<div class="title_div">
+				<span class="title_span">过滤条件选择</span>
+				<img class="title_img" alt="" src="<%=basePath %>resource/image/013.png">
+			</div>
+			<div class="row_div time_row_div">
 				<input type="checkbox" id="time_cb" checked="checked"/>
 				<span class="col_text_span">时间</span>
 			</div>
@@ -2411,11 +2519,24 @@ body{
 				<input type="checkbox" id="memo_cb" checked="checked"/>
 				<span class="col_text_span">备注</span>
 			</div>
+			<div class="cho_time_scope_div">选择时间范围:</div>
+			<div class="date_div">
+				<input type="date"/>
+			</div>
+			<div class="date_div">
+				<input type="date"/>
+			</div>
+			<div class="but_div screen_but_div">筛选</div>
+			<div class="line_div"></div>
+			<div class="but_div cre_rep_but_div" onclick="createReportTab()">生成报表</div>
+			<div class="but_div screen_but_div" onclick="showCreaEChartDiaDiv(true)">生成图表</div>
 		</div>
 		<div class="filter_condition_div" id="data_tab3_cond_div">
-			<div class="title_div">过滤条件</div>
-			<div class="data_choose_div">数据选择</div>
-			<div class="row_div">
+			<div class="title_div">
+				<span class="title_span">过滤条件选择</span>
+				<img class="title_img" alt="" src="<%=basePath %>resource/image/013.png">
+			</div>
+			<div class="row_div no_row_div">
 				<input type="checkbox" id="no_cb" checked="checked"/>
 				<span class="col_text_span">序号</span>
 			</div>
@@ -2439,6 +2560,17 @@ body{
 				<input type="checkbox" id="memo_cb" checked="checked"/>
 				<span class="col_text_span">备注</span>
 			</div>
+			<div class="cho_time_scope_div">选择时间范围:</div>
+			<div class="date_div">
+				<input type="date"/>
+			</div>
+			<div class="date_div">
+				<input type="date"/>
+			</div>
+			<div class="but_div screen_but_div">筛选</div>
+			<div class="line_div"></div>
+			<div class="but_div cre_rep_but_div" onclick="createReportTab()">生成报表</div>
+			<div class="but_div screen_but_div" onclick="showCreaEChartDiaDiv(true)">生成图表</div>
 		</div>
 		<div class="filter_condition_div" id="data_tab4_cond_div">
 			<div class="title_div">过滤条件</div>
