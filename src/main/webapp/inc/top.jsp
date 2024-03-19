@@ -5,10 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript">
+var bodyWidth;
 var bodyHeight;
 var topDivHeight;
 function initTopDivSize(){
+	bodyWidth=$("body").width();
 	bodyHeight=$("body").height();
+	
 	topDivHeight=$("#top_div").height();
 }
 </script>

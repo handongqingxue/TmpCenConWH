@@ -22,7 +22,7 @@ public class RepSysController {
 	public static final String MODULE_NAME="/repSys";
 
 	/**
-	 * 跳转到统计图表
+	 * 跳转到统计图表(测试时用,现在暂时不用了)
 	 * @return
 	 */
 	@RequestMapping(value="/goTotalChart")
