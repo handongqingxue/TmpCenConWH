@@ -16,6 +16,7 @@
 var repSysPath='<%=basePath %>repSys/';
 var repNameRadDivWidth;
 var repNameRadDivHeight;
+var toolBarDivHeight;
 $(function(){
 	initTopDivSize();
 	initLeftDivSize();
@@ -26,6 +27,8 @@ $(function(){
 	
 	initEChartDiv();
 	createEChart();
+	
+	initDataTabDiv();
 });
 
 function initToolBarDivSize(){
@@ -33,6 +36,8 @@ function initToolBarDivSize(){
 	toolBarDiv.width(bodyWidth-leftNavDivWidth-200);
 	toolBarDiv.css("margin-top",-leftNavDivHeight+20+"px");
 	toolBarDiv.css("margin-left",leftNavDivWidth+50+"px");
+	
+	toolBarDivHeight=toolBarDiv.height();
 }
 
 function initRepNameRadDivSize(){
@@ -65,6 +70,21 @@ function initEChartDiv(){
 	pieChartDiv.height(repNameRadDivHeight);
 	pieChartDiv.css("margin-top",barChartDivMT);
 	pieChartDiv.css("margin-left",barChartDivML);
+}
+
+function initDataTabDiv(){
+	var barChartDiv=$("#bar_chart_div");
+	var barChartDivML=barChartDiv.css("margin-left");
+	barChartDivML=barChartDivML.substring(0,barChartDivML.length-2);
+	
+	var repNameRadDiv=$(".rep_name_rad_div");
+	var repNameRadDivMR=repNameRadDiv.css("margin-right");
+	repNameRadDivMR=repNameRadDivMR.substring(0,repNameRadDivMR.length-2);
+	
+	var dataTabDiv=$("#data_tab_div");
+	dataTabDiv.width(bodyWidth-barChartDivML-repNameRadDivMR);
+	dataTabDiv.height(leftNavDivHeight-toolBarDivHeight-repNameRadDivHeight-120);
+	dataTabDiv.css("margin-left",barChartDivML+"px");
 }
 
 function showRepNameRadDiv(){
@@ -244,6 +264,360 @@ function initPieChartDiv(){
       myChart.setOption(option);
     }
 }
+
+function createTabCellStr(flag,val){
+	var str;
+	if(flag=="th")
+		str="<th>"+val+"</th>";
+	else if(flag=="td")
+		str="<td>"+val+"</td>";
+	return str;
+}
+
+function createDataTab(){
+	var tabName;
+	var radios = document.getElementsByName('rep_name_rad');
+	for(var i = 0; i < radios.length; i++) {
+	   if(radios[i].checked){
+	      var id=radios[i].id;
+	      if(id.indexOf("_rad")!=-1){
+	    	  tabName=id.substring(0,id.indexOf("_rad"));
+	      }
+	      break;
+	   }
+    }
+	var dataTabDiv=$("#data_tab_div");
+	dataTabDiv.empty();
+	if(tabName=="tab1"){
+		
+		var titleArr=["时间","入库数量(吨)","出库数量(吨)","库存数量(吨)","记录人签字","备注"];
+		var appendStr="<table class=\"data_tab1\" id=\"data_tab\" border=\"1\" cellspacing=\"0\">";
+		appendStr+="<tr class=\"tr1\">";
+		for(var i=0;i<titleArr.length;i++){
+			appendStr+=createTabCellStr("th",titleArr[i]);
+		}
+		appendStr+="</tr>";
+			
+		var dataArr=[];
+		var data={time:"2024年1月23日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月24日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月25日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月26日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月27日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月28日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月29日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月30日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月31日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr class=\"tr"+(i%2==0?2:3)+"\">";
+			var dataKeys=Object.keys(dataArr[i])
+			for(var j=0;j<dataKeys.length;j++){
+				appendStr+=createTabCellStr("td",dataArr[i][dataKeys[j]]);
+			}
+			appendStr+="</tr>";
+		}
+		
+		appendStr+="</table>";
+		
+		dataTabDiv.append(appendStr);
+	}
+	else if(tabName=="tab2"){
+		var titleArr=["时间","入库数量(吨)","出库数量(吨)","库存数量(吨)","记录人签字","备注"];
+		var appendStr="<table class=\"data_tab2\" id=\"data_tab\" border=\"1\" cellspacing=\"0\">";
+		appendStr+="<tr class=\"tr1\">";
+		for(var i=0;i<titleArr.length;i++){
+			appendStr+=createTabCellStr("th",titleArr[i]);
+		}
+		appendStr+="</tr>";
+
+		var dataArr=[];
+		var data={time:"2024年1月23日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月24日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月25日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月26日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月27日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月28日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月29日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月30日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={time:"2024年1月31日",inCount:111,outCount:222,saveCount:333,rec:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr class=\"tr"+(i%2==0?2:3)+"\">";
+			var dataKeys=Object.keys(dataArr[i])
+			for(var j=0;j<dataKeys.length;j++){
+				appendStr+=createTabCellStr("td",dataArr[i][dataKeys[j]]);
+			}
+			appendStr+="</tr>";
+		}
+		
+		appendStr+="</table>";
+		
+		dataTabDiv.append(appendStr);
+	}
+	else if(tabName=="tab3"){
+		var titleArr=["序号","出库日期","出库数量(吨)","出库签名","入库日期","入库数量(吨)","入库签名","总库存(kg)","出料人","备注"];
+		var appendStr="<table class=\"data_tab3\" id=\"data_tab\" border=\"1\" cellspacing=\"0\">";
+		appendStr+="<tr class=\"tr1\">";
+		for(var i=0;i<titleArr.length;i++){
+			appendStr+=createTabCellStr("th",titleArr[i]);
+		}
+		appendStr+="</tr>";
+		
+		var dataArr=[];
+		var data={no:1,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:4,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:5,outDate:"02-05",outCount:111,outSign:111,inDate:"02-03",inCount:222,inSign:222,total:333,outGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr class=\"tr"+(i%2==0?2:3)+"\">";
+			var dataKeys=Object.keys(dataArr[i])
+			for(var j=0;j<dataKeys.length;j++){
+				appendStr+=createTabCellStr("td",dataArr[i][dataKeys[j]]);
+			}
+			appendStr+="</tr>";
+		}
+		
+		appendStr+="</table>";
+		
+		dataTabDiv.append(appendStr);
+	}
+	else if(tabName=="tab4"){
+		var titleArr=["序号","出入库日期","出库量(kg)","入库量(kg)","总库存(kg)","库房责任人","班组长","领料人","备注"];
+		var appendStr="<table class=\"data_tab4\" id=\"data_tab\" border=\"1\" cellspacing=\"0\">";
+		appendStr+="<tr class=\"tr1\">";
+		for(var i=0;i<titleArr.length;i++){
+			appendStr+=createTabCellStr("th",titleArr[i]);
+		}
+		appendStr+="</tr>";
+
+		var dataArr=[];
+		var data={no:1,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr class=\"tr"+(i%2==0?2:3)+"\">";
+			var dataKeys=Object.keys(dataArr[i])
+			for(var j=0;j<dataKeys.length;j++){
+				appendStr+=createTabCellStr("td",dataArr[i][dataKeys[j]]);
+			}
+			appendStr+="</tr>";
+		}
+		
+		appendStr+="</table>";
+		
+		dataTabDiv.append(appendStr);
+	}
+	else if(tabName=="tab5"){
+		var titleArr=["序号","出入库日期","出库量(kg)","入库量(kg)","总库存(kg)","库房责任人","领料人","班组长","备注"];
+		var appendStr="<table class=\"data_tab5\" id=\"data_tab\" border=\"1\" cellspacing=\"0\">";
+		appendStr+="<tr class=\"tr1\">";
+		for(var i=0;i<titleArr.length;i++){
+			appendStr+=createTabCellStr("th",titleArr[i]);
+		}
+		appendStr+="</tr>";
+
+		var dataArr=[];
+		var data={no:1,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr class=\"tr"+(i%2==0?2:3)+"\">";
+			var dataKeys=Object.keys(dataArr[i])
+			for(var j=0;j<dataKeys.length;j++){
+				appendStr+=createTabCellStr("td",dataArr[i][dataKeys[j]]);
+			}
+			appendStr+="</tr>";
+		}
+		
+		appendStr+="</table>";
+		
+		dataTabDiv.append(appendStr);
+	}
+	else if(tabName=="tab6"){
+		var titleArr=["序号","出入库日期","出库量(kg)","入库量(kg)","总库存(kg)","库房责任人","班组长","领料人","备注"];
+		var appendStr="<table class=\"data_tab6\" id=\"data_tab\" border=\"1\" cellspacing=\"0\">";
+		appendStr+="<tr class=\"tr1\">";
+		for(var i=0;i<titleArr.length;i++){
+			appendStr+=createTabCellStr("th",titleArr[i]);
+		}
+		appendStr+="</tr>";
+
+		var dataArr=[];
+		var data={no:1,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr class=\"tr"+(i%2==0?2:3)+"\">";
+			var dataKeys=Object.keys(dataArr[i])
+			for(var j=0;j<dataKeys.length;j++){
+				appendStr+=createTabCellStr("td",dataArr[i][dataKeys[j]]);
+			}
+			appendStr+="</tr>";
+		}
+		
+		appendStr+="</table>";
+		
+		dataTabDiv.append(appendStr);
+	}
+	else if(tabName=="tab7"){
+		var titleArr=["序号","出入库日期","出库量(kg)","入库量(kg)","总库存(kg)","库房责任人","领料人","班组长","备注"];
+		var appendStr="<table class=\"data_tab7\" id=\"data_tab\" border=\"1\" cellspacing=\"0\">";
+		appendStr+="<tr class=\"tr1\">";
+		for(var i=0;i<titleArr.length;i++){
+			appendStr+=createTabCellStr("th",titleArr[i]);
+		}
+		appendStr+="</tr>";
+
+		var dataArr=[];
+		var data={no:1,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",recGoods:"天赐",groLea:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr class=\"tr"+(i%2==0?2:3)+"\">";
+			var dataKeys=Object.keys(dataArr[i])
+			for(var j=0;j<dataKeys.length;j++){
+				appendStr+=createTabCellStr("td",dataArr[i][dataKeys[j]]);
+			}
+			appendStr+="</tr>";
+		}
+		
+		appendStr+="</table>";
+		
+		dataTabDiv.append(appendStr);
+	}
+	else if(tabName=="tab8"){
+		var titleArr=["序号","出入库日期","出库量(kg)","入库量(kg)","总库存(kg)","库房责任人","班组长","领料人","备注"];
+		var appendStr="<table class=\"data_tab7\" id=\"data_tab\" border=\"1\" cellspacing=\"0\">";
+		appendStr+="<tr class=\"tr1\">";
+		for(var i=0;i<titleArr.length;i++){
+			appendStr+=createTabCellStr("th",titleArr[i]);
+		}
+		appendStr+="</tr>";
+
+		var dataArr=[];
+		var data={no:1,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr class=\"tr"+(i%2==0?2:3)+"\">";
+			var dataKeys=Object.keys(dataArr[i])
+			for(var j=0;j<dataKeys.length;j++){
+				appendStr+=createTabCellStr("td",dataArr[i][dataKeys[j]]);
+			}
+			appendStr+="</tr>";
+		}
+		
+		appendStr+="</table>";
+		
+		dataTabDiv.append(appendStr);
+	}
+	else if(tabName=="tab9"){
+		var titleArr=["序号","出入库日期","出库量(kg)","入库量(kg)","总库存(kg)","库房责任人","班组长","领料人","备注"];
+		var appendStr="<table class=\"data_tab7\" id=\"data_tab\" border=\"1\" cellspacing=\"0\">";
+		appendStr+="<tr class=\"tr1\">";
+		for(var i=0;i<titleArr.length;i++){
+			appendStr+=createTabCellStr("th",titleArr[i]);
+		}
+		appendStr+="</tr>";
+
+		var dataArr=[];
+		var data={no:1,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr class=\"tr"+(i%2==0?2:3)+"\">";
+			var dataKeys=Object.keys(dataArr[i])
+			for(var j=0;j<dataKeys.length;j++){
+				appendStr+=createTabCellStr("td",dataArr[i][dataKeys[j]]);
+			}
+			appendStr+="</tr>";
+		}
+		
+		appendStr+="</table>";
+		
+		dataTabDiv.append(appendStr);
+	}
+	else if(tabName=="tab10"){
+		var titleArr=["序号","出入库日期","出库量(kg)","入库量(kg)","总库存(kg)","库房责任人","班组长","领料人","备注"];
+		var appendStr="<table class=\"data_tab7\" id=\"data_tab\" border=\"1\" cellspacing=\"0\">";
+		appendStr+="<tr class=\"tr1\">";
+		for(var i=0;i<titleArr.length;i++){
+			appendStr+=createTabCellStr("th",titleArr[i]);
+		}
+		appendStr+="</tr>";
+
+		var dataArr=[];
+		var data={no:1,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:2,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+		var data={no:3,outInDate:"02-05",outCount:111,inCount:222,total:333,whMaster:"天赐",groLea:"天赐",recGoods:"天赐",memo:"李天亯"};
+		dataArr.push(data);
+
+		for(var i=0;i<dataArr.length;i++){
+			appendStr+="<tr class=\"tr"+(i%2==0?2:3)+"\">";
+			var dataKeys=Object.keys(dataArr[i])
+			for(var j=0;j<dataKeys.length;j++){
+				appendStr+=createTabCellStr("td",dataArr[i][dataKeys[j]]);
+			}
+			appendStr+="</tr>";
+		}
+		
+		appendStr+="</table>";
+		
+		dataTabDiv.append(appendStr);
+	}
+}
 </script>
 <style type="text/css">
 body{
@@ -360,6 +734,70 @@ body{
 	border:#EFEFEF solid 1px;
 	display: none;
 }
+
+.data_tab_div{
+	margin-top:50px;
+	overflow: auto;
+}
+.data_tab_div table{
+	width: 100%;
+	border: 1px;
+}
+.data_tab_div table tr{
+	height:80px;
+}
+.data_tab1 .tr2,
+.data_tab2 .tr2,
+.data_tab3 .tr2,
+.data_tab4 .tr2,
+.data_tab5 .tr2,
+.data_tab6 .tr2,
+.data_tab7 .tr2,
+.data_tab8 .tr2,
+.data_tab9 .tr2,
+.data_tab10 .tr2{
+	background-color: #fff;
+}
+.data_tab1 .tr3,
+.data_tab2 .tr3,
+.data_tab3 .tr3,
+.data_tab4 .tr3,
+.data_tab5 .tr3,
+.data_tab6 .tr3,
+.data_tab7 .tr3,
+.data_tab8 .tr3,
+.data_tab9 .tr3,
+.data_tab10 .tr3{
+	background-color: #F2F2F2;
+}
+.data_tab_div table tr th{
+	color:#fff;
+	font-size: 25px;
+	text-align: center;
+	background-color: #6C6C6C;
+	border: #DBDBDB solid 1px;
+}
+.data_tab_div table tr td{
+	font-size: 25px;
+	text-align: center;
+	border: #DBDBDB solid 1px;
+}
+.data_tab1 tr td,
+.data_tab2 tr td{
+	width: 16.6%;
+}
+.data_tab3 tr td,
+.data_tab4 tr td,
+.data_tab5 tr td,
+.data_tab6 tr td,
+.data_tab7 tr td,
+.data_tab8 tr td,
+.data_tab9 tr td,
+.data_tab10 tr td{
+	width: 10%;
+	font-size: 25px;
+	text-align: center;
+}
 </style>
 <title>Insert title here</title>
 </head>
@@ -398,43 +836,43 @@ body{
 	
 	<div class="rep_name_rad_div" id="in_out_rep_name_rad_div">
 		<div class="item_div tab1_item_div">
-			<input type="radio" id="tab1_rad" name="rep_name_rad" checked="checked"/>
+			<input type="radio" id="tab1_rad" name="rep_name_rad" checked="checked" onclick="createDataTab()"/>
 			<span class="name_span">1#硝酸铵库房多孔粒状硝酸铵出入库登记簿</span>
 		</div>
 		<div class="item_div">
-			<input type="radio" id="tab2_rad" name="rep_name_rad"/>
+			<input type="radio" id="tab2_rad" name="rep_name_rad" onclick="createDataTab()"/>
 			<span class="name_span">2#硝酸铵库房多孔粒状硝酸铵出入库登记簿</span>
 		</div>
 		<div class="item_div">
-			<input type="radio" id="tab3_rad" name="rep_name_rad"/>
+			<input type="radio" id="tab3_rad" name="rep_name_rad" onclick="createDataTab()"/>
 			<span class="name_span">15-1醋酸出入库登记表_文档1</span>
 		</div>
 		<div class="item_div">
-			<input type="radio" id="tab4_rad" name="rep_name_rad"/>
+			<input type="radio" id="tab4_rad" name="rep_name_rad" onclick="createDataTab()"/>
 			<span class="name_span">15-1柠檬酸出入库登记表</span>
 		</div>
 		<div class="item_div">
-			<input type="radio" id="tab5_rad" name="rep_name_rad"/>
+			<input type="radio" id="tab5_rad" name="rep_name_rad" onclick="createDataTab()"/>
 			<span class="name_span">15-3国产油相出入库登记表_文档1</span>
 		</div>
 		<div class="item_div">
-			<input type="radio" id="tab6_rad" name="rep_name_rad"/>
+			<input type="radio" id="tab6_rad" name="rep_name_rad" onclick="createDataTab()"/>
 			<span class="name_span">15-4硫脲出入库登记表_文档1</span>
 		</div>
 		<div class="item_div">
-			<input type="radio" id="tab7_rad" name="rep_name_rad"/>
+			<input type="radio" id="tab7_rad" name="rep_name_rad" onclick="createDataTab()"/>
 			<span class="name_span">15-5碳酸钠出入库登记表_文档1</span>
 		</div>
 		<div class="item_div">
-			<input type="radio" id="tab8_rad" name="rep_name_rad"/>
+			<input type="radio" id="tab8_rad" name="rep_name_rad" onclick="createDataTab()"/>
 			<span class="name_span">15-6亚硝酸钠出入库登记表_文档1</span>
 		</div>
 		<div class="item_div">
-			<input type="radio" id="tab9_rad" name="rep_name_rad"/>
+			<input type="radio" id="tab9_rad" name="rep_name_rad" onclick="createDataTab()"/>
 			<span class="name_span">15-7乙二醇出入库登记表_文档1</span>
 		</div>
 		<div class="item_div">
-			<input type="radio" id="tab10_rad" name="rep_name_rad"/>
+			<input type="radio" id="tab10_rad" name="rep_name_rad" onclick="createDataTab()"/>
 			<span class="name_span">15-9添加剂出入库登记表</span>
 		</div>
 	</div>
@@ -444,6 +882,9 @@ body{
 	<div class="chart_div" id="line_chart_div">
 	</div>
 	<div class="chart_div" id="pie_chart_div">
+	</div>
+	
+	<div class="data_tab_div" id="data_tab_div">
 	</div>
 </div>
 </body>
