@@ -263,14 +263,15 @@ function createReportTab(){
 	var tabName=$("#rep_name_sel").val();
 	if(tabName=="tab1"){
 		var creaRepDiaDiv=$("#crea_rep_dia_div");
+		var creaRepTabDiv=creaRepDiaDiv.find("#crea_rep_div #tab_div");
 		
-		var textSpan=creaRepDiaDiv.find("#tit_div").find("#text_span");
-		textSpan.text("");
+		var tabNameDiv=creaRepTabDiv.find("#name_div");
+		tabNameDiv.text("");
 		
-		var creaRepDiv=creaRepDiaDiv.find("#crea_rep_div");
-		creaRepDiv.empty();
+		var creaRepTab=creaRepTabDiv.find("table");
+		creaRepTab.remove();
 		
-		textSpan.text("1#硝酸铵库房多孔粒状硝酸铵出入库登记簿");
+		tabNameDiv.text("1#硝酸铵库房多孔粒状硝酸铵出入库登记簿");
 		
 		var timeCbChecked=$("#data_tab1_cond_div #time_cb").prop("checked");
 		var inCountCbChecked=$("#data_tab1_cond_div #in_count_cb").prop("checked");
@@ -279,7 +280,7 @@ function createReportTab(){
 		var recCbChecked=$("#data_tab1_cond_div #rec_cb").prop("checked");
 		var memoCbChecked=$("#data_tab1_cond_div #memo_cb").prop("checked");
 
-		var appendStr="<table id=\"rep_tab1\" style=\"width: 90%;margin:auto;border: 1px;\" border=\"1\" cellspacing=\"0\">";
+		var appendStr="<table id=\"rep_tab1\" style=\"width: 90%;margin:50px auto 0;border: 1px;\" border=\"1\" cellspacing=\"0\">";
 			appendStr+="<tr style=\"height: 70px;\">";
 			if(timeCbChecked)
 				appendStr+="<td style=\"width: 16.6%;font-size: 25px;text-align: center;\" rowspan=\"2\">时间</td>";
@@ -343,7 +344,7 @@ function createReportTab(){
 		}
 		appendStr+="</table>";
 		
-		creaRepDiv.append(appendStr);
+		creaRepTabDiv.append(appendStr);
 		
 		showCreaRepDiaDiv(true);
 	}
@@ -2628,7 +2629,6 @@ body{
 	width:100%;
 	margin-top: 20px;
 }
-.crea_rep_dia_div .tool_bar,
 .crea_echart_dia_div .tool_bar{
 	width:100%;
 	height:180px;
@@ -2679,8 +2679,6 @@ body{
 	border-radius:10px;
 	cursor: pointer;
 }
-.crea_rep_dia_div .tool_bar .print_rep_but,
-.crea_rep_dia_div .tool_bar .output_exc_but,
 .crea_echart_dia_div .tool_bar .create_but{
 	width: 180px;
 	height: 50px;
@@ -2761,19 +2759,73 @@ body{
 }
 
 .crea_rep_dia_div{
-	width: 2800px;
-	height: 1400px;
-	margin:auto;
-	top:150px;
-	left:0;
-	right:0;
-	background-color:#fff;
-	border:#347CAF solid 1px;
-	position:absolute;
+	width: 100%;
+	height: 100%;
+	position:fixed;
 	z-index: 1;
 	display: none;
 }
-.crea_rep_dia_div .tit_div,
+.crea_rep_dia_div .tit_div .text_span,
+.crea_echart_dia_div .tit_div .text_span{
+	font-size:30px;
+	margin-left: 2.5%;
+}
+.crea_rep_dia_div .tit_div .close_but_div{
+	width: 150px;
+	height: 50px;
+	line-height: 50px;
+	color:#686868;
+	font-size:25px;
+	text-align:center;
+	margin-top: 20px;
+	margin-right: 2.5%;
+	float: right;
+	border: #686868 solid 1px;
+	border-radius:5px;
+	cursor: pointer;
+}
+.crea_rep_dia_div .tool_bar{
+	width: 20%;
+	height: 100%;
+	background-color: #E4EDF1;
+	float: right;
+}
+.crea_rep_dia_div .tool_bar .tit_div{
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	margin-left:50px;
+	font-size:30px;
+	font-weight:bold;
+}
+.crea_rep_dia_div .crea_rep_div{
+	width: 80%;
+	height: 100%;
+	background-color:#ccc;
+}
+.crea_rep_dia_div .crea_rep_div .tit_div{
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	border-bottom: #B7B7B7 solid 1px;
+}
+.crea_rep_dia_div .crea_rep_div .tab_div{
+	width: 95%;
+	height: 88%;
+	margin:1% auto 0;
+	background-color:#fff;
+	border: #6092E7 solid 5px;
+}
+.crea_rep_dia_div .crea_rep_div .tab_div .name_div{
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	font-size:30px;
+	text-align:center;
+	border-bottom: #B7B7B7 solid 1px;
+}
+
+
 .crea_echart_dia_div .tit_div{
 	width: 100%;
 	height: 100px;
@@ -2782,11 +2834,6 @@ body{
 	text-align:center;
 	border-bottom: #F3F3F3 solid 1px;
 }
-.crea_rep_dia_div .tit_div .text_span,
-.crea_echart_dia_div .tit_div .text_span{
-	font-size:30px;
-}
-.crea_rep_dia_div .tit_div .close_span,
 .crea_echart_dia_div .tit_div .close_span{
 	color:#999;
 	font-size:25px;
@@ -2794,11 +2841,6 @@ body{
 	float: right;
 	cursor: pointer;
 }
-.crea_rep_dia_div .crea_rep_div{
-	width: 100%;
-	height: 1220px;
-}
-
 .crea_echart_dia_div{
 	width: 2000px;
 	height: 1400px;
@@ -2897,7 +2939,8 @@ body{
 	border: #BBB solid 1px;
 	border-radius:15px; 
 }
-.right_div .filter_condition_div .but_div{
+.right_div .filter_condition_div .but_div,
+.crea_rep_dia_div .tool_bar .but_div{
 	width:80%;
 	height:90px;
 	line-height:90px;
@@ -2907,12 +2950,17 @@ body{
 	border-radius:25px;
 	cursor: pointer;
 }
+.crea_rep_dia_div .tool_bar .output_exc_but_div{
+	margin:50px auto 0;
+	background-color: #53CB72;
+}
 .right_div .filter_condition_div .screen_but_div{
 	margin:50px auto 0;
 	letter-spacing:15px;
 	background-color: #53CB72;
 }
-.right_div .filter_condition_div .cre_rep_but_div{
+.right_div .filter_condition_div .cre_rep_but_div,
+.crea_rep_dia_div .tool_bar .print_rep_but_div{
 	margin:80px auto 0;
 	letter-spacing:15px;
 	background-color: #4095E5;
@@ -2949,6 +2997,23 @@ body{
 <title>Insert title here</title>
 </head>
 <body>
+<div class="crea_rep_dia_div" id="crea_rep_dia_div">
+	<div class="tool_bar" id="tool_bar">
+		<div class="tit_div">报表设置</div>
+		<div class="but_div print_rep_but_div" onclick="printRep()">打印报表</div>
+		<div class="but_div output_exc_but_div" onclick="exportExcel('tab2')">导出Excel</div>
+	</div>
+	<div class="crea_rep_div" id="crea_rep_div">
+		<div class="tit_div" id="tit_div">
+			<span class="text_span" id="text_span">报表预览</span>
+			<div class="close_but_div" onclick="showCreaRepDiaDiv(false)">退出预览</div>
+		</div>
+		<div class="tab_div" id="tab_div">
+			<div class="name_div" id="name_div"></div>
+		</div>
+	</div>
+</div>
+
 <div class="main_div">
 	<%@include file="../inc/top.jsp"%>
 	<%@include file="../inc/leftNav.jsp"%>
@@ -3471,19 +3536,6 @@ body{
 			<div class="line_div"></div>
 			<div class="but_div cre_rep_but_div" onclick="createReportTab()">生成报表</div>
 			<div class="but_div screen_but_div" onclick="showCreaEChartDiaDiv(true)">生成图表</div>
-		</div>
-	</div>
-	
-	<div class="crea_rep_dia_div" id="crea_rep_dia_div">
-		<div class="tit_div" id="tit_div">
-			<span class="text_span" id="text_span"></span>
-			<span class="close_span" onclick="showCreaRepDiaDiv(false)">X</span>
-		</div>
-		<div class="tool_bar" id="tool_bar">
-			<input class="print_rep_but" type="button" value="打印报表" onclick="printRep()"/>
-			<input class="output_exc_but" type="button" value="导出Excel" onclick="exportExcel('tab2')"/>
-		</div>
-		<div class="crea_rep_div" id="crea_rep_div">
 		</div>
 	</div>
 	
