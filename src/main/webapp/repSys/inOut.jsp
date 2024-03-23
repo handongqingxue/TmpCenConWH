@@ -2578,40 +2578,41 @@ function showCreaEChartDiaDiv(flag){
 	var creaEChartDiaDiv=$("#crea_echart_dia_div");
 	if(flag){
 		var creaEChartDiaDiv=$("#crea_echart_dia_div");
+		var echartDiv=creaEChartDiaDiv.find("#crea_echart_div #echart_div");
 		
-		var textSpan=creaEChartDiaDiv.find("#tit_div").find("#text_span");
-		textSpan.text("");
+		var tabNameDiv=echartDiv.find("#name_div");
+		tabNameDiv.text("");
 		
 		var tabName=$("#rep_name_sel").val();
 		if(tabName=="tab1"){
-			textSpan.text("1#硝酸铵库房多孔粒状硝酸铵出入库登记簿");
+			tabNameDiv.text("1#硝酸铵库房多孔粒状硝酸铵出入库登记簿");
 		}
 		else if(tabName=="tab2"){
-			textSpan.text("2#硝酸铵库房多孔粒状硝酸铵出入库登记簿");
+			tabNameDiv.text("2#硝酸铵库房多孔粒状硝酸铵出入库登记簿");
 		}
 		else if(tabName=="tab3"){
-			textSpan.text("15-1醋酸出入库登记表_文档1");
+			tabNameDiv.text("15-1醋酸出入库登记表_文档1");
 		}
 		else if(tabName=="tab4"){
-			textSpan.text("15-1柠檬酸出入库登记表");
+			tabNameDiv.text("15-1柠檬酸出入库登记表");
 		}
 		else if(tabName=="tab5"){
-			textSpan.text("15-3国产油相出入库登记表_文档1");
+			tabNameDiv.text("15-3国产油相出入库登记表_文档1");
 		}
 		else if(tabName=="tab6"){
-			textSpan.text("15-4硫脲出入库登记表_文档1");
+			tabNameDiv.text("15-4硫脲出入库登记表_文档1");
 		}
 		else if(tabName=="tab7"){
-			textSpan.text("15-5碳酸钠出入库登记表_文档1");
+			tabNameDiv.text("15-5碳酸钠出入库登记表_文档1");
 		}
 		else if(tabName=="tab8"){
-			textSpan.text("15-6亚硝酸钠出入库登记表_文档1");
+			tabNameDiv.text("15-6亚硝酸钠出入库登记表_文档1");
 		}
 		else if(tabName=="tab9"){
-			textSpan.text("15-7乙二醇出入库登记表_文档1");
+			tabNameDiv.text("15-7乙二醇出入库登记表_文档1");
 		}
 		else if(tabName=="tab10"){
-			textSpan.text("15-9添加剂出入库登记表");
+			tabNameDiv.text("15-9添加剂出入库登记表");
 		}
 		
 		creaEChartDiaDiv.css("display","block");
@@ -2638,11 +2639,6 @@ body{
 	width:100%;
 	margin-top: 20px;
 }
-.crea_echart_dia_div .tool_bar{
-	width:100%;
-	height:180px;
-	line-height:180px;
-}
 .center_div .tool_bar .choose_area_sel_img{
 	margin-top: 10px;
 	margin-left: 85px;
@@ -2658,8 +2654,7 @@ body{
 	border: #4F4F4F solid 1px;
 	border-radius:10px;
 }
-.center_div .tool_bar .choose_rep_text_span,
-.crea_echart_dia_div .tool_bar .choose_echart_text_span{
+.center_div .tool_bar .choose_rep_text_span{
 	color: #111;
 	font-size: 30px;
 	font-style:italic;
@@ -2687,12 +2682,6 @@ body{
 	background-color: #4095E5;
 	border-radius:10px;
 	cursor: pointer;
-}
-.crea_echart_dia_div .tool_bar .create_but{
-	width: 180px;
-	height: 50px;
-	margin-left:50px;
-	font-size: 35px;
 }
 
 .data_tab_div{
@@ -2767,7 +2756,8 @@ body{
 	text-align: center;
 }
 
-.crea_rep_dia_div{
+.crea_rep_dia_div,
+.crea_echart_dia_div{
 	width: 100%;
 	height: 100%;
 	position:fixed;
@@ -2779,7 +2769,8 @@ body{
 	font-size:30px;
 	margin-left: 2.5%;
 }
-.crea_rep_dia_div .tit_div .close_but_div{
+.crea_rep_dia_div .tit_div .close_but_div,
+.crea_echart_dia_div .tit_div .close_but_div{
 	width: 150px;
 	height: 50px;
 	line-height: 50px;
@@ -2793,13 +2784,15 @@ body{
 	border-radius:5px;
 	cursor: pointer;
 }
-.crea_rep_dia_div .tool_bar{
+.crea_rep_dia_div .tool_bar,
+.crea_echart_dia_div .tool_bar{
 	width: 20%;
 	height: 100%;
 	background-color: #E4EDF1;
 	float: right;
 }
-.crea_rep_dia_div .tool_bar .tit_div{
+.crea_rep_dia_div .tool_bar .tit_div,
+.crea_echart_dia_div .tool_bar .tit_div{
 	width: 100%;
 	height: 100px;
 	line-height: 100px;
@@ -2807,25 +2800,29 @@ body{
 	font-size:30px;
 	font-weight:bold;
 }
-.crea_rep_dia_div .crea_rep_div{
+.crea_rep_dia_div .crea_rep_div,
+.crea_echart_dia_div .crea_echart_div{
 	width: 80%;
 	height: 100%;
 	background-color:#ccc;
 }
-.crea_rep_dia_div .crea_rep_div .tit_div{
+.crea_rep_dia_div .crea_rep_div .tit_div,
+.crea_echart_dia_div .crea_echart_div .tit_div{
 	width: 100%;
 	height: 100px;
 	line-height: 100px;
 	border-bottom: #B7B7B7 solid 1px;
 }
-.crea_rep_dia_div .crea_rep_div .tab_div{
+.crea_rep_dia_div .crea_rep_div .tab_div,
+.crea_echart_dia_div .crea_echart_div .echart_div{
 	width: 95%;
 	height: 88%;
 	margin:1% auto 0;
 	background-color:#fff;
 	border: #6092E7 solid 5px;
 }
-.crea_rep_dia_div .crea_rep_div .tab_div .name_div{
+.crea_rep_dia_div .crea_rep_div .tab_div .name_div,
+.crea_echart_dia_div .crea_echart_div .echart_div .name_div{
 	width: 100%;
 	height: 100px;
 	line-height: 100px;
@@ -2835,59 +2832,49 @@ body{
 }
 
 
-.crea_echart_dia_div .tit_div{
-	width: 100%;
-	height: 100px;
-	line-height: 100px;
-	font-weight:bold;
-	text-align:center;
-	border-bottom: #F3F3F3 solid 1px;
+.crea_echart_dia_div .tool_bar .choose_echart_text_div{
+	width:88%;
+	height:70px;
+	line-height:70px;
+	margin:30px auto 0;
+	font-size:35px;
+	font-style:italic;
 }
-.crea_echart_dia_div .tit_div .close_span{
-	color:#999;
-	font-size:25px;
-	margin-right: 20px;
-	float: right;
-	cursor: pointer;
-}
-.crea_echart_dia_div{
-	width: 2000px;
-	height: 1400px;
-	margin:auto;
-	top:150px;
-	left:0;
-	right:0;
-	background-color:#fff;
-	border:#347CAF solid 1px;
-	position:absolute;
-	z-index: 1;
-	display: none;
+.crea_echart_dia_div .tool_bar .sel_div{
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .crea_echart_dia_div .tool_bar .echart_name_sel{
-	width:200px;
-	height:50px;
-	color: #999;
+	width: 88%;
+	height: 60px;
+	color: #000;
 	font-size: 25px;
-	margin-left:50px;
 	background-color: #fff;
-	border: #eee solid 1px;	
+	border: #000 solid 1px;
+}
+.crea_echart_dia_div .tool_bar .create_but_div{
+	margin: 80px auto 0;
+    letter-spacing: 15px;
+    background-color: #4095E5;
 }
 .crea_echart_dia_div .bar_chart_div{
 	width: 90%;
 	height: 700px;
-	margin:auto;
+	margin:100px auto 0;
 	display: none;
 }
 .crea_echart_dia_div .line_chart_div{
 	width: 90%;
 	height: 800px;
-	margin:auto;
+	margin:100px auto 0;
 	display: none;
 }
 .crea_echart_dia_div .pie_chart_div{
 	width: 600px;
 	height: 500px;
-	margin:auto;
+	margin:100px auto 0;
 	display: none;
 }
 
@@ -2949,7 +2936,8 @@ body{
 	border-radius:15px; 
 }
 .right_div .filter_condition_div .but_div,
-.crea_rep_dia_div .tool_bar .but_div{
+.crea_rep_dia_div .tool_bar .but_div,
+.crea_echart_dia_div .tool_bar .but_div{
 	width:80%;
 	height:90px;
 	line-height:90px;
@@ -3019,6 +3007,36 @@ body{
 		</div>
 		<div class="tab_div" id="tab_div">
 			<div class="name_div" id="name_div"></div>
+		</div>
+	</div>
+</div>
+	
+<div class="crea_echart_dia_div" id="crea_echart_dia_div">
+	<div class="tool_bar" id="tool_bar">
+		<div class="tit_div">选择</div>
+		<div class="choose_echart_text_div">请选择图表</div>
+		<div class="sel_div">
+			<select class="echart_name_sel" id="echart_name_sel">
+				<option value="bar">柱状图</option>
+				<option value="line">折线图</option>
+				<option value="pie">饼状图</option>
+			</select>
+		</div>
+		<div class="but_div create_but_div" onclick="createEChart()">生成</div>
+	</div>
+	<div class="crea_echart_div" id="crea_echart_div">
+		<div class="tit_div" id="tit_div">
+			<span class="text_span" id="text_span">图表预览</span>
+			<div class="close_but_div" onclick="showCreaEChartDiaDiv(false)">退出预览</div>
+		</div>
+		<div class="echart_div" id="echart_div">
+			<div class="name_div" id="name_div"></div>
+			<div class="bar_chart_div" id="bar_chart_div">
+			</div>
+			<div class="line_chart_div" id="line_chart_div">
+			</div>
+			<div class="pie_chart_div" id="pie_chart_div">
+			</div>
 		</div>
 	</div>
 </div>
@@ -3545,28 +3563,6 @@ body{
 			<div class="line_div"></div>
 			<div class="but_div cre_rep_but_div" onclick="createReportTab()">生成报表</div>
 			<div class="but_div screen_but_div" onclick="showCreaEChartDiaDiv(true)">生成图表</div>
-		</div>
-	</div>
-	
-	<div class="crea_echart_dia_div" id="crea_echart_dia_div">
-		<div class="tit_div" id="tit_div">
-			<span class="text_span" id="text_span"></span>
-			<span class="close_span" onclick="showCreaEChartDiaDiv(false)">X</span>
-		</div>
-		<div class="tool_bar" id="tool_bar">
-			<span class="choose_echart_text_span">请选择图表</span>
-			<select class="echart_name_sel" id="echart_name_sel">
-				<option value="bar">柱状图</option>
-				<option value="line">折线图</option>
-				<option value="pie">饼状图</option>
-			</select>
-			<input class="create_but" type="button" value="生成" onclick="createEChart()"/>
-		</div>
-		<div class="bar_chart_div" id="bar_chart_div">
-		</div>
-		<div class="line_chart_div" id="line_chart_div">
-		</div>
-		<div class="pie_chart_div" id="pie_chart_div">
 		</div>
 	</div>
 </div>
