@@ -350,15 +350,16 @@ function createReportTab(){
 	}
 	else if(tabName=="tab2"){
 		var creaRepDiaDiv=$("#crea_rep_dia_div");
+		var creaRepTabDiv=creaRepDiaDiv.find("#crea_rep_div #tab_div");
 		
-		var textSpan=creaRepDiaDiv.find("#tit_div").find("#text_span");
-		textSpan.text("");
+		var tabNameDiv=creaRepTabDiv.find("#name_div");
+		tabNameDiv.text("");
 		
-		var creaRepDiv=creaRepDiaDiv.find("#crea_rep_div");
-		creaRepDiv.empty();
+		var creaRepTab=creaRepTabDiv.find("table");
+		creaRepTab.remove();
 		
-		textSpan.text("2#硝酸铵库房多孔粒状硝酸铵出入库登记簿");
-
+		tabNameDiv.text("2#硝酸铵库房多孔粒状硝酸铵出入库登记簿");
+		
 		var timeCbChecked=$("#data_tab2_cond_div #time_cb").prop("checked");
 		var inCountCbChecked=$("#data_tab2_cond_div #in_count_cb").prop("checked");
 		var outCountCbChecked=$("#data_tab2_cond_div #out_count_cb").prop("checked");
@@ -366,7 +367,7 @@ function createReportTab(){
 		var recCbChecked=$("#data_tab2_cond_div #rec_cb").prop("checked");
 		var memoCbChecked=$("#data_tab2_cond_div #memo_cb").prop("checked");
 
-		var appendStr="<table id=\"rep_tab2\" style=\"width: 90%;margin:auto;border: 1px;\" border=\"1\" cellspacing=\"0\">";
+		var appendStr="<table id=\"rep_tab2\" style=\"width: 90%;margin:50px auto 0;border: 1px;\" border=\"1\" cellspacing=\"0\">";
 			appendStr+="<tr style=\"height: 70px;\">";
 			if(timeCbChecked)
 				appendStr+="<td style=\"width: 16.6%;font-size: 25px;text-align: center;\" rowspan=\"2\">时间</td>";
@@ -430,20 +431,21 @@ function createReportTab(){
 		}
 		appendStr+="</table>";
 		
-		creaRepDiv.append(appendStr);
+		creaRepTabDiv.append(appendStr);
 		
 		showCreaRepDiaDiv(true);
 	}
 	else if(tabName=="tab3"){
 		var creaRepDiaDiv=$("#crea_rep_dia_div");
+		var creaRepTabDiv=creaRepDiaDiv.find("#crea_rep_div #tab_div");
 		
-		var textSpan=creaRepDiaDiv.find("#tit_div").find("#text_span");
-		textSpan.text("");
+		var tabNameDiv=creaRepTabDiv.find("#name_div");
+		tabNameDiv.text("");
 		
-		var creaRepDiv=creaRepDiaDiv.find("#crea_rep_div");
-		creaRepDiv.empty();
+		var creaRepTab=creaRepTabDiv.find("table");
+		creaRepTab.remove();
 		
-		textSpan.text("15-1醋酸出入库登记表_文档1");
+		tabNameDiv.text("15-1醋酸出入库登记表_文档1");
 		
 		var noCbChecked=$("#data_tab3_cond_div #no_cb").prop("checked");
 		var outRecCbChecked=$("#data_tab3_cond_div #out_rec_cb").prop("checked");
@@ -452,7 +454,7 @@ function createReportTab(){
 		var outGoodsCbChecked=$("#data_tab3_cond_div #out_goods_cb").prop("checked");
 		var memoCbChecked=$("#data_tab3_cond_div #memo_cb").prop("checked");
 
-		var appendStr="<table id=\"rep_tab3\" style=\"width: 90%;margin:auto;border: 1px;\" border=\"1\" cellspacing=\"0\">";
+		var appendStr="<table id=\"rep_tab3\" style=\"width: 90%;margin:50px auto 0;border: 1px;\" border=\"1\" cellspacing=\"0\">";
 			appendStr+="<tr style=\"height: 70px;\">";
 					if(noCbChecked)
 				appendStr+="<td style=\"width: 7%;font-size: 25px;text-align: center;\" rowspan=\"2\">序号</td>";
@@ -516,20 +518,21 @@ function createReportTab(){
 		}
 		appendStr+="</table>";
 		
-		creaRepDiv.append(appendStr);
+		creaRepTabDiv.append(appendStr);
 		
 		showCreaRepDiaDiv(true);
 	}
 	else if(tabName=="tab4"){
 		var creaRepDiaDiv=$("#crea_rep_dia_div");
+		var creaRepTabDiv=creaRepDiaDiv.find("#crea_rep_div #tab_div");
 		
-		var textSpan=creaRepDiaDiv.find("#tit_div").find("#text_span");
-		textSpan.text("");
+		var tabNameDiv=creaRepTabDiv.find("#name_div");
+		tabNameDiv.text("");
 		
-		var creaRepDiv=creaRepDiaDiv.find("#crea_rep_div");
-		creaRepDiv.empty();
+		var creaRepTab=creaRepTabDiv.find("table");
+		creaRepTab.remove();
 		
-		textSpan.text("15-1柠檬酸出入库登记表");
+		tabNameDiv.text("15-1柠檬酸出入库登记表");
 		
 		var noCbChecked=$("#data_tab4_cond_div #no_cb").prop("checked");
 		var outInDateCbChecked=$("#data_tab4_cond_div #out_in_date_cb").prop("checked");
@@ -541,7 +544,7 @@ function createReportTab(){
 		var recGoodsCbChecked=$("#data_tab4_cond_div #rec_goods_cb").prop("checked");
 		var memoCbChecked=$("#data_tab4_cond_div #memo_cb").prop("checked");
 
-		var appendStr="<table id=\"rep_tab4\" style=\"width: 90%;margin:auto;border: 1px;\" border=\"1\" cellspacing=\"0\">";
+		var appendStr="<table id=\"rep_tab4\" style=\"width: 90%;margin:50px auto 0;border: 1px;\" border=\"1\" cellspacing=\"0\">";
 			appendStr+="<tr style=\"height: 120px;\">";
 				if(noCbChecked)
 		appendStr+="<td style=\"width: 5%;font-size: 30px;text-align: center;\">序号</td>";
@@ -595,20 +598,21 @@ function createReportTab(){
 		}
 		appendStr+="</table>";
 		
-		creaRepDiv.append(appendStr);
+		creaRepTabDiv.append(appendStr);
 		
 		showCreaRepDiaDiv(true);
 	}
 	else if(tabName=="tab5"){
 		var creaRepDiaDiv=$("#crea_rep_dia_div");
+		var creaRepTabDiv=creaRepDiaDiv.find("#crea_rep_div #tab_div");
 		
-		var textSpan=creaRepDiaDiv.find("#tit_div").find("#text_span");
-		textSpan.text("");
+		var tabNameDiv=creaRepTabDiv.find("#name_div");
+		tabNameDiv.text("");
 		
-		var creaRepDiv=creaRepDiaDiv.find("#crea_rep_div");
-		creaRepDiv.empty();
+		var creaRepTab=creaRepTabDiv.find("table");
+		creaRepTab.remove();
 		
-		textSpan.text("15-3国产油相出入库登记表_文档1");
+		tabNameDiv.text("15-3国产油相出入库登记表_文档1");
 		
 		var noCbChecked=$("#data_tab5_cond_div #no_cb").prop("checked");
 		var outInDateCbChecked=$("#data_tab5_cond_div #out_in_date_cb").prop("checked");
@@ -620,7 +624,7 @@ function createReportTab(){
 		var groLeaCbChecked=$("#data_tab5_cond_div #gro_lea_cb").prop("checked");
 		var memoCbChecked=$("#data_tab5_cond_div #memo_cb").prop("checked");
 
-		var appendStr="<table id=\"rep_tab5\" style=\"width: 90%;margin:auto;border: 1px;\" border=\"1\" cellspacing=\"0\">";
+		var appendStr="<table id=\"rep_tab5\" style=\"width: 90%;margin:50px auto 0;border: 1px;\" border=\"1\" cellspacing=\"0\">";
 			appendStr+="<tr style=\"height: 120px;\">";
 				if(noCbChecked)
 		appendStr+="<td style=\"width: 5%;font-size: 30px;text-align: center;\">序号</td>";
@@ -674,20 +678,21 @@ function createReportTab(){
 		}
 		appendStr+="</table>";
 		
-		creaRepDiv.append(appendStr);
+		creaRepTabDiv.append(appendStr);
 		
 		showCreaRepDiaDiv(true);
 	}
 	else if(tabName=="tab6"){
 		var creaRepDiaDiv=$("#crea_rep_dia_div");
+		var creaRepTabDiv=creaRepDiaDiv.find("#crea_rep_div #tab_div");
 		
-		var textSpan=creaRepDiaDiv.find("#tit_div").find("#text_span");
-		textSpan.text("");
+		var tabNameDiv=creaRepTabDiv.find("#name_div");
+		tabNameDiv.text("");
 		
-		var creaRepDiv=creaRepDiaDiv.find("#crea_rep_div");
-		creaRepDiv.empty();
+		var creaRepTab=creaRepTabDiv.find("table");
+		creaRepTab.remove();
 		
-		textSpan.text("15-4硫脲出入库登记表_文档1");
+		tabNameDiv.text("15-4硫脲出入库登记表_文档1");
 		
 		var noCbChecked=$("#data_tab6_cond_div #no_cb").prop("checked");
 		var outInDateCbChecked=$("#data_tab6_cond_div #out_in_date_cb").prop("checked");
@@ -699,7 +704,7 @@ function createReportTab(){
 		var recGoodsCbChecked=$("#data_tab6_cond_div #rec_goods_cb").prop("checked");
 		var memoCbChecked=$("#data_tab6_cond_div #memo_cb").prop("checked");
 
-		var appendStr="<table id=\"rep_tab6\" style=\"width: 90%;margin:auto;border: 1px;\" border=\"1\" cellspacing=\"0\">";
+		var appendStr="<table id=\"rep_tab6\" style=\"width: 90%;margin:50px auto 0;border: 1px;\" border=\"1\" cellspacing=\"0\">";
 			appendStr+="<tr style=\"height: 120px;\">";
 				if(noCbChecked)
 		appendStr+="<td style=\"width: 5%;font-size: 30px;text-align: center;\">序号</td>";
@@ -753,20 +758,21 @@ function createReportTab(){
 		}
 		appendStr+="</table>";
 		
-		creaRepDiv.append(appendStr);
+		creaRepTabDiv.append(appendStr);
 		
 		showCreaRepDiaDiv(true);
 	}
 	else if(tabName=="tab7"){
 		var creaRepDiaDiv=$("#crea_rep_dia_div");
+		var creaRepTabDiv=creaRepDiaDiv.find("#crea_rep_div #tab_div");
 		
-		var textSpan=creaRepDiaDiv.find("#tit_div").find("#text_span");
-		textSpan.text("");
+		var tabNameDiv=creaRepTabDiv.find("#name_div");
+		tabNameDiv.text("");
 		
-		var creaRepDiv=creaRepDiaDiv.find("#crea_rep_div");
-		creaRepDiv.empty();
+		var creaRepTab=creaRepTabDiv.find("table");
+		creaRepTab.remove();
 		
-		textSpan.text("15-5碳酸钠出入库登记表_文档1");
+		tabNameDiv.text("15-5碳酸钠出入库登记表_文档1");
 		
 		var noCbChecked=$("#data_tab7_cond_div #no_cb").prop("checked");
 		var outInDateCbChecked=$("#data_tab7_cond_div #out_in_date_cb").prop("checked");
@@ -778,7 +784,7 @@ function createReportTab(){
 		var groLeaCbChecked=$("#data_tab7_cond_div #gro_lea_cb").prop("checked");
 		var memoCbChecked=$("#data_tab7_cond_div #memo_cb").prop("checked");
 
-		var appendStr="<table id=\"rep_tab7\" style=\"width: 90%;margin:auto;border: 1px;\" border=\"1\" cellspacing=\"0\">";
+		var appendStr="<table id=\"rep_tab7\" style=\"width: 90%;margin:50px auto 0;border: 1px;\" border=\"1\" cellspacing=\"0\">";
 			appendStr+="<tr style=\"height: 120px;\">";
 				if(noCbChecked)
 		appendStr+="<td style=\"width: 5%;font-size: 30px;text-align: center;\">序号</td>";
@@ -832,20 +838,21 @@ function createReportTab(){
 		}
 		appendStr+="</table>";
 		
-		creaRepDiv.append(appendStr);
+		creaRepTabDiv.append(appendStr);
 		
 		showCreaRepDiaDiv(true);
 	}
 	else if(tabName=="tab8"){
 		var creaRepDiaDiv=$("#crea_rep_dia_div");
+		var creaRepTabDiv=creaRepDiaDiv.find("#crea_rep_div #tab_div");
 		
-		var textSpan=creaRepDiaDiv.find("#tit_div").find("#text_span");
-		textSpan.text("");
+		var tabNameDiv=creaRepTabDiv.find("#name_div");
+		tabNameDiv.text("");
 		
-		var creaRepDiv=creaRepDiaDiv.find("#crea_rep_div");
-		creaRepDiv.empty();
+		var creaRepTab=creaRepTabDiv.find("table");
+		creaRepTab.remove();
 		
-		textSpan.text("15-6亚硝酸钠出入库登记表_文档1");
+		tabNameDiv.text("15-6亚硝酸钠出入库登记表_文档1");
 		
 		var noCbChecked=$("#data_tab8_cond_div #no_cb").prop("checked");
 		var outInDateCbChecked=$("#data_tab8_cond_div #out_in_date_cb").prop("checked");
@@ -857,7 +864,7 @@ function createReportTab(){
 		var recGoodsCbChecked=$("#data_tab8_cond_div #rec_goods_cb").prop("checked");
 		var memoCbChecked=$("#data_tab8_cond_div #memo_cb").prop("checked");
 
-		var appendStr="<table id=\"rep_tab8\" style=\"width: 90%;margin:auto;border: 1px;\" border=\"1\" cellspacing=\"0\">";
+		var appendStr="<table id=\"rep_tab8\" style=\"width: 90%;margin:50px auto 0;border: 1px;\" border=\"1\" cellspacing=\"0\">";
 			appendStr+="<tr style=\"height: 120px;\">";
 				if(noCbChecked)
 		appendStr+="<td style=\"width: 5%;font-size: 30px;text-align: center;\">序号</td>";
@@ -911,20 +918,21 @@ function createReportTab(){
 		}
 		appendStr+="</table>";
 		
-		creaRepDiv.append(appendStr);
+		creaRepTabDiv.append(appendStr);
 		
 		showCreaRepDiaDiv(true);
 	}
 	else if(tabName=="tab9"){
 		var creaRepDiaDiv=$("#crea_rep_dia_div");
+		var creaRepTabDiv=creaRepDiaDiv.find("#crea_rep_div #tab_div");
 		
-		var textSpan=creaRepDiaDiv.find("#tit_div").find("#text_span");
-		textSpan.text("");
+		var tabNameDiv=creaRepTabDiv.find("#name_div");
+		tabNameDiv.text("");
 		
-		var creaRepDiv=creaRepDiaDiv.find("#crea_rep_div");
-		creaRepDiv.empty();
+		var creaRepTab=creaRepTabDiv.find("table");
+		creaRepTab.remove();
 		
-		textSpan.text("15-7乙二醇出入库登记表_文档1");
+		tabNameDiv.text("15-7乙二醇出入库登记表_文档1");
 		
 		var noCbChecked=$("#data_tab9_cond_div #no_cb").prop("checked");
 		var outInDateCbChecked=$("#data_tab9_cond_div #out_in_date_cb").prop("checked");
@@ -936,7 +944,7 @@ function createReportTab(){
 		var recGoodsCbChecked=$("#data_tab9_cond_div #rec_goods_cb").prop("checked");
 		var memoCbChecked=$("#data_tab9_cond_div #memo_cb").prop("checked");
 
-		var appendStr="<table id=\"rep_tab9\" style=\"width: 90%;margin:auto;border: 1px;\" border=\"1\" cellspacing=\"0\">";
+		var appendStr="<table id=\"rep_tab9\" style=\"width: 90%;margin:50px auto 0;border: 1px;\" border=\"1\" cellspacing=\"0\">";
 			appendStr+="<tr style=\"height: 120px;\">";
 				if(noCbChecked)
 		appendStr+="<td style=\"width: 5%;font-size: 30px;text-align: center;\">序号</td>";
@@ -990,20 +998,21 @@ function createReportTab(){
 		}
 		appendStr+="</table>";
 		
-		creaRepDiv.append(appendStr);
+		creaRepTabDiv.append(appendStr);
 		
 		showCreaRepDiaDiv(true);
 	}
 	else if(tabName=="tab10"){
 		var creaRepDiaDiv=$("#crea_rep_dia_div");
+		var creaRepTabDiv=creaRepDiaDiv.find("#crea_rep_div #tab_div");
 		
-		var textSpan=creaRepDiaDiv.find("#tit_div").find("#text_span");
-		textSpan.text("");
+		var tabNameDiv=creaRepTabDiv.find("#name_div");
+		tabNameDiv.text("");
 		
-		var creaRepDiv=creaRepDiaDiv.find("#crea_rep_div");
-		creaRepDiv.empty();
+		var creaRepTab=creaRepTabDiv.find("table");
+		creaRepTab.remove();
 		
-		textSpan.text("15-9添加剂出入库登记表");
+		tabNameDiv.text("15-9添加剂出入库登记表");
 		
 		var noCbChecked=$("#data_tab10_cond_div #no_cb").prop("checked");
 		var outInDateCbChecked=$("#data_tab10_cond_div #out_in_date_cb").prop("checked");
@@ -1015,7 +1024,7 @@ function createReportTab(){
 		var recGoodsCbChecked=$("#data_tab10_cond_div #rec_goods_cb").prop("checked");
 		var memoCbChecked=$("#data_tab10_cond_div #memo_cb").prop("checked");
 
-		var appendStr="<table id=\"rep_tab10\" style=\"width: 90%;margin:auto;border: 1px;\" border=\"1\" cellspacing=\"0\">";
+		var appendStr="<table id=\"rep_tab10\" style=\"width: 90%;margin:50px auto 0;border: 1px;\" border=\"1\" cellspacing=\"0\">";
 			appendStr+="<tr style=\"height: 120px;\">";
 				if(noCbChecked)
 		appendStr+="<td style=\"width: 5%;font-size: 30px;text-align: center;\">序号</td>";
@@ -1069,7 +1078,7 @@ function createReportTab(){
 		}
 		appendStr+="</table>";
 		
-		creaRepDiv.append(appendStr);
+		creaRepTabDiv.append(appendStr);
 		
 		showCreaRepDiaDiv(true);
 	}
