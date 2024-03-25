@@ -150,10 +150,12 @@ a{
 			<img class="nav_img" alt="" src="<%=basePath %>resource/image/006.png">
 			<span class="text_span">系统设置</span>
 		</div>
+		<a href="<%=basePath %>alaDia/goWms">
 		<div class="warn_nav_div">
 			<img class="nav_img" alt="" src="<%=basePath %>resource/image/007.png">
 			<span class="text_span">报警诊断</span>
 		</div>
+		</a>
 	</div>
 </div>
 </body>

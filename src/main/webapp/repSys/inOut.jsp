@@ -22,10 +22,6 @@ $(function(){
 });
 
 function initLayoutDivSize(){
-	var body=$("body");
-	var bodyWidth=body.width();
-	var bodyHeight=body.height();
-	
 	var topDiv=$("#top_div");
 	var topDivHeight=topDiv.height();
 	

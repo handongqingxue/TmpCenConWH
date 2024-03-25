@@ -88,6 +88,23 @@ function initLeftDivSize(){
 				</div>
 			</a>
 		</c:when>
+		<c:when test="${uri.contains('/alaDia/')}">
+			<a href="<%=basePath %>alaDia/goWms">
+				<div class="item_div">
+					<img alt="" src="<%=basePath %>resource/image/014.png">
+				</div>
+			</a>
+			<a href="">
+				<div class="item_div">
+					<img alt="" src="<%=basePath %>resource/image/011.png">
+				</div>
+			</a>
+			<a href="">
+				<div class="item_div">
+					<img alt="" src="<%=basePath %>resource/image/015.png">
+				</div>
+			</a>
+		</c:when>
 	</c:choose>
 </div>
 </body>

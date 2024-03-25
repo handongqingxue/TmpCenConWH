@@ -29,6 +29,7 @@
 				/agv/**=anon
 				/vedio/**=anon
 				/repSys/**=anon
+				/alaDia/**=anon
 				/resource/**=anon
 				/**=authc
 			</value>
