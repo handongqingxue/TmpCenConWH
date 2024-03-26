@@ -19,17 +19,20 @@ $(function(){
 	initLeftDivSize();
 	initLayoutDivSize();
 	initPieChartDiv();
+	initTodayAlarmData();
 });
 
 function initLayoutDivSize(){
 	var toolBarDiv=$("#tool_bar_div");
 	var toolBarDivML=leftNavDivWidth+leftNavDivWidth*0.5;
-	toolBarDiv.width(bodyWidth-leftNavDivWidth-200);
+	var toolBarDivWidth=bodyWidth-leftNavDivWidth-200;
+	toolBarDiv.width(toolBarDivWidth);
 	toolBarDiv.css("margin-top",-leftNavDivHeight+50+"px");
 	toolBarDiv.css("margin-left",toolBarDivML+"px");
 	
 	var alarmCountDiv=$("#alarm_count_div");
 	alarmCountDiv.css("margin-left",toolBarDivML+"px");
+	var alarmCountDivWidth=alarmCountDiv.width();
 	
 	var alarmCountItemDiv=alarmCountDiv.find(".item_div");
 	var alarmCountDivHeight=alarmCountDiv.height();
@@ -38,12 +41,49 @@ function initLayoutDivSize(){
 	var alarmPercDiv=$("#alarm_perc_div");
 	alarmPercDiv.height(alarmCountDivHeight);
 	alarmPercDiv.css("margin-top",-alarmCountDivHeight+"px");
-	alarmPercDiv.css("margin-left",convertPxStrToInt(alarmCountDivML)+alarmCountItemDiv.width()+20+"px");
+	var alarmPercDivMT=convertPxStrToInt(alarmCountDivML)+alarmCountItemDiv.width()+20+"px";
+	alarmPercDiv.css("margin-left",alarmPercDivMT);
 	
+	var alarmPercDivWidth=alarmPercDiv.width();
 	var alarmPercDivHeight=alarmPercDiv.height();
 	
 	var pieChartDiv=$("#pie_chart_div");
 	pieChartDiv.height(alarmPercDivHeight);
+
+	var todayAlarmListDiv=$("#today_alarm_list_div");
+	todayAlarmListDiv.width(toolBarDivWidth-alarmCountDivWidth-alarmPercDivWidth);
+	todayAlarmListDiv.height(alarmCountDivHeight);
+	todayAlarmListDiv.css("margin-top",-alarmCountDivHeight+"px");
+	todayAlarmListDiv.css("margin-left",convertPxStrToInt(alarmPercDivMT)+alarmPercDivWidth+20+"px");
+
+	var alarmDenDiv=$("#alarm_den_div");
+	alarmDenDiv.width(toolBarDivWidth);
+	alarmDenDiv.css("margin-left",toolBarDivML+"px");
+	
+	var denLineDiv=$("#den_line_div");
+	var denLineDivWidth=denLineDiv.width();
+	var denLineDivHeight=denLineDiv.height();
+	var itemCount=24;
+	var denLineItemDivWidth=denLineDivWidth/itemCount;
+	
+	var dlidML=0;
+	for(var i=0;i<itemCount;i++){
+		var bgColor;
+		if(i>=0&i<=7||i>=17)
+			bgColor="#141F01";
+		else if(i>=8&i<=12)
+			bgColor="#E02817";
+		else if(i>=13&i<=16)
+			bgColor="#FCCA00";
+		var itemStr="<div class=\"item_div\" style=\"width:"+denLineItemDivWidth+"px;margin-top:"+(i==0?"0":"-"+denLineDivHeight)+"px;margin-left:"+dlidML+"px;\">";
+			itemStr+="<div style=\"width:100%;height:70px;background-color:"+bgColor+"\"></div>";
+			itemStr+="<div style=\"width:100%;height:60px;line-height:60px;font-size:28px;text-align:center;\">"+i+"</div>";
+		itemStr+="</div>";
+		
+		denLineDiv.append(itemStr);
+		
+		dlidML+=denLineItemDivWidth;
+	}
 }
 
 function initPieChartDiv(){
@@ -117,6 +157,27 @@ function initPieChartDiv(){
     if(option&&typeof option==='object') {
       myChart.setOption(option);
     }
+}
+
+function initTodayAlarmData(){
+	var todayAlarmListTab=$("#today_alarm_list_tab");
+	todayAlarmListTab.find(".content_tr").remove();
+	for(var i=0;i<2;i++){
+		var appendStr="<tr class=\"content_tr\" style=\"background-color:#"+(i%2==0?"fff":"F2F2F2")+"\">";
+			appendStr+="<td>"+(i+1)+"</td>";
+			if(i%2==0)
+				appendStr+="<td style=\"color:#fff;background-color: red;\">柠檬酸库存超上限</td>";
+			else
+				appendStr+="<td style=\"color:#fff;background-color: #365403;\">仓库闲置率过高</td>";
+			appendStr+="<td>2023-01-10 01:00:00</td>";
+			if(i%2==0)
+				appendStr+="<td>一级</td>";
+			else
+				appendStr+="<td>二级</td>";
+		appendStr+="</tr>";
+		
+		todayAlarmListTab.append(appendStr);
+	}
 }
 
 function convertPxStrToInt(str){
@@ -241,6 +302,95 @@ body{
 	font-size: 35px;
 	position: absolute;
 }
+
+.today_alarm_list_div{
+	background-color: #EFEFEF;
+	border-radius:10px;
+}
+.today_alarm_list_div .tit_div{
+	width: 93%;
+	height: 80px;
+	line-height: 80px;
+	margin: auto;
+	font-size: 30px;
+}
+.today_alarm_list_div .today_alarm_list_tab{
+	width: 90%; 
+	margin:auto; 
+	border: #DBDBDB solid 1px;
+}
+.today_alarm_list_div .today_alarm_list_tab tr{
+	height:70px;
+}
+.today_alarm_list_div .today_alarm_list_tab .tit_tr{
+	color:#fff;
+	font-size: 30px;
+	background-color: #333333;
+}
+.today_alarm_list_div .today_alarm_list_tab .content_tr{
+	color:#000;
+	font-size: 25px;
+	text-align: center;
+}
+
+.alarm_den_div{
+	height: 200px;
+	margin-top:20px;
+	background-color: #EFEFEF;
+	border-radius:10px;
+}
+.alarm_den_div .label_div{
+	width: 98%;
+	height:70px;
+	line-height:70px;
+	margin:auto; 
+}
+.alarm_den_div .label_div .tit_span{
+	font-size: 25px;
+}
+.alarm_den_div .label_div .black_item_div{
+	width:330px;
+	margin-left: 450px;
+}
+.alarm_den_div .label_div .yellow_item_div{
+	width:450px;
+	margin-left: 850px;
+}
+.alarm_den_div .label_div .red_item_div{
+	width:350px;
+	margin-left: 1350px;
+}
+.alarm_den_div .label_div .item_div .icon_div{
+	width: 60px;
+	height: 30px;
+	border-radius:15px;
+}
+.alarm_den_div .label_div .black_item_div .icon_div{
+	margin-top: -50px;
+	background-color:#141F01;
+}
+.alarm_den_div .label_div .yellow_item_div .icon_div{
+	margin-top: -30px;
+	background-color:#FCCA00;
+}
+.alarm_den_div .label_div .red_item_div .icon_div{
+	margin-top: -30px;
+	background-color:#E02817;
+}
+.alarm_den_div .label_div .item_div .name_span{
+	margin-top: -50px;
+	margin-left: 90px;
+	font-size: 25px;
+	position: absolute;
+}
+.alarm_den_div .den_line_div{
+	width: 98%;
+	height:130px;
+	margin: auto;
+}
+.alarm_den_div .den_line_div .item_div{
+	height:130px;
+}
 </style>
 <title>Insert title here</title>
 </head>
@@ -276,6 +426,36 @@ body{
 	<div class="alarm_perc_div" id="alarm_perc_div">
 		<span class="tit_span">报警比例</span>
 		<div class="pie_chart_div" id="pie_chart_div">
+		</div>
+	</div>
+	<div class="today_alarm_list_div" id="today_alarm_list_div">
+		<div class="tit_div">当日活动报警列表</div>
+		<table class="today_alarm_list_tab" id="today_alarm_list_tab" border="1" cellspacing="0">
+			<tr class="tit_tr">
+				<th>序号</th>
+				<th>报警名称</th>
+				<th>报警时间</th>
+				<th>等级</th>
+			</tr>
+		</table>
+	</div>
+	<div class="alarm_den_div" id="alarm_den_div">
+		<div class="label_div">
+			<span class="tit_span">24小时报警密度分布</span>
+			<div class="item_div black_item_div">
+				<div class="icon_div"></div>
+				<span class="name_span">每小时报警数量<5</span>
+			</div>
+			<div class="item_div yellow_item_div">
+				<div class="icon_div"></div>
+				<span class="name_span">每小时报警数量>=5且<=10</span>
+			</div>
+			<div class="item_div red_item_div">
+				<div class="icon_div"></div>
+				<span class="name_span">每小时报警数量>10</span>
+			</div>
+		</div>
+		<div class="den_line_div" id="den_line_div">
 		</div>
 	</div>
 </div>
