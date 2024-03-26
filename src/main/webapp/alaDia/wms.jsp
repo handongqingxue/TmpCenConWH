@@ -20,6 +20,9 @@ $(function(){
 	initLayoutDivSize();
 	initPieChartDiv();
 	initTodayAlarmData();
+	initDenLineData();
+	initHisAlarmData();
+	initHisAlarmLineChartDiv()
 });
 
 function initLayoutDivSize(){
@@ -60,6 +63,19 @@ function initLayoutDivSize(){
 	alarmDenDiv.width(toolBarDivWidth);
 	alarmDenDiv.css("margin-left",toolBarDivML+"px");
 	
+	var hisAlarmDiv=$("#his_alarm_div");
+	hisAlarmDiv.width(toolBarDivWidth);
+	hisAlarmDiv.height(leftNavDivHeight-toolBarDiv.height()-alarmCountDivHeight-alarmDenDiv.height()-200);
+	hisAlarmDiv.css("margin-left",toolBarDivML+"px");
+
+	var hisAlarmLineChartDiv=$("#his_alarm_line_chart_div");
+	hisAlarmLineChartDiv.width(toolBarDivWidth-$("#his_alarm_list_tab").width()-200);
+	hisAlarmLineChartDiv.height(hisAlarmDiv.height());
+	hisAlarmLineChartDiv.css("margin-top",-$("#his_alarm_list_tab").height()+"px");
+	hisAlarmLineChartDiv.css("margin-left",convertPxStrToInt($("#his_alarm_list_tab").css("margin-left"))+$("#his_alarm_list_tab").width()+"px");
+}
+
+function initDenLineData(){
 	var denLineDiv=$("#den_line_div");
 	var denLineDivWidth=denLineDiv.width();
 	var denLineDivHeight=denLineDiv.height();
@@ -178,6 +194,79 @@ function initTodayAlarmData(){
 		
 		todayAlarmListTab.append(appendStr);
 	}
+}
+
+function initHisAlarmData(){
+	var hisAlarmListTab=$("#his_alarm_list_tab");
+	hisAlarmListTab.find(".content_tr").remove();
+	for(var i=0;i<2;i++){
+		var appendStr="<tr class=\"content_tr\" style=\"background-color:#"+(i%2==0?"fff":"F2F2F2")+"\">";
+			appendStr+="<td>"+(i+1)+"</td>";
+			if(i%2==0)
+				appendStr+="<td style=\"color:#fff;background-color: red;\">柠檬酸库存超上限</td>";
+			else
+				appendStr+="<td style=\"color:#fff;background-color: #365403;\">仓库闲置率过高</td>";
+			appendStr+="<td>2023-01-10 01:00:00</td>";
+			if(i%2==0)
+				appendStr+="<td>一级</td>";
+			else
+				appendStr+="<td>二级</td>";
+		appendStr+="</tr>";
+		
+		hisAlarmListTab.append(appendStr);
+	}
+}
+
+function initHisAlarmLineChartDiv(){
+	var dom = document.getElementById('his_alarm_line_chart_div');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    var option;
+    option = {
+	  title: {
+	    text: 'Stacked Line'
+	  },
+	  tooltip: {
+	    trigger: 'axis'
+	  },
+	  legend: {
+	    data: ['报警数量']
+	  },
+	  grid: {
+	    left: '3%',
+	    right: '4%',
+	    bottom: '3%',
+	    containLabel: true
+	  },
+	  toolbox: {
+	    feature: {
+	      saveAsImage: {}
+	    }
+	  },
+	  xAxis: {
+	    type: 'category',
+	    boundaryGap: false,
+	    data: ['2024年1月23日', '2024年1月24日', '2024年1月25日', '2024年1月26日', '2024年1月27日', '2024年1月28日', '2024年1月29日']
+	  },
+	  yAxis: {
+	    type: 'value'
+	  },
+	  series: [
+	    {
+	      name: '报警数量',
+	      type: 'line',
+	      stack: 'Total',
+	      data: [320, 332, 301, 334, 390, 330, 320]
+	    }
+	  ]
+	};
+
+    if(option&&typeof option === 'object') {
+      myChart.setOption(option);
+    }
 }
 
 function convertPxStrToInt(str){
@@ -307,7 +396,8 @@ body{
 	background-color: #EFEFEF;
 	border-radius:10px;
 }
-.today_alarm_list_div .tit_div{
+.today_alarm_list_div .tit_div,
+.his_alarm_div .tit_div{
 	width: 93%;
 	height: 80px;
 	line-height: 80px;
@@ -319,15 +409,18 @@ body{
 	margin:auto; 
 	border: #DBDBDB solid 1px;
 }
-.today_alarm_list_div .today_alarm_list_tab tr{
+.today_alarm_list_div .today_alarm_list_tab tr,
+.his_alarm_div .his_alarm_list_tab tr{
 	height:70px;
 }
-.today_alarm_list_div .today_alarm_list_tab .tit_tr{
+.today_alarm_list_div .today_alarm_list_tab .tit_tr,
+.his_alarm_div .his_alarm_list_tab .tit_tr{
 	color:#fff;
 	font-size: 30px;
 	background-color: #333333;
 }
-.today_alarm_list_div .today_alarm_list_tab .content_tr{
+.today_alarm_list_div .today_alarm_list_tab .content_tr,
+.his_alarm_div .his_alarm_list_tab .content_tr{
 	color:#000;
 	font-size: 25px;
 	text-align: center;
@@ -390,6 +483,17 @@ body{
 }
 .alarm_den_div .den_line_div .item_div{
 	height:130px;
+}
+
+.his_alarm_div{
+	margin-top: 50px;
+	background-color: #EFEFEF;
+	border-radius:10px;
+}
+.his_alarm_div .his_alarm_list_tab{
+	width: 40%;
+	margin-left:3.5%;
+	border: #DBDBDB solid 1px;
 }
 </style>
 <title>Insert title here</title>
@@ -456,6 +560,19 @@ body{
 			</div>
 		</div>
 		<div class="den_line_div" id="den_line_div">
+		</div>
+	</div>
+	<div class="his_alarm_div" id="his_alarm_div">
+		<div class="tit_div">历史报警列表以及统计曲线</div>
+		<table class="his_alarm_list_tab" id="his_alarm_list_tab" border="1" cellspacing="0">
+			<tr class="tit_tr">
+				<th>序号</th>
+				<th>报警名称</th>
+				<th>报警时间</th>
+				<th>等级</th>
+			</tr>
+		</table>
+		<div class="his_alarm_line_chart_div" id="his_alarm_line_chart_div">
 		</div>
 	</div>
 </div>
