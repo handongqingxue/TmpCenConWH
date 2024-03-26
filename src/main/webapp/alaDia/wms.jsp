@@ -18,14 +18,109 @@ $(function(){
 	initTopDivSize();
 	initLeftDivSize();
 	initLayoutDivSize();
+	initPieChartDiv();
 });
 
 function initLayoutDivSize(){
 	var toolBarDiv=$("#tool_bar_div");
+	var toolBarDivML=leftNavDivWidth+leftNavDivWidth*0.5;
 	toolBarDiv.width(bodyWidth-leftNavDivWidth-200);
 	toolBarDiv.css("margin-top",-leftNavDivHeight+50+"px");
-	toolBarDiv.css("margin-left",leftNavDivWidth+leftNavDivWidth*0.5+"px");
+	toolBarDiv.css("margin-left",toolBarDivML+"px");
 	
+	var alarmCountDiv=$("#alarm_count_div");
+	alarmCountDiv.css("margin-left",toolBarDivML+"px");
+	
+	var alarmCountItemDiv=alarmCountDiv.find(".item_div");
+	var alarmCountDivHeight=alarmCountDiv.height();
+	var alarmCountDivML=alarmCountDiv.css("margin-left");
+	
+	var alarmPercDiv=$("#alarm_perc_div");
+	alarmPercDiv.height(alarmCountDivHeight);
+	alarmPercDiv.css("margin-top",-alarmCountDivHeight+"px");
+	alarmPercDiv.css("margin-left",convertPxStrToInt(alarmCountDivML)+alarmCountItemDiv.width()+20+"px");
+	
+	var alarmPercDivHeight=alarmPercDiv.height();
+	
+	var pieChartDiv=$("#pie_chart_div");
+	pieChartDiv.height(alarmPercDivHeight);
+}
+
+function initPieChartDiv(){
+	var pieChartDiv=$("#pie_chart_div");
+	pieChartDiv.css("display","block");
+	
+	var dom = document.getElementById('pie_chart_div');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    var option;
+    option = {
+	  tooltip: {
+	    trigger: 'item'
+	  },
+	  legend: {
+		  orient: 'vertical',
+	    top: '30%',
+	    right: 50,
+	    textStyle: {
+	           //图例中文字的样式
+	           fontSize: 25,
+	         },
+	  },
+	  series: [
+	    {
+	      name: 'Access From',
+	      type: 'pie',
+	      radius: ['50%', '70%'],
+	      avoidLabelOverlap: false,
+	      itemStyle: {
+	        borderRadius: 0,
+	        borderColor: '#fff',
+	        borderWidth: 2,
+	        normal: {
+               color: function (colors) {
+                 var colorList = [
+                   '#F53C08',
+                   '#BD3124',
+                   '#892BCF',
+                 ];
+                 return colorList[colors.dataIndex];
+               }
+	        },
+	      },
+	      label: {
+	        show: false,
+	        position: 'center'
+	      },
+	      emphasis: {
+	        label: {
+	          show: true,
+	          fontSize: 40,
+	          fontWeight: 'bold'
+	        }
+	      },
+	      labelLine: {
+	        show: false
+	      },
+	      data: [
+	        { value: 580, name: '特级' },
+	        { value: 484, name: '一级' },
+	        { value: 300, name: '二级' }
+	      ]
+	    }
+	  ]
+	};
+
+    if(option&&typeof option==='object') {
+      myChart.setOption(option);
+    }
+}
+
+function convertPxStrToInt(str){
+	return parseInt(str.substring(0,str.length-2));
 }
 </script>
 <style type="text/css">
@@ -96,6 +191,56 @@ body{
 	border-radius:10px;
 	cursor: pointer;
 }
+
+.alarm_count_div{
+	width: 18%;
+	margin-top:50px;
+}
+.alarm_count_div .item_div{
+	width: 100%;
+	height: 200px;
+	border-radius:10px;
+}
+.alarm_count_div .level_one_item_div{
+	background-color: #E02817;
+}
+.alarm_count_div .level_two_item_div{
+	margin-top: 20px;
+	background-color: #892BCF;
+}
+.alarm_count_div .item_div .icon_img{
+	margin-top: 50px;
+	margin-left: 40px;
+}
+.alarm_count_div .item_div .count_span{
+	margin-top: 20px;
+	margin-left: 240px;
+	color: #BEBEBE;
+	font-size: 65px;
+	position: absolute;
+}
+.alarm_count_div .item_div .name_span{
+	margin-top: 110px;
+	margin-left: 150px;
+	color: #BEBEBE;
+	font-size: 45px;
+	position: absolute;
+}
+
+.alarm_perc_div{
+	width: 22%;
+	background-color: #EFEFEF;
+	border-radius:10px;
+}
+.alarm_perc_div .pie_chart_div{
+	width: 100%;
+}
+.alarm_perc_div .tit_span{
+	margin-top: 20px;
+	margin-left: 50px;
+	font-size: 35px;
+	position: absolute;
+}
 </style>
 <title>Insert title here</title>
 </head>
@@ -114,6 +259,23 @@ body{
 			<span class="to_text_span">至</span>
 			<input class="time_inp" type="date"/>
 			<div class="sear_but_div">查询</div>
+		</div>
+	</div>
+	<div class="alarm_count_div" id="alarm_count_div">
+		<div class="item_div level_one_item_div">
+			<img class="icon_img" alt="" src="<%=basePath %>resource/image/017.png">
+			<span class="count_span">300</span>
+			<span class="name_span">一级以上报警</span>
+		</div>
+		<div class="item_div level_two_item_div">
+			<img class="icon_img" alt="" src="<%=basePath %>resource/image/018.png">
+			<span class="count_span">160</span>
+			<span class="name_span">二级以下报警</span>
+		</div>
+	</div>
+	<div class="alarm_perc_div" id="alarm_perc_div">
+		<span class="tit_span">报警比例</span>
+		<div class="pie_chart_div" id="pie_chart_div">
 		</div>
 	</div>
 </div>
