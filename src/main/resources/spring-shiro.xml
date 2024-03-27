@@ -26,10 +26,12 @@
 			<value>
 				/main/**=anon
 				/phone/**=anon
+				<!--
 				/agv/**=anon
 				/vedio/**=anon
 				/repSys/**=anon
 				/alaDia/**=anon
+				-->
 				/resource/**=anon
 				/**=authc
 			</value>

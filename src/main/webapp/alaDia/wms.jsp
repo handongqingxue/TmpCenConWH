@@ -189,9 +189,9 @@ function initPieChartDiv(){
 	    top: '30%',
 	    right: 50,
 	    textStyle: {
-	           //图例中文字的样式
-	           fontSize: 25,
-	         },
+           //图例中文字的样式
+           fontSize: 25,
+        },
 	  },
 	  series: [
 	    {
@@ -303,7 +303,11 @@ function initHisAlarmLineChartDiv(){
 	    trigger: 'axis'
 	  },
 	  legend: {
-	    data: ['报警数量']
+	    data: ['报警数量'],
+	    textStyle: {
+           //图例中文字的样式
+           fontSize: 25,
+        },
 	  },
 	  grid: {
 	    left: '3%',
@@ -319,16 +323,30 @@ function initHisAlarmLineChartDiv(){
 	  xAxis: {
 	    type: 'category',
 	    boundaryGap: false,
+	    axisLabel: {
+            show: true,
+            interval: 0,//横轴信息全部显示
+            rotate:  35,//-35度角倾斜显示
+            textStyle: {
+            	fontSize: 25
+            }
+        },
 	    data: ['2024年1月23日', '2024年1月24日', '2024年1月25日', '2024年1月26日', '2024年1月27日', '2024年1月28日', '2024年1月29日']
 	  },
 	  yAxis: {
-	    type: 'value'
+	    type: 'value',
+	    axisLabel: {
+            textStyle: {
+            	fontSize: 25
+            },
+        },
 	  },
 	  series: [
 	    {
 	      name: '报警数量',
 	      type: 'line',
 	      stack: 'Total',
+	      color:'#F53C08',
 	      data: [320, 332, 301, 334, 390, 330, 320]
 	    }
 	  ]

@@ -14,6 +14,15 @@ function initTopDivSize(){
 	
 	topDivHeight=$("#top_div").height();
 }
+
+function showUserOptionDiv(){
+	var userOptionDiv=$("#user_option_div");
+	var display=userOptionDiv.css("display");
+	if(display=="none")
+		userOptionDiv.css("display","block");
+	else
+		userOptionDiv.css("display","none");
+}
 </script>
 <title>Insert title here</title>
 <style type="text/css">
@@ -40,7 +49,7 @@ a{
 	position: absolute;
 }
 .top_div .nav_div{
-	width: 800px;
+	width: 1600px;
 	height:120px;
 	margin-left:500px;
 	border-left:#FFF solid 2px;
@@ -115,6 +124,39 @@ a{
 	color:#fff;
 	font-size:35px;
 }
+
+.top_div .user_info_div{
+	width: 400px;
+	height: 120px;
+	line-height: 120px;
+	margin-top: -120px;
+	margin-right: 20px;
+	color: #fff;
+	font-size: 35px;
+	float: right;
+}
+.top_div .user_info_div .role_span{
+	margin-left: 50px;
+}
+
+.top_div .user_option_div{
+	width: 300px;
+	height: 200px;
+	border: 1px solid #e6ebf5;
+	margin-right: 120px;
+	background-color:#fff;
+	right: 10px;
+	position:absolute;
+	display: none;
+}
+.top_div .user_option_div .item_div{
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	font-size: 35px;
+	text-align: center;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -156,6 +198,16 @@ a{
 			<span class="text_span">报警诊断</span>
 		</div>
 		</a>
+	</div>
+	<div class="user_info_div">
+		<span class="username_span" onclick="showUserOptionDiv()">${sessionScope.user.username }</span>
+		<span class="role_span">超级管理员</span>
+	</div>
+	<div class="user_option_div" id="user_option_div">
+		<div class="item_div">个人中心</div>
+		<div class="item_div">
+			<a href="<%=basePath%>main/exit">退出登录</a>
+		</div>
 	</div>
 </div>
 </body>
