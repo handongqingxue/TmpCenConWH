@@ -14,65 +14,132 @@
 <script type="text/javascript" src="<%=basePath %>resource/js/echarts.min.js"></script>
 <script type="text/javascript">
 var alaDiaPath='<%=basePath %>alaDia/';
+var toolBarDivMT;
+var toolBarDivML;
+var toolBarDivWidth;
+var toolBarDivHeight;
+var toolBarDivMTSpace=50;
+
+var alarmCountDivWidth;
+var alarmCountDivHeight;
+var alarmCountDivML;
+var alarmCountItemDivWidth;
+
+var alarmPercDivWidth;
+var alarmPercDivHeight;
+var alarmPercDivML;
+var alarmPercDivMLSpace=20;
+
+var todayAlarmListDivWidth;
+var todayAlarmListDivMT;
+var todayAlarmListDivMLSpace=20;
+
+var alarmDenDivHeight;
+var alarmDenDivHeightSpace=200;
+
+var hisAlarmListTabWidth;
+var hisAlarmListTabHeight;
+var hisAlarmListTabML;
+var hisAlarmLineChartDivWidth;
+var hisAlarmListChartDivWidthSpace=400;
+var hisAlarmLineChartDivML=100;
+var hisAlarmLineChartDivMBSpace=100;
 $(function(){
 	initTopDivSize();
 	initLeftDivSize();
-	initLayoutDivSize();
+
+	initToolBarDivStyle();
+	initAlarmCountDivStyle();
+	
+	initAlarmPercDivStyle();
 	initPieChartDiv();
+	
+	initTodayAlarmListDivStyle();
 	initTodayAlarmData();
+	
+	initAlarmDenDivStyle();
 	initDenLineData();
+	
+	initHisAlarmDivStyle();
 	initHisAlarmData();
 	initHisAlarmLineChartDiv()
 });
 
-function initLayoutDivSize(){
+function initToolBarDivStyle(){
 	var toolBarDiv=$("#tool_bar_div");
-	var toolBarDivML=leftNavDivWidth+leftNavDivWidth*0.5;
-	var toolBarDivWidth=bodyWidth-leftNavDivWidth-200;
-	toolBarDiv.width(toolBarDivWidth);
-	toolBarDiv.css("margin-top",-leftNavDivHeight+50+"px");
-	toolBarDiv.css("margin-left",toolBarDivML+"px");
+	toolBarDivMT=-leftNavDivHeight+toolBarDivMTSpace;
+	toolBarDivML=leftNavDivWidth+leftNavDivWidth*0.5;//左边菜单栏宽度+其宽度的一半
+	toolBarDivWidth=bodyWidth-leftNavDivWidth*2;//网页宽度-左边菜单栏宽度2倍
+	toolBarDivHeight=toolBarDiv.height();
 	
+	toolBarDiv.width(toolBarDivWidth);
+	toolBarDiv.css("margin-top",toolBarDivMT+"px");
+	toolBarDiv.css("margin-left",toolBarDivML+"px");
+}
+
+function initAlarmCountDivStyle(){
 	var alarmCountDiv=$("#alarm_count_div");
 	alarmCountDiv.css("margin-left",toolBarDivML+"px");
-	var alarmCountDivWidth=alarmCountDiv.width();
+	alarmCountDivWidth=alarmCountDiv.width();
+	alarmCountDivHeight=alarmCountDiv.height();
+	alarmCountDivML=convertPxStrToInt(alarmCountDiv.css("margin-left"));
 	
 	var alarmCountItemDiv=alarmCountDiv.find(".item_div");
-	var alarmCountDivHeight=alarmCountDiv.height();
-	var alarmCountDivML=alarmCountDiv.css("margin-left");
-	
+	alarmCountItemDivWidth=alarmCountItemDiv.width();
+}
+
+function initAlarmPercDivStyle(){
 	var alarmPercDiv=$("#alarm_perc_div");
+	alarmPercDivML=alarmCountDivML+alarmCountItemDivWidth+alarmPercDivMLSpace;
+	
 	alarmPercDiv.height(alarmCountDivHeight);
 	alarmPercDiv.css("margin-top",-alarmCountDivHeight+"px");
-	var alarmPercDivMT=convertPxStrToInt(alarmCountDivML)+alarmCountItemDiv.width()+20+"px";
-	alarmPercDiv.css("margin-left",alarmPercDivMT);
+	alarmPercDiv.css("margin-left",alarmPercDivML+"px");
 	
-	var alarmPercDivWidth=alarmPercDiv.width();
-	var alarmPercDivHeight=alarmPercDiv.height();
+	alarmPercDivWidth=alarmPercDiv.width();
+	alarmPercDivHeight=alarmPercDiv.height();
 	
 	var pieChartDiv=$("#pie_chart_div");
 	pieChartDiv.height(alarmPercDivHeight);
+}
 
+function initTodayAlarmListDivStyle(){
 	var todayAlarmListDiv=$("#today_alarm_list_div");
-	todayAlarmListDiv.width(toolBarDivWidth-alarmCountDivWidth-alarmPercDivWidth);
+	todayAlarmListDivWidth=toolBarDivWidth-alarmCountDivWidth-alarmPercDivWidth
+	todayAlarmListDivMT=alarmPercDivML+alarmPercDivWidth+todayAlarmListDivMLSpace;
+	
+	todayAlarmListDiv.width(todayAlarmListDivWidth);
 	todayAlarmListDiv.height(alarmCountDivHeight);
 	todayAlarmListDiv.css("margin-top",-alarmCountDivHeight+"px");
-	todayAlarmListDiv.css("margin-left",convertPxStrToInt(alarmPercDivMT)+alarmPercDivWidth+20+"px");
+	todayAlarmListDiv.css("margin-left",todayAlarmListDivMT+"px");
+}
 
+function initAlarmDenDivStyle(){
 	var alarmDenDiv=$("#alarm_den_div");
 	alarmDenDiv.width(toolBarDivWidth);
 	alarmDenDiv.css("margin-left",toolBarDivML+"px");
 	
+	alarmDenDivHeight=alarmDenDiv.height();
+}
+
+function initHisAlarmDivStyle(){
 	var hisAlarmDiv=$("#his_alarm_div");
+	var hisAlarmDivHeight=leftNavDivHeight-toolBarDivHeight-alarmCountDivHeight-alarmDenDivHeight-alarmDenDivHeightSpace;
 	hisAlarmDiv.width(toolBarDivWidth);
-	hisAlarmDiv.height(leftNavDivHeight-toolBarDiv.height()-alarmCountDivHeight-alarmDenDiv.height()-200);
+	hisAlarmDiv.height(hisAlarmDivHeight);
 	hisAlarmDiv.css("margin-left",toolBarDivML+"px");
+	
+	hisAlarmListTabWidth=$("#his_alarm_list_tab").width();
+	hisAlarmListTabHeight=$("#his_alarm_list_tab").height();
+	hisAlarmListTabML=convertPxStrToInt($("#his_alarm_list_tab").css("margin-left"));
 
 	var hisAlarmLineChartDiv=$("#his_alarm_line_chart_div");
-	hisAlarmLineChartDiv.width(toolBarDivWidth-$("#his_alarm_list_tab").width()-200);
-	hisAlarmLineChartDiv.height(hisAlarmDiv.height());
-	hisAlarmLineChartDiv.css("margin-top",-$("#his_alarm_list_tab").height()+"px");
-	hisAlarmLineChartDiv.css("margin-left",convertPxStrToInt($("#his_alarm_list_tab").css("margin-left"))+$("#his_alarm_list_tab").width()+"px");
+	hisAlarmLineChartDivWidth=toolBarDivWidth-hisAlarmListTabWidth-hisAlarmListChartDivWidthSpace;
+	
+	var hisAlarmTitDiv=hisAlarmDiv.find(".tit_div");
+	hisAlarmLineChartDiv.width(hisAlarmLineChartDivWidth);
+	hisAlarmLineChartDiv.height(hisAlarmDivHeight-hisAlarmTitDiv.height()-hisAlarmLineChartDivMBSpace);
+	hisAlarmLineChartDiv.css("margin-left",hisAlarmListTabML+hisAlarmListTabWidth+hisAlarmLineChartDivML+"px");
 }
 
 function initDenLineData(){
@@ -215,6 +282,9 @@ function initHisAlarmData(){
 		
 		hisAlarmListTab.append(appendStr);
 	}
+	
+	var hisAlarmLineChartDiv=$("#his_alarm_line_chart_div");
+	hisAlarmLineChartDiv.css("margin-top",-hisAlarmListTab.height()+"px");
 }
 
 function initHisAlarmLineChartDiv(){
