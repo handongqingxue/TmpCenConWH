@@ -6,4 +6,55 @@
 	<select id="get" resultType="com.tmpCenConWH.entity.User">
 		select * from user where username=#{username} and password=#{password}
 	</select>
+	<insert id="add" parameterType="com.tmpCenConWH.entity.User">
+		insert into user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="username!=null">
+				username,
+			</if>
+			<if test="password!=null">
+				password,
+			</if>
+			<if test="phone!=null">
+				phone,
+			</if>
+			<if test="qq!=null">
+				qq,
+			</if>
+			<if test="weixin!=null">
+				weixin,
+			</if>
+				createTime,
+				state,
+			<if test="remark!=null">
+				remark,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="username!=null">
+				#{username},
+			</if>
+			<if test="password!=null">
+				#{password},
+			</if>
+			<if test="phone!=null">
+				#{phone},
+			</if>
+			<if test="qq!=null">
+				#{qq},
+			</if>
+			<if test="weixin!=null">
+				#{weixin},
+			</if>
+				now(),
+				${@com.tmpCenConWH.entity.User@NO_CHECK},
+			<if test="remark!=null">
+				#{remark},
+			</if>
+		</trim>
+	</insert>
+	<select id="getCountByUsername" resultType="java.lang.Integer">
+		select count(*) from user where username=#{username}
+	</select>
 </mapper>

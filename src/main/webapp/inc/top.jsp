@@ -205,9 +205,9 @@ a{
 	</div>
 	<div class="user_option_div" id="user_option_div">
 		<div class="item_div">个人中心</div>
-		<div class="item_div">
-			<a href="<%=basePath%>main/exit">退出登录</a>
-		</div>
+		<a href="<%=basePath%>main/exit">
+			<div class="item_div">退出登录</div>
+		</a>
 	</div>
 </div>
 </body>

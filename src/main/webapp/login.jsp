@@ -87,10 +87,11 @@ body{
 	color: #ff4949;
 	font-size: 25px;
 }
-.login_div .form_item_div .login_but_div{
-	width: 100%;
+.login_div .login_but_div,
+.login_div .reg_but_div{
 	height: 64px;
 	line-height: 64px;
+	margin: 50px 80px 0;
 	color: #fff;
 	font-size: 28px;
 	text-align:center;
@@ -118,9 +119,10 @@ body{
 			</div>
 			<div class="error_div">密码不能为空</div>
 		</div>
-		<div class="form_item_div">
-			<div class="login_but_div" onclick="login()">登录</div>
-		</div>
+		<div class="login_but_div" onclick="login()">登录</div>
+		<a href="<%=basePath%>main/goRegist">
+			<div class="reg_but_div" onclick="login()">注册</div>
+		</a>
 	</div>
 </div>
 </body>
