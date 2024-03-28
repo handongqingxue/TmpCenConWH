@@ -1,5 +1,7 @@
 package com.tmpCenConWH.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.tmpCenConWH.entity.*;
@@ -12,4 +14,6 @@ public interface UserMapper {
 	int add(User user);
 
 	int getCountByUsername(@Param("username") String username);
+
+	List<User> queryList(@Param("username") String username, @Param("startTime") String startTime, @Param("endTime") String endTime, @Param("state") Integer state);
 }

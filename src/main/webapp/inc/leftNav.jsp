@@ -62,7 +62,7 @@ function initLeftDivSize(){
 			<div class="item_div">故障统计</div>
 			<div class="item_div">视频联动</div>
 		</c:when>
-		<c:when test="${uri.contains('/repSys/')}">
+		<c:when test="${uri.contains('/repSys/')}"><!-- 报表系统 -->
 			<!-- 出入库报表 -->
 			<a href="<%=basePath %>repSys/goInOut">
 				<div class="item_div">
@@ -87,6 +87,20 @@ function initLeftDivSize(){
 					<img alt="" src="<%=basePath %>resource/image/012.png">
 				</div>
 			</a>
+		</c:when>
+		<c:when test="${uri.contains('/sysSet/')}"><!-- 系统设置 -->
+			<div class="item_div">
+				<img alt="" src="<%=basePath %>resource/image/014.png" title="个人中心">
+			</div>
+			<div class="item_div">
+				<img alt="" src="<%=basePath %>resource/image/014.png" title="用户查询">
+			</div>
+			<div class="item_div">
+				<img alt="" src="<%=basePath %>resource/image/014.png" title="角色查询">
+			</div>
+			<div class="item_div">
+				<img alt="" src="<%=basePath %>resource/image/014.png" title="权限查询">
+			</div>
 		</c:when>
 		<c:when test="${uri.contains('/alaDia/')}">
 			<a href="<%=basePath %>alaDia/goWms">

@@ -20,7 +20,7 @@ function login(){
 		{username:username,password:password},
 		function(result){
         	if(result.status==0){
-        		alert(result.msg);
+        		//alert(result.msg);
         		//layer.msg(json.msg, {icon: 6});
         		window.location.href=path+result.url;
         	}else if(result.status==1){
@@ -34,6 +34,9 @@ function login(){
 <style type="text/css">
 body{
 	margin:0;
+}
+a{
+	text-decoration: none;
 }
 .main_div{
 	width:3840px;
@@ -121,7 +124,7 @@ body{
 		</div>
 		<div class="login_but_div" onclick="login()">登录</div>
 		<a href="<%=basePath%>main/goRegist">
-			<div class="reg_but_div" onclick="login()">注册</div>
+			<div class="reg_but_div">注册</div>
 		</a>
 	</div>
 </div>

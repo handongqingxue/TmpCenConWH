@@ -1,0 +1,226 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="uri" value="<%=request.getRequestURI() %>"></c:set>
+<%
+	String basePath=request.getScheme()+"://"+request.getServerName()+":"
+		+request.getServerPort()+request.getContextPath()+"/";
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="<%=basePath %>resource/js/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+var sysSetPath='<%=basePath %>sysSet/';
+var centerDivWidthSpace=200;
+
+var noCheckState;
+var checkedState;
+var editingState;
+
+var noCheckStateName;
+var checkedStateName;
+var editingStateName;
+$(function(){
+	initStateVar();
+	initTopDivSize();
+	initLeftDivSize();
+	initCenterDivStyle();
+});
+
+function initStateVar(){
+	noCheckState=parseInt('${requestScope.noCheckState}');
+	checkedState=parseInt('${requestScope.checkedState}');
+	editingState=parseInt('${requestScope.editingState}');
+
+	noCheckStateName='${requestScope.noCheckStateName}';
+	checkedStateName='${requestScope.checkedStateName}';
+	editingStateName='${requestScope.editingStateName}';
+}
+
+function initCenterDivStyle(){
+	var centerDiv=$("#center_div");
+	centerDiv.width(bodyWidth-leftNavDivWidth-centerDivWidthSpace);
+	centerDiv.height(leftNavDivHeight);
+	centerDiv.css("margin-top",-leftNavDivHeight+"px");
+	centerDiv.css("margin-left",leftNavDivWidth+"px");
+}
+
+function initDataTab(){
+	var dataTab=$("#data_tab");
+	dataTab.find(".tr2").remove();
+	dataTab.find(".tr3").remove();
+	
+	var username=$("#username").val();
+	var startTime=$("#startTime").val();
+	var endTime=$("#endTime").val();
+	var state=$("#state_sel").val();
+	
+	$.post(sysSetPath+"queryUserList",
+		{username:username,startTime:startTime,endTime:endTime,state:state},
+		function(result){
+			if(result.status=="ok"){
+				var userList=result.userList;
+				for(var i=0;i<userList.length;i++){
+					var user=userList[i];
+					var appendStr="<tr class=\"tr"+(i%2==0?2:3)+"\">";
+						appendStr+="<td>"+user.username+"</td>";
+						appendStr+="<td>"+user.createTime+"</td>";
+						appendStr+="<td>"+user.phone+"</td>";
+						appendStr+="<td>"+user.qq+"</td>";
+						appendStr+="<td>"+user.weixin+"</td>";
+						appendStr+="<td>"+getStateNameById(user.state)+"</td>";
+					appendStr+="</tr>";
+					
+					dataTab.append(appendStr);
+				}
+			}
+		}
+	,"json");
+}
+
+function getStateNameById(stateId){
+	var str;
+	switch (stateId) {
+	case noCheckState:
+		str=noCheckStateName;//待审核
+		break;
+	case checkedState:
+		str=checkedStateName;//审核通过
+		break;
+	case editingState:
+		str=editingStateName;//编辑中
+		break;
+	}
+	return str;
+}
+</script>
+<style type="text/css">
+body{
+	margin:0;
+}
+.main_div{
+	width:3840px;
+	height:2160px;
+}
+
+.center_div{
+	overflow-y: auto;
+}
+.center_div .tool_bar{
+	width:100%;
+	margin-top: 20px;
+}
+.center_div .tool_bar .un_text_span,
+.center_div .tool_bar .ct_text_span,
+.center_div .tool_bar .to_text_span,
+.center_div .tool_bar .state_text_span{
+	color: #111;
+	font-size: 30px;
+	font-style:italic;
+	margin-left:50px;
+}
+.center_div .tool_bar .username_inp{
+	width: 10%;
+	height: 60px;
+	margin-left:50px;
+	color: #000;
+	font-size: 25px;
+	background-color: #fff;
+	border: #eee solid 1px;
+}
+.center_div .tool_bar .st_date,
+.center_div .tool_bar .et_date,
+.center_div .tool_bar .state_sel{
+	width:10%;
+	height:40px;
+	margin-left:50px;
+	color:#888;
+	font-size:25px;
+	border: #BBB solid 1px;
+	border-radius:15px; 
+}
+.center_div .tool_bar .sear_but_div{
+	width: 180px;
+	height: 70px;
+	line-height: 70px;
+	margin-top:-70px;
+	margin-left:2250px;
+	color:#fff;
+	font-size: 28px;
+	text-align:center;
+	letter-spacing:15px;
+	background-color: #4095E5;
+	border-radius:10px;
+	cursor: pointer;
+}
+
+.data_tab_div{
+	width: 93%;
+	margin: 50px auto 0;
+}
+.data_tab_div table{
+	width: 100%;
+	border: 1px;
+}
+.data_tab_div table tr{
+	height:80px;
+}
+.data_tab_div table tr th{
+	color:#fff;
+	font-size: 25px;
+	text-align: center;
+	background-color: #6C6C6C;
+	border: #DBDBDB solid 1px;
+}
+.data_tab_div table tr td{
+	font-size: 25px;
+	text-align: center;
+	border: #DBDBDB solid 1px;
+}
+.data_tab .tr2{
+	background-color: #fff;
+}
+.data_tab .tr3{
+	background-color: #F2F2F2;
+}
+</style>
+<title>Insert title here</title>
+</head>
+<body>
+<div class="main_div">
+	<%@include file="../inc/top.jsp"%>
+	<%@include file="../inc/leftNav.jsp"%>
+	<div class="center_div" id="center_div">
+		<div class="tool_bar" id="tool_bar">
+			<span class="un_text_span">用户名:</span>
+			<input class="username_inp" type="text" id="username" placeholder="请输入用户名"/>
+			<span class="ct_text_span">创建时间:</span>
+			<input class="st_date" type="date" id="startTime"/>
+			<span class="to_text_span">至</span>
+			<input class="et_date" type="date" id="endTime"/>
+			<span class="state_text_span">状态:</span>
+			<select class="state_sel" id="state_sel">
+				<option value="${requestScope.noCheckState}">${requestScope.noCheckStateName}</option>
+				<option value="${requestScope.checkedState}">${requestScope.checkedStateName}</option>
+				<option value="${requestScope.editingState}">${requestScope.editingStateName}</option>
+			</select>
+			<div class="sear_but_div" onclick="initDataTab()">查询</div>
+		</div>
+		<div class="data_tab_div" id="data_tab_div">
+			<table class="data_tab" id="data_tab" border="1" cellspacing="0">
+				<tr class="tr1">
+					<th>用户名</th>
+					<th>创建时间</th>
+					<th>电话</th>
+					<th>qq</th>
+					<th>微信</th>
+					<th>状态</th>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+</html>

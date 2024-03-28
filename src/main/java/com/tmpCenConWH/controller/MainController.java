@@ -89,18 +89,6 @@ public class MainController {
 		
 		return "testMap";
 	}
-
-	/**
-	 * 跳转到首页
-	 * @return
-	 */
-	@RequestMapping(value="/goHome")
-	public String goHome() {
-		
-		//http://localhost:8080/TmpCenConWH/main/goHome
-		
-		return "home";
-	}
 	
 	/**
 	 * 注册信息处理接口
@@ -177,7 +165,7 @@ public class MainController {
 		
 		plan.setStatus(0);
 		plan.setMsg("验证通过");
-		plan.setUrl("main/goHome");
+		plan.setUrl("home/goHome");
 		return JsonUtil.getJsonFromObject(plan);
 	}
 

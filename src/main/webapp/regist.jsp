@@ -174,6 +174,9 @@ function regist(){
 body{
 	margin:0;
 }
+a{
+	text-decoration: none;
+}
 .main_div{
 	width:3840px;
 	height:2160px;
@@ -184,7 +187,7 @@ body{
 }
 .reg_div{
 	width: 800px;
-	height: 1330px;
+	height: 1430px;
 	margin:100px auto 0;
 	background-color: rgba(21,28,44,.5);
 	padding-top: 1px;
@@ -227,7 +230,8 @@ body{
 	font-size: 25px;
 	display: none;
 }
-.reg_div .submit_but_div{
+.reg_div .submit_but_div,
+.reg_div .back_but_div{
 	height: 64px;
 	line-height: 64px;
 	margin: 50px 80px 0;
@@ -284,6 +288,9 @@ body{
 			</div>
 		</div>
 		<div class="submit_but_div" onclick="checkSubmit()">提交</div>
+		<a href="<%=basePath%>main/goLogin">
+			<div class="back_but_div">返回</div>
+		</a>
 	</div>
 </div>
 </body>

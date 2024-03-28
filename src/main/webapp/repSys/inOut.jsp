@@ -14,6 +14,9 @@
 <script type="text/javascript" src="<%=basePath %>resource/js/echarts.min.js"></script>
 <script type="text/javascript">
 var repSysPath='<%=basePath %>repSys/';
+var centerDivWidthSpace=200;
+var rightDivHeightSpace=100;
+var rightDivMTSpace=80;
 $(function(){
 	initTopDivSize();
 	initLeftDivSize();
@@ -22,23 +25,17 @@ $(function(){
 });
 
 function initLayoutDivSize(){
-	var topDiv=$("#top_div");
-	var topDivHeight=topDiv.height();
-	
-	var leftNavDiv=$("#left_nav_div");
-	var leftNavDivWidth=leftNavDiv.width();
-	
 	var rightDiv=$("#right_div");
 	var rightDivWidth=rightDiv.width();
 
 	var centerDiv=$("#center_div");
-	centerDiv.width(bodyWidth-leftNavDivWidth-rightDivWidth-200);
-	centerDiv.height(leftNavDiv.height());
+	centerDiv.width(bodyWidth-leftNavDivWidth-rightDivWidth-centerDivWidthSpace);
+	centerDiv.height(leftNavDivHeight);
 	centerDiv.css("margin-top",-leftNavDivHeight+"px");
 	centerDiv.css("margin-left",leftNavDivWidth+"px");
 
-	rightDiv.height(centerDiv.height()-100);
-	rightDiv.css("margin-top",-centerDiv.height()+80+"px");
+	rightDiv.height(centerDiv.height()-rightDivHeightSpace);
+	rightDiv.css("margin-top",-centerDiv.height()+rightDivMTSpace+"px");
 	
 	$(".filter_condition_div").height(rightDiv.height());
 }

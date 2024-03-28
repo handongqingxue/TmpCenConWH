@@ -164,7 +164,7 @@ a{
 	<img class="system_name_img" alt="" src="<%=basePath %>resource/image/001.png">
 	<span class="system_name_span">远程集中监控系统</span>
 	<div class="nav_div">
-		<a href="<%=basePath %>main/goHome">
+		<a href="<%=basePath %>home/goHome">
 		<div class="home_nav_div${uri.contains('home.jsp')?' selected':'' }">
 			<img class="nav_img" alt="" src="<%=basePath %>resource/image/002.png">
 			<span class="text_span">首页</span>
@@ -188,10 +188,12 @@ a{
 			<span class="text_span">报表系统</span>
 		</div>
 		</a>
+		<a href="<%=basePath %>sysSet/goUserList">
 		<div class="sys_set_nav_div">
 			<img class="nav_img" alt="" src="<%=basePath %>resource/image/006.png">
 			<span class="text_span">系统设置</span>
 		</div>
+		</a>
 		<a href="<%=basePath %>alaDia/goWms">
 		<div class="warn_nav_div">
 			<img class="nav_img" alt="" src="<%=basePath %>resource/image/007.png">

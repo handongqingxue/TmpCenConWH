@@ -57,4 +57,17 @@
 	<select id="getCountByUsername" resultType="java.lang.Integer">
 		select count(*) from user where username=#{username}
 	</select>
+	<select id="queryList" resultType="com.tmpCenConWH.entity.User">
+		select * from user where username!='admin'
+		<if test="username!=''&amp;username!=null">
+			and username like CONCAT('%',#{username},'%')
+		</if>
+		<if test="startTime!=''&amp;startTime!=null&amp;endTime!=''&amp;endTime!=null">
+			and createTime between #{startTime} and #{endTime}
+		</if>
+		<if test="state!=''&amp;state!=null">
+			and state=#{state}
+		</if>
+		order by createTime
+	</select>
 </mapper>
