@@ -64,13 +64,16 @@ function initDataTab(){
 				var userList=result.userList;
 				for(var i=0;i<userList.length;i++){
 					var user=userList[i];
-					var appendStr="<tr class=\"tr"+(i%2==0?2:3)+"\">";
+					var appendStr="<tr class=\"tr"+(i%2==0?2:3)+"\" id=\"tr"+user.id+"\">";
 						appendStr+="<td>"+user.username+"</td>";
 						appendStr+="<td>"+user.createTime+"</td>";
 						appendStr+="<td>"+user.phone+"</td>";
 						appendStr+="<td>"+user.qq+"</td>";
 						appendStr+="<td>"+user.weixin+"</td>";
 						appendStr+="<td>"+getStateNameById(user.state)+"</td>";
+						appendStr+="<td>";
+							appendStr+="<input class=\"detail_but\" type=\"button\" value=\"详情\" onclick=\"showDetailUserBgDiv(true,"+user.id+")\"/>";
+						appendStr+="</td>";
 					appendStr+="</tr>";
 					
 					dataTab.append(appendStr);
@@ -95,6 +98,34 @@ function getStateNameById(stateId){
 	}
 	return str;
 }
+
+function showDetailUserBgDiv(show,id){
+ 	var detailUserBgDiv=$("#detail_user_bg_div");
+	if(show){
+		detailUserBgDiv.css("display","block");
+		
+		detailUserBgDiv.find("#id_hid").val(id);
+		var tr=$("#data_tab #tr"+id);
+		var tds=tr.find("td");
+		
+		detailUserBgDiv.find("#username_td").text(tds.eq(0).text());
+		detailUserBgDiv.find("#createTime_td").text(tds.eq(1).text());
+		detailUserBgDiv.find("#phone_td").text(tds.eq(2).text());
+		detailUserBgDiv.find("#qq_td").text(tds.eq(3).text());
+		detailUserBgDiv.find("#weixin_td").text(tds.eq(4).text());
+		detailUserBgDiv.find("#state_td").text(tds.eq(5).text());
+	}
+	else{
+		detailUserBgDiv.css("display","none");
+		
+		detailUserBgDiv.find("#username_td").text("");
+		detailUserBgDiv.find("#createTime_td").text("");
+		detailUserBgDiv.find("#phone_td").text("");
+		detailUserBgDiv.find("#qq_td").text("");
+		detailUserBgDiv.find("#weixin_td").text("");
+		detailUserBgDiv.find("#state_td").text("");
+	}
+}
 </script>
 <style type="text/css">
 body{
@@ -103,6 +134,46 @@ body{
 .main_div{
 	width:3840px;
 	height:2160px;
+}
+
+.detail_user_bg_div{
+	width: 100%;
+	height: 100%;
+	background-color:rgba(0,0,0,0.5);
+	position:fixed;
+	z-index: 1;
+	display: none;
+}
+.detail_user_div{
+	width: 50%;
+	height: 500px;
+	margin: 200px auto 0;
+	background-color:#fff;
+}
+.detail_user_div .tit_div{
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	font-size: 30px;
+	border-bottom: #eee solid 1px;
+}
+.detail_user_div .tit_div .tit_span{
+	margin-left: 50px;
+}
+.detail_user_div .tit_div .close_but_span{
+	font-size: 30px;
+	margin-right:50px;
+	float: right;
+	cursor: pointer;
+}
+.detail_user_div table{
+	width: 90%;
+	margin:50px auto 0;
+}
+.detail_user_div table tr{
+	height: 100px;
+	font-size: 30px;
+	text-align: center;
 }
 
 .center_div{
@@ -185,10 +256,43 @@ body{
 .data_tab .tr3{
 	background-color: #F2F2F2;
 }
+.data_tab_div table tr td .detail_but{
+	font-size: 25px;
+}
 </style>
 <title>Insert title here</title>
 </head>
 <body>
+<div class="detail_user_bg_div" id="detail_user_bg_div">
+	<div class="detail_user_div" id="detail_user_div">
+		<div class="tit_div">
+			<span class="tit_span">用户详情</span>
+			<span class="close_but_span" onclick="showDetailUserBgDiv(false)">X</span>
+		</div>
+		<input type="hidden" id="id_hid"/>
+		<table>
+			<tr>
+				<td>用户名</td>
+				<td id="username_td"></td>
+				<td>创建时间</td>
+				<td id="createTime_td"></td>
+			</tr>
+			<tr>
+				<td>电话</td>
+				<td id="phone_td"></td>
+				<td>qq</td>
+				<td id="qq_td"></td>
+			</tr>
+			<tr>
+				<td>微信</td>
+				<td id="weixin_td"></td>
+				<td>状态</td>
+				<td id="state_td"></td>
+			</tr>
+		</table>
+	</div>
+</div>
+
 <div class="main_div">
 	<%@include file="../inc/top.jsp"%>
 	<%@include file="../inc/leftNav.jsp"%>
@@ -217,6 +321,7 @@ body{
 					<th>qq</th>
 					<th>微信</th>
 					<th>状态</th>
+					<th>操作</th>
 				</tr>
 			</table>
 		</div>
