@@ -11,8 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tmpCenConWH.entity.User;
-import com.tmpCenConWH.service.UserService;
+import com.tmpCenConWH.entity.*;
+import com.tmpCenConWH.service.*;
 import com.tmpCenConWH.util.*;
 
 @Controller
@@ -21,6 +21,8 @@ public class SysSetController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RoleService roleService;
 	public static final String MODULE_NAME="/sysSet";
 
 	/**
@@ -59,6 +61,26 @@ public class SysSetController {
 		else {
 			jsonMap.put("status", "no");
 			jsonMap.put("message", "暂无用户信息");
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryRoleList")
+	@ResponseBody
+	public Map<String, Object> queryRoleList(String name) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<Role> roleList=roleService.queryList(name);
+		
+		if(roleList.size()>0) {
+			jsonMap.put("status", "ok");
+			jsonMap.put("roleList", roleList);
+		}
+		else {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无角色信息");
 		}
 		
 		return jsonMap;

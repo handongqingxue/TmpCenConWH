@@ -13,6 +13,58 @@
 <script type="text/javascript" src="<%=basePath %>resource/js/MD5.js"></script>
 <script type="text/javascript">
 var path='<%=basePath %>';
+function checkLogin(){
+	if(checkUsername()){
+		if(checkPassword()){
+			login();
+		}
+	}
+}
+
+function focusUsername(){
+	var unErrDiv=$("#un_error_div");
+	var unErrMsg = unErrDiv.text();
+	if(unErrMsg=="用户名不能为空"){
+		unErrDiv.text("");
+		unErrDiv.css("display","none");
+	}
+}
+
+//验证用户名
+function checkUsername(){
+	var unErrDiv=$("#un_error_div");
+	var username=$("#username").val();
+	if(username==null||username==""){
+		unErrDiv.text("用户名不能为空");
+		unErrDiv.css("display","block");
+		return false;
+	}
+	else
+		return true;
+}
+
+function focusPassword(){
+	var pwdErrDiv=$("#pwd_error_div");
+	var pwdErrMsg = pwdErrDiv.text();
+	if(pwdErrMsg=="密码不能为空"){
+		pwdErrDiv.text("");
+		pwdErrDiv.css("display","none");
+	}
+}
+
+//验证密码
+function checkPassword(){
+	var pwdErrDiv=$("#pwd_error_div");
+	var password=$("#password").val();
+	if(password==null||password==""){
+		pwdErrDiv.text("密码不能为空");
+		pwdErrDiv.css("display","block");
+  		return false;
+	}
+	else
+		return true;
+}
+
 function login(){
 	var username=$("#username").val();
 	var password=MD5($("#password").val()).toUpperCase();
@@ -89,6 +141,7 @@ a{
 .login_div .form_item_div .error_div{
 	color: #ff4949;
 	font-size: 25px;
+	display: none;
 }
 .login_div .login_but_div,
 .login_div .reg_but_div{
@@ -111,18 +164,18 @@ a{
 		<div class="form_item_div">
 			<div class="tit_div">用户名</div>
 			<div class="input_div">
-				<input type="text" id="username" value="admin"/>
+				<input type="text" id="username" value="admin" onfocus="focusUsername()" onblur="checkUsername()"/>
 			</div>
-			<div class="error_div">用户名不能为空</div>
+			<div class="error_div" id="un_error_div"></div>
 		</div>
 		<div class="form_item_div">
 			<div class="tit_div">密码</div>
 			<div class="input_div">
-				<input type="password" id="password" value="123456"/>
+				<input type="password" id="password" value="123456" onfocus="focusPassword()" onblur="checkPassword()"/>
 			</div>
-			<div class="error_div">密码不能为空</div>
+			<div class="error_div" id="pwd_error_div"></div>
 		</div>
-		<div class="login_but_div" onclick="login()">登录</div>
+		<div class="login_but_div" onclick="checkLogin()">登录</div>
 		<a href="<%=basePath%>main/goRegist">
 			<div class="reg_but_div">注册</div>
 		</a>

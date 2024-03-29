@@ -15,19 +15,19 @@ public class Role {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getDescribe() {
+		return describe;
+	}
+	public void setDescribe(String describe) {
+		this.describe = describe;
+	}
 	public String getPermissionIds() {
 		return permissionIds;
 	}
 	public void setPermissionIds(String permissionIds) {
 		this.permissionIds = permissionIds;
 	}
-	public String getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
 	private String name;
+	private String describe;
 	private String permissionIds;
-	private String createTime;
 }
