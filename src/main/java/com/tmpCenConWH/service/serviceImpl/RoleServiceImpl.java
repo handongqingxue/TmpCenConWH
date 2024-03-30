@@ -14,6 +14,18 @@ public class RoleServiceImpl implements RoleService {
 
 	@Autowired
 	private RoleMapper roleDao;
+
+	@Override
+	public int add(Role role) {
+		// TODO Auto-generated method stub
+		return roleDao.add(role);
+	}
+
+	@Override
+	public int edit(Role role) {
+		// TODO Auto-generated method stub
+		return roleDao.edit(role);
+	}
 	
 	@Override
 	public List<Role> queryList(String name) {

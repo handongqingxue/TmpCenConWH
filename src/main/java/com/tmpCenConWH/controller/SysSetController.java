@@ -66,6 +66,61 @@ public class SysSetController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 添加角色
+	 * @param role
+	 * @return
+	 */
+	@RequestMapping(value="/addRole")
+	@ResponseBody
+	public Map<String, Object> addRole(Role role) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		try {
+			int count=roleService.add(role);
+			if(count>0) {
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "创建角色成功！");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "创建角色失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "创建角色失败！");
+		}
+		finally {
+			return jsonMap;
+		}
+	}
+	
+	/**
+	 * 编辑角色
+	 * @param role
+	 * @return
+	 */
+	@RequestMapping(value="/editRole")
+	@ResponseBody
+	public Map<String, Object> editRole(Role role) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=roleService.edit(role);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑角色成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑角色失败！");
+		}
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/queryRoleList")
 	@ResponseBody
 	public Map<String, Object> queryRoleList(String name) {

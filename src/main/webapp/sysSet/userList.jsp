@@ -101,7 +101,7 @@ function initRoleDataTab(){
 						appendStr+="<td>"+role.name+"</td>";
 						appendStr+="<td>"+role.describe+"</td>";
 						appendStr+="<td>";
-							appendStr+="<input class=\"detail_but\" type=\"button\" value=\"详情\" onclick=\"showDetailRoleBgDiv(true,"+role.id+")\"/>";
+							appendStr+="<input class=\"edit_but\" type=\"button\" value=\"编辑\" onclick=\"showEditRoleBgDiv(true,"+role.id+")\"/>";
 						appendStr+="</td>";
 					appendStr+="</tr>";
 					
@@ -164,13 +164,120 @@ function showAddRoleBgDiv(show){
 	else{
 		addRoleBgDiv.css("display","none");
 		
-		addRoleBgDiv.find("#username_td").text("");
-		addRoleBgDiv.find("#createTime_td").text("");
+		addRoleBgDiv.find("#name_inp").val("");
+		addRoleBgDiv.find("#describe_inp").val("");
+	}
+}
+
+function showEditRoleBgDiv(show,id){
+ 	var editRoleBgDiv=$("#edit_role_bg_div");
+	if(show){
+		editRoleBgDiv.css("display","block");
+
+		editRoleBgDiv.find("#id_hid").val(id);
+		var tr=$(".role_page_div #data_tab #tr"+id);
+		var tds=tr.find("td");
+		
+		editRoleBgDiv.find("#name_inp").val(tds.eq(0).text());
+		editRoleBgDiv.find("#describe_inp").val(tds.eq(1).text());
+	}
+	else{
+		editRoleBgDiv.css("display","none");
+		
+		editRoleBgDiv.find("#name_inp").val("");
+		editRoleBgDiv.find("#describe_inp").val("");
 	}
 }
 
 function checkAddRole(){
+	if(checkAddRoleName()){
+		addRole();
+	}
+}
+
+function focusAddRoleName(){
+	var name = $("#add_role_div #name_inp").val();
+	if(name=="名称不能为空"){
+		$("#add_role_div #name_inp").val("");
+		$("#add_role_div #name_inp").css("color", "#555555");
+	}
+}
+
+//验证名称
+function checkAddRoleName(){
+	var name = $("#add_role_div #name_inp").val();
+	if(name==null||name==""||name=="名称不能为空"){
+		$("#add_role_div #name_inp").css("color","#E15748");
+		$("#add_role_div #name_inp").val("名称不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
+function addRole(){
+	var name = $("#add_role_div #name_inp").val();
+	var describe = $("#add_role_div #describe_inp").val();
 	
+	$.post(sysSetPath+"addRole",
+		{name:name,describe:describe},
+		function(data){
+			if(data.message=="ok"){
+				alert(data.info);
+				initRoleDataTab();
+				showAddRoleBgDiv(false);
+			}
+			else{
+				alert(data.info);
+			}
+		}
+	,"json");
+}
+
+function checkEditRole(){
+	if(checkEditRoleName()){
+		editRole();
+	}
+}
+
+function focusEditRoleName(){
+	var name = $("#edit_role_div #name_inp").val();
+	if(name=="名称不能为空"){
+		$("#edit_role_div #name_inp").val("");
+		$("#edit_role_div #name_inp").css("color", "#555555");
+	}
+}
+
+//验证名称
+function checkEditRoleName(){
+	var name = $("#edit_role_div #name_inp").val();
+	if(name==null||name==""||name=="名称不能为空"){
+		$("#edit_role_div #name_inp").css("color","#E15748");
+		$("#edit_role_div #name_inp").val("名称不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
+function editRole(){
+	var id = $("#edit_role_div #id_hid").val();
+	var name = $("#edit_role_div #name_inp").val();
+	var describe = $("#edit_role_div #describe_inp").val();
+	
+	$.post(sysSetPath+"editRole",
+		{id:id,name:name,describe:describe},
+		function(data){
+			if(data.message=="ok"){
+				alert(data.info);
+				initRoleDataTab();
+				showEditRoleBgDiv(false);
+			}
+			else{
+				alert(data.info);
+			}
+		}
+	,"json");
 }
 </script>
 <style type="text/css">
@@ -183,7 +290,8 @@ body{
 }
 
 .detail_user_bg_div,
-.add_role_bg_div{
+.add_role_bg_div,
+.edit_role_bg_div{
 	width: 100%;
 	height: 100%;
 	background-color:rgba(0,0,0,0.5);
@@ -198,7 +306,8 @@ body{
 	background-color:#fff;
 }
 .detail_user_div .tit_div,
-.add_role_div .tit_div{
+.add_role_div .tit_div,
+.edit_role_div .tit_div{
 	width: 100%;
 	height: 100px;
 	line-height: 100px;
@@ -206,18 +315,21 @@ body{
 	border-bottom: #eee solid 1px;
 }
 .detail_user_div .tit_div .tit_span,
-.add_role_div .tit_div .tit_span{
+.add_role_div .tit_div .tit_span,
+.edit_role_div .tit_div .tit_span{
 	margin-left: 50px;
 }
 .detail_user_div .tit_div .close_but_span,
-.add_role_div .tit_div .close_but_span{
+.add_role_div .tit_div .close_but_span,
+.edit_role_div .tit_div .close_but_span{
 	font-size: 30px;
 	margin-right:50px;
 	float: right;
 	cursor: pointer;
 }
 .detail_user_div table,
-.add_role_div table{
+.add_role_div table,
+.edit_role_div table{
 	width: 90%;
 	margin:50px auto 0;
 }
@@ -227,26 +339,31 @@ body{
 	text-align: center;
 }
 
-.add_role_div{
+.add_role_div,
+.edit_role_div{
 	width: 50%;
 	height: 600px;
 	margin: 200px auto 0;
 	background-color:#fff;
 }
-.add_role_div table tr{
+.add_role_div table tr,
+.edit_role_div table tr{
 	height: 300px;
 	font-size: 30px;
 	text-align: center;
 }
-.add_role_div table tr td input{
+.add_role_div table tr td input,
+.edit_role_div table tr td input{
 	width: 50%;
 	height: 50px;
 }
-.add_role_div table tr td textarea{
+.add_role_div table tr td textarea,
+.edit_role_div table tr td textarea{
 	width: 100%;
 	height: 200px;
 }
-.add_role_div .but_div{
+.add_role_div .but_div,
+.edit_role_div .but_div{
 	width: 180px;
 	height: 70px;
 	line-height: 70px;
@@ -257,13 +374,15 @@ body{
 	float:right;
 	cursor: pointer;
 }
-.add_role_div .cancel_but_div{
+.add_role_div .cancel_but_div,
+.edit_role_div .cancel_but_div{
 	margin-right:50px;
 	color:#000;
 	background-color: #fff;
 	border: #000 solid 1px;
 }
-.add_role_div .confirm_but_div{
+.add_role_div .confirm_but_div,
+.edit_role_div .confirm_but_div{
 	margin-right:20px;
 	color:#fff;
 	background-color: #4095E5;
@@ -361,7 +480,7 @@ body{
 	background-color: #F2F2F2;
 }
 .center_div .user_page_div .data_tab_div table tr td .detail_but,
-.center_div .role_page_div .data_tab_div table tr td .detail_but{
+.center_div .role_page_div .data_tab_div table tr td .edit_but{
 	font-size: 25px;
 }
 
@@ -447,6 +566,30 @@ body{
 		</table>
 		<div class="but_div cancel_but_div" onclick="showAddRoleBgDiv(false)">取消</div>
 		<div class="but_div confirm_but_div" onclick="checkAddRole()">确定</div>
+	</div>
+</div>
+
+<div class="edit_role_bg_div" id="edit_role_bg_div">
+	<div class="edit_role_div" id="edit_role_div">
+		<div class="tit_div">
+			<span class="tit_span">添加角色</span>
+			<span class="close_but_span" onclick="showEditRoleBgDiv(false)">X</span>
+		</div>
+		<input type="hidden" id="id_hid"/>
+		<table>
+			<tr>
+				<td>名称</td>
+				<td>
+					<input type="text" id="name_inp"/>
+				</td>
+				<td>描述</td>
+				<td>
+					<textarea rows="3" cols="10" id="describe_inp"></textarea>
+				</td>
+			</tr>
+		</table>
+		<div class="but_div cancel_but_div" onclick="showEditRoleBgDiv(false)">取消</div>
+		<div class="but_div confirm_but_div" onclick="checkEditRole()">确定</div>
 	</div>
 </div>
 
