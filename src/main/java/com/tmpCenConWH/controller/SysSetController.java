@@ -23,6 +23,8 @@ public class SysSetController {
 	private UserService userService;
 	@Autowired
 	private RoleService roleService;
+	@Autowired
+	private PermissionService permissionService;
 	public static final String MODULE_NAME="/sysSet";
 
 	/**
@@ -136,6 +138,26 @@ public class SysSetController {
 		else {
 			jsonMap.put("status", "no");
 			jsonMap.put("message", "暂无角色信息");
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryPermissionList")
+	@ResponseBody
+	public Map<String, Object> queryPermissionList(String name) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<Permission> permissionList=permissionService.queryList(name);
+		
+		if(permissionList.size()>0) {
+			jsonMap.put("status", "ok");
+			jsonMap.put("permissionList", permissionList);
+		}
+		else {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无权限信息");
 		}
 		
 		return jsonMap;

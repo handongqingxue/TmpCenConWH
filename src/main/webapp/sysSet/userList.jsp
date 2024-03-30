@@ -112,6 +112,36 @@ function initRoleDataTab(){
 	,"json");
 }
 
+function initPerDataTab(){
+	var dataTab=$(".per_page_div #data_tab");
+	dataTab.find(".tr2").remove();
+	dataTab.find(".tr3").remove();
+	
+	var name=$(".per_page_div #name").val();
+	
+	$.post(sysSetPath+"queryPermissionList",
+		{name:name},
+		function(result){
+			if(result.status=="ok"){
+				var permissionList=result.permissionList;
+				for(var i=0;i<permissionList.length;i++){
+					var permission=permissionList[i];
+					var appendStr="<tr class=\"tr"+(i%2==0?2:3)+"\" id=\"tr"+permission.id+"\">";
+						appendStr+="<td>"+permission.name+"</td>";
+						appendStr+="<td>"+permission.sort+"</td>";
+						appendStr+="<td>"+permission.describe+"</td>";
+						appendStr+="<td>";
+							appendStr+="<input class=\"edit_but\" type=\"button\" value=\"编辑\" onclick=\"showEditPerBgDiv(true,"+permission.id+")\"/>";
+						appendStr+="</td>";
+					appendStr+="</tr>";
+					
+					dataTab.append(appendStr);
+				}
+			}
+		}
+	,"json");
+}
+
 function getStateNameById(stateId){
 	var str;
 	switch (stateId) {
@@ -279,6 +309,26 @@ function editRole(){
 		}
 	,"json");
 }
+
+function changeTabPage(flag){
+	$(".tab_page_div .item_div").removeClass("selected");
+	$(".user_page_div").css("display","none");
+	$(".role_page_div").css("display","none");
+	$(".per_page_div").css("display","none");
+	
+	if(flag=="user"){
+		$(".tab_page_div .user_item_div").addClass("selected");
+		$(".user_page_div").css("display","block");
+	}
+	else if(flag=="role"){
+		$(".tab_page_div .role_item_div").addClass("selected");
+		$(".role_page_div").css("display","block");
+	}
+	else if(flag=="per"){
+		$(".tab_page_div .per_item_div").addClass("selected");
+		$(".per_page_div").css("display","block");
+	}
+}
 </script>
 <style type="text/css">
 body{
@@ -388,12 +438,40 @@ body{
 	background-color: #4095E5;
 }
 
-.center_div .user_page_div{
+.center_div .tab_page_div{
+	width:100%;
+	height: 100px;
+}
+.center_div .tab_page_div .item_div{
+	width: 200px;
+	height: 100px;
+	line-height: 100px;
+	font-size: 30px;
+	text-align:center;
+	cursor: pointer;
+}
+.center_div .tab_page_div .selected{
+	color: #fff;
+	background-color: #4095E5;
+}
+.center_div .tab_page_div .role_item_div{
+	margin-top: -100px;
+	margin-left: 200px;
+}
+.center_div .tab_page_div .per_item_div{
+	margin-top: -100px;
+	margin-left: 400px;
+}
+
+.center_div .user_page_div,
+.center_div .role_page_div,
+.center_div .per_page_div{
 	overflow-y: auto;
 	display: none;
 }
 .center_div .user_page_div .tool_bar，
-.center_div .role_page_div .tool_bar{
+.center_div .role_page_div .tool_bar，
+.center_div .per_page_div .tool_bar{
 	width:100%;
 	margin-top: 20px;
 }
@@ -401,14 +479,16 @@ body{
 .center_div .user_page_div .tool_bar .ct_text_span,
 .center_div .user_page_div .tool_bar .to_text_span,
 .center_div .user_page_div .tool_bar .state_text_span,
-.center_div .role_page_div .tool_bar .name_text_span{
+.center_div .role_page_div .tool_bar .name_text_span,
+.center_div .per_page_div .tool_bar .name_text_span{
 	color: #111;
 	font-size: 30px;
 	font-style:italic;
 	margin-left:50px;
 }
 .center_div .user_page_div .tool_bar .username_inp,
-.center_div .role_page_div .tool_bar .name_inp{
+.center_div .role_page_div .tool_bar .name_inp,
+.center_div .per_page_div .tool_bar .name_inp{
 	width: 10%;
 	height: 60px;
 	margin-left:50px;
@@ -444,21 +524,25 @@ body{
 }
 
 .center_div .user_page_div .data_tab_div,
-.center_div .role_page_div .data_tab_div{
+.center_div .role_page_div .data_tab_div,
+.center_div .per_page_div .data_tab_div{
 	width: 93%;
 	margin: 50px auto 0;
 }
 .center_div .user_page_div .data_tab_div table,
-.center_div .role_page_div .data_tab_div table{
+.center_div .role_page_div .data_tab_div table,
+.center_div .per_page_div .data_tab_div table{
 	width: 100%;
 	border: 1px;
 }
 .center_div .user_page_div .data_tab_div table tr,
-.center_div .role_page_div .data_tab_div table tr{
+.center_div .role_page_div .data_tab_div table tr,
+.center_div .per_page_div .data_tab_div table tr{
 	height:80px;
 }
 .center_div .user_page_div .data_tab_div table tr th,
-.center_div .role_page_div .data_tab_div table tr th{
+.center_div .role_page_div .data_tab_div table tr th,
+.center_div .per_page_div .data_tab_div table tr th{
 	color:#fff;
 	font-size: 25px;
 	text-align: center;
@@ -466,25 +550,30 @@ body{
 	border: #DBDBDB solid 1px;
 }
 .center_div .user_page_div .data_tab_div table tr td,
-.center_div .role_page_div .data_tab_div table tr td{
+.center_div .role_page_div .data_tab_div table tr td,
+.center_div .per_page_div .data_tab_div table tr td{
 	font-size: 25px;
 	text-align: center;
 	border: #DBDBDB solid 1px;
 }
 .center_div .user_page_div .data_tab .tr2,
-.center_div .role_page_div .data_tab .tr2{
+.center_div .role_page_div .data_tab .tr2,
+.center_div .per_page_div .data_tab .tr2{
 	background-color: #fff;
 }
 .center_div .user_page_div .data_tab .tr3,
-.center_div .role_page_div .data_tab .tr3{
+.center_div .role_page_div .data_tab .tr3,
+.center_div .per_page_div .data_tab .tr3{
 	background-color: #F2F2F2;
 }
 .center_div .user_page_div .data_tab_div table tr td .detail_but,
-.center_div .role_page_div .data_tab_div table tr td .edit_but{
+.center_div .role_page_div .data_tab_div table tr td .edit_but,
+.center_div .per_page_div .data_tab_div table tr td .edit_but{
 	font-size: 25px;
 }
 
-.center_div .role_page_div .tool_bar .sear_but_div{
+.center_div .role_page_div .tool_bar .sear_but_div,
+.center_div .per_page_div .tool_bar .sear_but_div{
 	width: 180px;
 	height: 70px;
 	line-height: 70px;
@@ -498,7 +587,8 @@ body{
 	border-radius:10px;
 	cursor: pointer;
 }
-.center_div .role_page_div .tool_bar .add_but_div{
+.center_div .role_page_div .tool_bar .add_but_div,
+.center_div .per_page_div .tool_bar .add_but_div{
 	width: 180px;
 	height: 70px;
 	line-height: 70px;
@@ -597,6 +687,11 @@ body{
 	<%@include file="../inc/top.jsp"%>
 	<%@include file="../inc/leftNav.jsp"%>
 	<div class="center_div" id="center_div">
+		<div class="tab_page_div">
+			<div class="item_div user_item_div" onclick="changeTabPage('user')">用户查询</div>
+			<div class="item_div role_item_div" onclick="changeTabPage('role')">角色查询</div>
+			<div class="item_div per_item_div" onclick="changeTabPage('per')">权限查询</div>
+		</div>
 		<div class="user_page_div">
 			<div class="tool_bar" id="tool_bar">
 				<span class="un_text_span">用户名:</span>
@@ -639,6 +734,25 @@ body{
 				<table class="data_tab" id="data_tab" border="1" cellspacing="0">
 					<tr class="tr1">
 						<th>名称</th>
+						<th>描述</th>
+						<th>操作</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		<div class="per_page_div">
+			<div class="tool_bar" id="tool_bar">
+				<span class="name_text_span">名称:</span>
+				<input class="name_inp" type="text" id="name" placeholder="请输入名称"/>
+				<div class="sear_but_div" onclick="initPerDataTab()">查询</div>
+				<div class="add_but_div" onclick="showAddPerBgDiv(true)">添加</div>
+			</div>
+			<div class="data_tab_div" id="data_tab_div">
+				<table class="data_tab" id="data_tab" border="1" cellspacing="0">
+					<tr class="tr1">
+						<th>名称</th>
+						<th>排序</th>
 						<th>描述</th>
 						<th>操作</th>
 					</tr>
