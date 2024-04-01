@@ -15,19 +15,19 @@ public class Permission {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
 	public Integer getSort() {
 		return sort;
 	}
 	public void setSort(Integer sort) {
 		this.sort = sort;
 	}
+	public String getDescribe() {
+		return describe;
+	}
+	public void setDescribe(String describe) {
+		this.describe = describe;
+	}
 	private String name;
-	private String createTime;
 	private Integer sort;
+	private String describe;
 }

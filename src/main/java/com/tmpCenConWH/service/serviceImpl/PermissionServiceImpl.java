@@ -14,6 +14,12 @@ public class PermissionServiceImpl implements PermissionService {
 
 	@Autowired
 	private PermissionMapper permissionDao;
+
+	@Override
+	public int add(Permission permission) {
+		// TODO Auto-generated method stub
+		return permissionDao.add(permission);
+	}
 	
 	@Override
 	public List<Permission> queryList(String name) {

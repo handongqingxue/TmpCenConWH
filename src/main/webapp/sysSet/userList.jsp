@@ -219,6 +219,20 @@ function showEditRoleBgDiv(show,id){
 	}
 }
 
+function showAddPerBgDiv(show){
+ 	var addPerBgDiv=$("#add_per_bg_div");
+	if(show){
+		addPerBgDiv.css("display","block");
+	}
+	else{
+		addPerBgDiv.css("display","none");
+		
+		addPerBgDiv.find("#name_inp").val("");
+		addPerBgDiv.find("#sort_inp").val("");
+		addPerBgDiv.find("#describe_inp").val("");
+	}
+}
+
 function checkAddRole(){
 	if(checkAddRoleName()){
 		addRole();
@@ -310,6 +324,52 @@ function editRole(){
 	,"json");
 }
 
+function checkAddPer(){
+	if(checkAddPerName()){
+		addPermission();
+	}
+}
+
+function focusAddPerName(){
+	var name = $("#add_per_div #name_inp").val();
+	if(name=="名称不能为空"){
+		$("#add_per_div #name_inp").val("");
+		$("#add_per_div #name_inp").css("color", "#555555");
+	}
+}
+
+//验证名称
+function checkAddPerName(){
+	var name = $("#add_per_div #name_inp").val();
+	if(name==null||name==""||name=="名称不能为空"){
+		$("#add_per_div #name_inp").css("color","#E15748");
+		$("#add_per_div #name_inp").val("名称不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
+function addPermission(){
+	var name = $("#add_per_div #name_inp").val();
+	var sort = $("#add_per_div #sort_inp").val();
+	var describe = $("#add_per_div #describe_inp").val();
+	
+	$.post(sysSetPath+"addPermission",
+		{name:name,sort:sort,describe:describe},
+		function(data){
+			if(data.message=="ok"){
+				alert(data.info);
+				initPerDataTab();
+				showAddPerBgDiv(false);
+			}
+			else{
+				alert(data.info);
+			}
+		}
+	,"json");
+}
+
 function changeTabPage(flag){
 	$(".tab_page_div .item_div").removeClass("selected");
 	$(".user_page_div").css("display","none");
@@ -341,7 +401,8 @@ body{
 
 .detail_user_bg_div,
 .add_role_bg_div,
-.edit_role_bg_div{
+.edit_role_bg_div,
+.add_per_bg_div{
 	width: 100%;
 	height: 100%;
 	background-color:rgba(0,0,0,0.5);
@@ -357,7 +418,8 @@ body{
 }
 .detail_user_div .tit_div,
 .add_role_div .tit_div,
-.edit_role_div .tit_div{
+.edit_role_div .tit_div,
+.add_per_div .tit_div{
 	width: 100%;
 	height: 100px;
 	line-height: 100px;
@@ -366,12 +428,14 @@ body{
 }
 .detail_user_div .tit_div .tit_span,
 .add_role_div .tit_div .tit_span,
-.edit_role_div .tit_div .tit_span{
+.edit_role_div .tit_div .tit_span,
+.add_per_div .tit_div .tit_span{
 	margin-left: 50px;
 }
 .detail_user_div .tit_div .close_but_span,
 .add_role_div .tit_div .close_but_span,
-.edit_role_div .tit_div .close_but_span{
+.edit_role_div .tit_div .close_but_span,
+.add_per_div .tit_div .close_but_span{
 	font-size: 30px;
 	margin-right:50px;
 	float: right;
@@ -379,18 +443,21 @@ body{
 }
 .detail_user_div table,
 .add_role_div table,
-.edit_role_div table{
+.edit_role_div table,
+.add_per_div table{
 	width: 90%;
 	margin:50px auto 0;
 }
-.detail_user_div table tr{
+.detail_user_div table tr,
+.add_per_div table tr{
 	height: 100px;
 	font-size: 30px;
 	text-align: center;
 }
 
 .add_role_div,
-.edit_role_div{
+.edit_role_div,
+.add_per_div{
 	width: 50%;
 	height: 600px;
 	margin: 200px auto 0;
@@ -403,17 +470,20 @@ body{
 	text-align: center;
 }
 .add_role_div table tr td input,
-.edit_role_div table tr td input{
+.edit_role_div table tr td input,
+.add_per_div table tr td input{
 	width: 50%;
 	height: 50px;
 }
 .add_role_div table tr td textarea,
-.edit_role_div table tr td textarea{
+.edit_role_div table tr td textarea,
+.add_per_div table tr td textarea{
 	width: 100%;
 	height: 200px;
 }
 .add_role_div .but_div,
-.edit_role_div .but_div{
+.edit_role_div .but_div,
+.add_per_div .but_div{
 	width: 180px;
 	height: 70px;
 	line-height: 70px;
@@ -425,14 +495,16 @@ body{
 	cursor: pointer;
 }
 .add_role_div .cancel_but_div,
-.edit_role_div .cancel_but_div{
+.edit_role_div .cancel_but_div,
+.add_per_div .cancel_but_div{
 	margin-right:50px;
 	color:#000;
 	background-color: #fff;
 	border: #000 solid 1px;
 }
 .add_role_div .confirm_but_div,
-.edit_role_div .confirm_but_div{
+.edit_role_div .confirm_but_div,
+.add_per_div .confirm_but_div{
 	margin-right:20px;
 	color:#fff;
 	background-color: #4095E5;
@@ -680,6 +752,37 @@ body{
 		</table>
 		<div class="but_div cancel_but_div" onclick="showEditRoleBgDiv(false)">取消</div>
 		<div class="but_div confirm_but_div" onclick="checkEditRole()">确定</div>
+	</div>
+</div>
+
+<div class="add_per_bg_div" id="add_per_bg_div">
+	<div class="add_per_div" id="add_per_div">
+		<div class="tit_div">
+			<span class="tit_span">添加权限</span>
+			<span class="close_but_span" onclick="showAddPerBgDiv(false)">X</span>
+		</div>
+		<table>
+			<tr>
+				<td>名称</td>
+				<td>
+					<input type="text" id="name_inp"/>
+				</td>
+				<td>排序</td>
+				<td>
+					<input type="text" id="sort_inp"/>
+				</td>
+			</tr>
+			<tr>
+				<td>描述</td>
+				<td>
+					<textarea rows="3" cols="10" id="describe_inp"></textarea>
+				</td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		<div class="but_div cancel_but_div" onclick="showAddPerBgDiv(false)">取消</div>
+		<div class="but_div confirm_but_div" onclick="checkAddPer()">确定</div>
 	</div>
 </div>
 
