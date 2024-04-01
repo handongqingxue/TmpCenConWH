@@ -295,6 +295,7 @@ function initCameraView(){
 function loadTileset(){
 	var tileset = new Cesium.Cesium3DTileset({
 	   url: "http://localhost:8080/TmpCenConWH/upload/b3dm/tileset.json",
+	   //url: "http://localhost:8080/PositionPhZY/upload/蓝天消毒/b3dm/tileset.json",
 	   shadows:Cesium.ShadowMode.DISABLED,//去除阴影
 	});
 	console.log(tileset)

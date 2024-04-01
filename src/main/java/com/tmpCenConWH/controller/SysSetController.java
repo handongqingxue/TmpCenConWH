@@ -166,6 +166,29 @@ public class SysSetController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 编辑权限
+	 * @param permission
+	 * @return
+	 */
+	@RequestMapping(value="/editPermission")
+	@ResponseBody
+	public Map<String, Object> editPermission(Permission permission) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=permissionService.edit(permission);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑权限成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑权限失败！");
+		}
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/queryPermissionList")
 	@ResponseBody
 	public Map<String, Object> queryPermissionList(String name) {

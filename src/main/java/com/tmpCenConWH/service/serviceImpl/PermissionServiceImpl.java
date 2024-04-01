@@ -20,6 +20,12 @@ public class PermissionServiceImpl implements PermissionService {
 		// TODO Auto-generated method stub
 		return permissionDao.add(permission);
 	}
+
+	@Override
+	public int edit(Permission permission) {
+		// TODO Auto-generated method stub
+		return permissionDao.edit(permission);
+	}
 	
 	@Override
 	public List<Permission> queryList(String name) {

@@ -7,6 +7,8 @@ import com.tmpCenConWH.entity.*;
 public interface PermissionService {
 
 	int add(Permission permission);
+
+	int edit(Permission permission);
 	
 	List<Permission> queryList(String name);
 }
